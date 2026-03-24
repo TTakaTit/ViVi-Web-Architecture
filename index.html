@@ -117,12 +117,34 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 .tl-task:hover{opacity:.85}
 .tl-cell{padding:3px 2px;position:relative}
 .tl-milestone{width:12px;height:12px;background:var(--wh);border:2px solid;border-radius:50%;position:absolute;top:50%;transform:translateY(-50%);left:50%;margin-left:-6px;z-index:2}
+/* ANIMATIONS */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes revealUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(153,60,29,0.4); } 70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(153,60,29,0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(153,60,29,0); } }
+
+.reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+.hover-lift { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
+.hover-lift:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+
+.svg-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; transform-box: fill-box; transform-origin: center; }
+.svg-hover:hover { transform: translateY(-3px) scale(1.03); filter: drop-shadow(0 8px 16px rgba(0,0,0,0.12)); }
+
+.glass { backdrop-filter: blur(12px); background: rgba(255,255,255,0.75) !important; border: 1px solid rgba(255,255,255,0.3) !important; }
+
+/* GLOBALS ENHANCEMENT */
+* { transition: background-color 0.2s, border-color 0.2s; }
+.card, .stat, .browser, .fsteps, .tl-row { transition: all 0.3s ease; }
+.card:hover, .stat:hover { border-color: var(--pu-m); }
+
+.pulse-node { animation: pulse 2s infinite; }
 </style>
 </head>
 <body>
 
 <nav class="side">
-  <div class="side-logo"><div class="logo">Vi<span>Vi</span></div><div class="logo-sub">Web · Architecture · 2025</div></div>
+  <div class="side-logo"><div class="logo">Vi<span>Vi</span></div><div class="logo-sub">Web · Architecture · 2026</div></div>
   <div class="ng"><div class="nl">Hệ thống</div>
     <button class="nb on" onclick="go('overview',this)"><div class="d"></div>Tổng quan</button>
     <button class="nb" onclick="go('flow',this)"><div class="d"></div>Screen flow</button>
@@ -150,15 +172,15 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 <main class="main">
 
 <!-- ══ OVERVIEW ══ -->
-<section class="pg on" id="overview">
+<section class="pg on reveal" id="overview">
   <span class="tag" style="background:var(--pu-l);color:var(--pu)">Tổng quan</span>
   <h1>ViVi — Web Architecture</h1>
-  <p class="sub">Nền tảng kết nối người Việt tại Đức: tìm việc + tìm nhà. 5 vai trò, 32 routes, 2 tháng hoàn thiện MVP với team 2 dev + 1 des.</p>
+  <p class="sub">Nền tảng kết nối người Việt tại Đức: tìm việc + tìm nhà. 6 vai trò, 32 routes, 2 tháng hoàn thiện MVP với team 2 dev + 1 des.</p>
   <div class="stats">
-    <div class="stat p"><div class="stat-n">32</div><div class="stat-l">Tổng routes</div></div>
-    <div class="stat t"><div class="stat-n">5</div><div class="stat-l">Vai trò</div></div>
-    <div class="stat c"><div class="stat-n">3</div><div class="stat-l">Luồng doanh thu</div></div>
-    <div class="stat a"><div class="stat-n">2 th</div><div class="stat-l">Timeline (MVP)</div></div>
+    <div class="stat p hover-lift" style="transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);"><div class="stat-n" style="text-shadow: 0 4px 10px rgba(127,119,221,0.3)">32</div><div class="stat-l">Tổng routes</div></div>
+    <div class="stat t hover-lift" style="transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);"><div class="stat-n" style="text-shadow: 0 4px 10px rgba(29,158,117,0.3)">6</div><div class="stat-l">Vai trò</div></div>
+    <div class="stat c hover-lift" style="transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);"><div class="stat-n" style="text-shadow: 0 4px 10px rgba(216,90,48,0.3)">3</div><div class="stat-l">Luồng doanh thu</div></div>
+    <div class="stat a hover-lift" style="transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);"><div class="stat-n" style="text-shadow: 0 4px 10px rgba(239,159,39,0.3)">2 th</div><div class="stat-l">Timeline (MVP)</div></div>
   </div>
   <h2>Cấu trúc trang</h2>
   <div class="g4" style="margin-bottom:20px">
@@ -178,7 +200,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 </section>
 
 <!-- ══ SCREEN FLOW ══ -->
-<section class="pg" id="flow">
+<section class="pg reveal" id="flow">
   <span class="tag" style="background:var(--pu-l);color:var(--pu)">Screen Flow</span>
   <h1>Luồng điều hướng</h1>
   <p class="sub">Hành trình người dùng từ truy cập đến hoàn tất mục tiêu.</p>
@@ -205,7 +227,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 </section>
 
 <!-- ══ SEQUENCE ══ -->
-<section class="pg" id="sequence">
+<section class="pg reveal" id="sequence">
   <span class="tag" style="background:var(--pu-l);color:var(--pu)">Sequence</span>
   <h1>Luồng tương tác hệ thống</h1>
   <p class="sub">Cách Browser, Frontend, Backend và Database trao đổi trong 3 kịch bản chính.</p>
@@ -217,55 +239,56 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 </section>
 
 <!-- ══ ROLES ══ -->
-<section class="pg" id="roles">
+<section class="pg reveal" id="roles">
   <span class="tag" style="background:var(--pu-l);color:var(--pu)">Roles & Dữ liệu</span>
   <h1>Vai trò, Quyền hạn & Dữ liệu</h1>
-  <p class="sub">5 vai trò hệ thống, ma trận quyền và cấu trúc data model.</p>
-  <h2>5 Vai trò</h2>
-  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:22px">
-    <div class="card" style="border-top:3px solid var(--gr-m)"><div style="font-size:11px;font-weight:600;color:var(--gr-d);margin-bottom:4px">Guest</div><div style="font-size:10px;color:var(--tx3);margin-bottom:6px">Chưa đăng nhập</div><div style="font-size:10px;color:var(--tx2);line-height:1.9">Xem trang chủ<br>Xem feed (giới hạn)<br>Đăng ký / Đăng nhập</div></div>
-    <div class="card" style="border-top:3px solid var(--pu-m)"><div style="font-size:11px;font-weight:600;color:var(--pu);margin-bottom:4px">Job Seeker</div><div style="font-size:10px;color:var(--tx3);margin-bottom:6px">Tìm việc</div><div style="font-size:10px;color:var(--tx2);line-height:1.9">Duyệt & lọc việc<br>Xem chi tiết<br>Chat với employer<br>Bookmark · Review</div></div>
-    <div class="card" style="border-top:3px solid var(--te-m)"><div style="font-size:11px;font-weight:600;color:var(--te);margin-bottom:4px">Employer</div><div style="font-size:10px;color:var(--tx3);margin-bottom:6px">Tuyển dụng</div><div style="font-size:10px;color:var(--tx2);line-height:1.9">Đăng tin tuyển<br>Quản lý listings<br>Mua Premium<br>Xem stats</div></div>
-    <div class="card" style="border-top:3px solid var(--co-m)"><div style="font-size:11px;font-weight:600;color:var(--co);margin-bottom:4px">Host</div><div style="font-size:10px;color:var(--tx3);margin-bottom:6px">Cho thuê</div><div style="font-size:10px;color:var(--tx2);line-height:1.9">Đăng phòng<br>Quản lý phòng<br>Mua Premium<br>Đánh dấu đã thuê</div></div>
-    <div class="card" style="border-top:3px solid var(--am-m)"><div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:4px">Admin</div><div style="font-size:10px;color:var(--tx3);margin-bottom:6px">Quản trị</div><div style="font-size:10px;color:var(--tx2);line-height:1.9">Duyệt KYC<br>Quản lý bài đăng<br>Xử lý report<br>Analytics</div></div>
+  <p class="sub">6 vai trò hệ thống, ma trận quyền và cấu trúc data model.</p>
+  <h2>6 Vai trò</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px">
+    <div class="card hover-lift" style="border-top:3px solid var(--gr-m);box-shadow:0 4px 15px rgba(0,0,0,0.02)"><div style="font-size:12px;font-weight:700;color:var(--gr-d);margin-bottom:2px">Guest</div><div style="font-size:10px;color:var(--tx3);margin-bottom:8px">Khách vãng lai</div><div style="font-size:11px;color:var(--tx2);line-height:1.9">Xem trang chủ<br>Xem feed (giới hạn)<br>Đăng ký / Đăng nhập</div></div>
+    <div class="card hover-lift" style="border-top:3px solid var(--pu-m);box-shadow:0 4px 15px rgba(127,119,221,0.05)"><div style="font-size:12px;font-weight:700;color:var(--pu);margin-bottom:2px">Job Seeker</div><div style="font-size:10px;color:var(--tx3);margin-bottom:8px">Người tìm việc</div><div style="font-size:11px;color:var(--tx2);line-height:1.9">Duyệt & lọc việc<br>Xem chi tiết & Apply<br>Chat với nhà tuyển dụng</div></div>
+    <div class="card hover-lift" style="border-top:3px solid var(--te-m);box-shadow:0 4px 15px rgba(29,158,117,0.05)"><div style="font-size:12px;font-weight:700;color:var(--te);margin-bottom:2px">Employer</div><div style="font-size:10px;color:var(--tx3);margin-bottom:8px">Nhà tuyển dụng</div><div style="font-size:11px;color:var(--tx2);line-height:1.9">Đăng tin tuyển nhân viên<br>Quản lý hồ sơ ứng viên<br>Mua gói Premium</div></div>
+    <div class="card hover-lift" style="border-top:3px solid var(--co-m);box-shadow:0 4px 15px rgba(216,90,48,0.05)"><div style="font-size:12px;font-weight:700;color:var(--co);margin-bottom:2px">Home Seeker</div><div style="font-size:10px;color:var(--tx3);margin-bottom:8px">Người tìm nhà</div><div style="font-size:11px;color:var(--tx2);line-height:1.9">Duyệt & lọc nhà ở<br>Xem chi tiết & Bookmark<br>Sắp xếp lịch xem nhà / Chat</div></div>
+    <div class="card hover-lift" style="border-top:3px solid var(--am-m);box-shadow:0 4px 15px rgba(239,159,39,0.05)"><div style="font-size:12px;font-weight:700;color:var(--am);margin-bottom:2px">Host</div><div style="font-size:10px;color:var(--tx3);margin-bottom:8px">Chủ nhà / Môi giới</div><div style="font-size:11px;color:var(--tx2);line-height:1.9">Đăng phòng/nhà cho thuê<br>Quản lý danh sách phòng<br>Mua gói Premium (đẩy tin)</div></div>
+    <div class="card hover-lift" style="border-top:3px solid var(--tx);box-shadow:0 4px 15px rgba(0,0,0,0.08)"><div style="font-size:12px;font-weight:700;color:var(--tx);margin-bottom:2px">Admin</div><div style="font-size:10px;color:var(--tx3);margin-bottom:8px">Quản trị viên (ViVi)</div><div style="font-size:11px;color:var(--tx2);line-height:1.9">Duyệt KYC / ID<br>Quản lý vi phạm (Reports)<br>Hỗ trợ support</div></div>
   </div>
   <h2>Ma trận quyền</h2>
   <div style="overflow-x:auto;margin-bottom:22px">
-  <table class="tbl">
-    <thead><tr><th>Chức năng</th><th style="text-align:center">Guest</th><th style="text-align:center">Seeker</th><th style="text-align:center">Employer</th><th style="text-align:center">Host</th><th style="text-align:center">Admin</th></tr></thead>
+  <table class="tbl hover-lift" style="box-shadow:0 10px 30px rgba(0,0,0,0.03);border:1px solid #e2e0d8;border-radius:10px">
+    <thead><tr><th>Chức năng</th><th style="text-align:center">Guest</th><th style="text-align:center">Job Seeker</th><th style="text-align:center">Employer</th><th style="text-align:center">Home Seeker</th><th style="text-align:center">Host</th><th style="text-align:center">Admin</th></tr></thead>
     <tbody>
-      <tr><td>Xem feed (job/housing)</td><td style="text-align:center;color:var(--am)">◐ giới hạn</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td></tr>
-      <tr><td>Chat / Liên hệ</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td></tr>
-      <tr><td>Đăng tin tuyển dụng</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td></tr>
-      <tr><td>Đăng phòng cho thuê</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td></tr>
-      <tr><td>Mua Premium</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--co)">✗</td></tr>
-      <tr><td>Bookmark / Lưu</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--co)">✗</td></tr>
-      <tr><td>Đánh giá / Report</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td></tr>
-      <tr><td>Duyệt KYC / nội dung</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td></tr>
-      <tr><td>Analytics toàn hệ thống</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--am)">◐ của mình</td><td style="text-align:center;color:var(--am)">◐ của mình</td><td style="text-align:center;color:var(--te)">✓ toàn bộ</td></tr>
+      <tr style="transition:background 0.2s" onmouseover="this.style.background='#fdf8ff'" onmouseout="this.style.background=''"><td>Xem feed (job/housing)</td><td style="text-align:center;color:var(--am)">◐ giới hạn</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td></tr>
+      <tr style="transition:background 0.2s" onmouseover="this.style.background='#f0fff4'" onmouseout="this.style.background=''"><td>Chat / Liên hệ</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td></tr>
+      <tr style="transition:background 0.2s" onmouseover="this.style.background='#fff5f3'" onmouseout="this.style.background=''"><td>Đăng tin tuyển dụng</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td></tr>
+      <tr style="transition:background 0.2s" onmouseover="this.style.background='#fffaf0'" onmouseout="this.style.background=''"><td>Đăng nhà cho thuê</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td></tr>
+      <tr style="transition:background 0.2s" onmouseover="this.style.background='#f9f8f6'" onmouseout="this.style.background=''"><td>Mua Premium</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--co)">✗</td></tr>
+      <tr style="transition:background 0.2s" onmouseover="this.style.background='#fdf8ff'" onmouseout="this.style.background=''"><td>Bookmark / Lưu</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--co)">✗</td></tr>
+      <tr style="transition:background 0.2s" onmouseover="this.style.background='#f0fff4'" onmouseout="this.style.background=''"><td>Đánh giá / Report</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td><td style="text-align:center;color:var(--te)">✓</td></tr>
+      <tr style="transition:background 0.2s" onmouseover="this.style.background='#fff5f3'" onmouseout="this.style.background=''"><td>Duyệt KYC / nội dung</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--te)">✓</td></tr>
+      <tr style="transition:background 0.2s" onmouseover="this.style.background='#fffaf0'" onmouseout="this.style.background=''"><td>Analytics toàn hệ thống</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--am)">◐ của mình</td><td style="text-align:center;color:var(--co)">✗</td><td style="text-align:center;color:var(--am)">◐ của mình</td><td style="text-align:center;color:var(--te)">✓ toàn bộ</td></tr>
     </tbody>
   </table></div>
   <h2>Data model chính</h2>
   <div class="g3">
-    <div class="card" style="border-left:3px solid var(--pu-m)"><div style="font-size:11px;font-weight:600;color:var(--pu);margin-bottom:7px">User</div><div style="font-size:10px;font-family:monospace;line-height:2;color:var(--tx2)">id uuid PK<br>email string UNIQUE<br>name · avatar_url<br>language: VI|DE<br>role: seeker|employer|host<br>kyc_status: pending|verified<br>preference: string[]<br>city · bio · created_at</div></div>
-    <div class="card" style="border-left:3px solid var(--te-m)"><div style="font-size:11px;font-weight:600;color:var(--te);margin-bottom:7px">JobListing</div><div style="font-size:10px;font-family:monospace;line-height:2;color:var(--tx2)">id uuid PK<br>user_id FK → User<br>title · city · industry<br>job_type: mini|part|full<br>salary_min · salary_max<br>experience: boolean<br>description · images[]<br>status: draft|active|expired<br>is_premium · premium_until<br>views · created_at</div></div>
-    <div class="card" style="border-left:3px solid var(--co-m)"><div style="font-size:11px;font-weight:600;color:var(--co);margin-bottom:7px">HousingListing</div><div style="font-size:10px;font-family:monospace;line-height:2;color:var(--tx2)">id uuid PK<br>user_id FK → User<br>city · district · size_m2<br>floor · wg_size<br>rent_price · duration<br>preference: student|f|m|any<br>amenities[] · images[]<br>status: active|rented|draft<br>is_premium · views</div></div>
-    <div class="card" style="border-left:3px solid var(--am-m)"><div style="font-size:11px;font-weight:600;color:var(--am);margin-bottom:7px">Message / Conversation</div><div style="font-size:10px;font-family:monospace;line-height:2;color:var(--tx2)">conversation_id uuid PK<br>user_a · user_b FK → User<br>listing_id (nullable)<br>listing_type: job|housing<br>phone_shared: boolean<br>── messages ──<br>message_id · sender_id<br>content · is_read<br>created_at</div></div>
-    <div class="card" style="border-left:3px solid var(--gr-m)"><div style="font-size:11px;font-weight:600;color:var(--gr-d);margin-bottom:7px">Payment / KYC</div><div style="font-size:10px;font-family:monospace;line-height:2;color:var(--tx2)">user_id · listing_id<br>amount (cents) · EUR<br>stripe_intent_id<br>status: pending|ok|fail<br>plan_days: 1|3|7<br>── KYC ──<br>front_url · back_url<br>selfie_url · status<br>reviewed_by · reviewed_at</div></div>
-    <div class="card" style="border-left:3px solid var(--pu-m)"><div style="font-size:11px;font-weight:600;color:var(--pu);margin-bottom:7px">Review / Bookmark / Notif</div><div style="font-size:10px;font-family:monospace;line-height:2;color:var(--tx2)">── Review ──<br>reviewer_id · target_id<br>target_type: user|listing<br>rating 1–5 · comment<br>── Bookmark ──<br>user_id · listing_id<br>listing_type: job|housing<br>── Notification ──<br>user_id · type · is_read<br>title · body · ref_id</div></div>
+    <div class="card hover-lift" style="border-top:3px solid var(--pu-m);box-shadow:0 4px 15px rgba(0,0,0,0.02)"><div style="font-size:12px;font-weight:700;color:var(--pu);margin-bottom:7px">User</div><div style="font-size:11px;font-family:monospace;line-height:1.9;color:var(--tx2)">id uuid PK<br>email string UNIQUE<br>name · avatar_url<br>language: VI|DE<br>role: job_seeker|employer|home_seeker|host<br>kyc_status: pending|verified<br>preference: string[]<br>city · bio · created_at</div></div>
+    <div class="card hover-lift" style="border-top:3px solid var(--te-m);box-shadow:0 4px 15px rgba(0,0,0,0.02)"><div style="font-size:12px;font-weight:700;color:var(--te);margin-bottom:7px">JobListing</div><div style="font-size:11px;font-family:monospace;line-height:1.9;color:var(--tx2)">id uuid PK<br>user_id FK → User<br>title · city · industry<br>job_type: mini|part|full<br>salary_min · salary_max<br>experience: boolean<br>description · images[]<br>status: active|draft|expired<br>is_premium · views</div></div>
+    <div class="card hover-lift" style="border-top:3px solid var(--co-m);box-shadow:0 4px 15px rgba(0,0,0,0.02)"><div style="font-size:12px;font-weight:700;color:var(--co);margin-bottom:7px">HousingListing</div><div style="font-size:11px;font-family:monospace;line-height:1.9;color:var(--tx2)">id uuid PK<br>user_id FK → User<br>city · district · size_m2<br>floor · wg_size<br>rent_price · duration<br>preference: student|f|m|any<br>amenities[] · images[]<br>status: active|rented|draft<br>is_premium · views</div></div>
+    <div class="card hover-lift" style="border-top:3px solid var(--am-m);box-shadow:0 4px 15px rgba(0,0,0,0.02)"><div style="font-size:12px;font-weight:700;color:var(--am);margin-bottom:7px">Message / Conversation</div><div style="font-size:11px;font-family:monospace;line-height:1.9;color:var(--tx2)">conversation_id uuid PK<br>user_a · user_b FK → User<br>listing_id (nullable)<br>listing_type: job|housing<br>phone_shared: boolean<br>── messages ──<br>message_id · sender_id<br>content · is_read<br>created_at</div></div>
+    <div class="card hover-lift" style="border-top:3px solid var(--gr-d);box-shadow:0 4px 15px rgba(0,0,0,0.02)"><div style="font-size:12px;font-weight:700;color:var(--gr-d);margin-bottom:7px">Payment / KYC</div><div style="font-size:11px;font-family:monospace;line-height:1.9;color:var(--tx2)">user_id · listing_id<br>amount (cents) · EUR<br>stripe_intent_id<br>status: pending|ok|fail<br>plan_days: 1|3|7<br>── KYC ──<br>front_url · back_url<br>selfie_url · status<br>reviewed_by · reviewed_at</div></div>
+    <div class="card hover-lift" style="border-top:3px solid var(--pu-m);box-shadow:0 4px 15px rgba(0,0,0,0.02)"><div style="font-size:12px;font-weight:700;color:var(--pu);margin-bottom:7px">Review / Bookmark / Notif</div><div style="font-size:11px;font-family:monospace;line-height:1.9;color:var(--tx2)">── Review ──<br>reviewer_id · target_id<br>target_type: user|listing<br>rating 1–5 · comment<br>── Bookmark ──<br>user_id · listing_id<br>listing_type: job|housing<br>── Notification ──<br>user_id · type · is_read<br>title · body · ref_id</div></div>
   </div>
 </section>
 
 <!-- ══ USE CASE ══ -->
-<section class="pg" id="usecase">
+<section class="pg reveal" id="usecase">
   <span class="tag" style="background:var(--te-l);color:var(--te)">Use Case Diagram</span>
   <h1>Use Case Diagram</h1>
-  <p class="sub">Toàn bộ tương tác giữa 5 actor và hệ thống ViVi theo 4 nhóm chức năng.</p>
+  <p class="sub">Toàn bộ tương tác giữa 6 actor và hệ thống ViVi theo 4 nhóm chức năng.</p>
   <div id="uc-render"></div>
 </section>
 
 <!-- ══ ACTIVITY ══ -->
-<section class="pg" id="activity">
+<section class="pg reveal" id="activity">
   <span class="tag" style="background:var(--co-l);color:var(--co)">Activity Diagram</span>
   <h1>Activity Diagram</h1>
   <p class="sub">Luồng hoạt động chi tiết của 4 kịch bản chính với swimlane.</p>
@@ -273,7 +296,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 </section>
 
 <!-- ══ SITEMAP ══ -->
-<section class="pg" id="sitemap">
+<section class="pg reveal" id="sitemap">
   <span class="tag" style="background:var(--am-l);color:var(--am)">Site Map</span>
   <h1>Site Map</h1>
   <p class="sub">Toàn bộ cấu trúc URL và phân cấp trang — 32 routes.</p>
@@ -281,7 +304,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 </section>
 
 <!-- ══ LAYOUTS: ONBOARDING ══ -->
-<section class="pg" id="lo-onboard">
+<section class="pg reveal" id="lo-onboard">
   <span class="tag" style="background:var(--pu-l);color:var(--pu)">Layouts · Onboarding · 4 trang</span>
   <h1>Giao diện Onboarding</h1>
   <p class="sub">Luồng đầu tiên người dùng gặp.</p>
@@ -374,10 +397,10 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
       <div style="font-size:15px;font-weight:700;margin-bottom:4px">Bạn cần gì hôm nay?</div>
       <div style="font-size:11px;color:var(--tx3);margin-bottom:18px">Chọn một hoặc nhiều. Có thể thay đổi sau.</div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:660px;margin:0 auto 18px">
-        <div style="border:2px solid var(--pu-m);border-radius:10px;padding:16px 10px;background:var(--pu-l)"><div style="font-size:24px;margin-bottom:6px">💼</div><div style="font-size:12px;font-weight:600;color:var(--pu);margin-bottom:2px">Tìm việc</div><div style="font-size:10px;color:var(--pu-m)">Nail, nhà hàng, IT...</div></div>
-        <div style="border:1px solid var(--bd);border-radius:10px;padding:16px 10px"><div style="font-size:24px;margin-bottom:6px">📋</div><div style="font-size:12px;font-weight:600;margin-bottom:2px">Tuyển dụng</div><div style="font-size:10px;color:var(--tx3)">Đăng tin tuyển nhân viên</div></div>
-        <div style="border:1px solid var(--bd);border-radius:10px;padding:16px 10px"><div style="font-size:24px;margin-bottom:6px">🏠</div><div style="font-size:12px;font-weight:600;margin-bottom:2px">Tìm nhà</div><div style="font-size:10px;color:var(--tx3)">WG, phòng, ngắn/dài hạn</div></div>
-        <div style="border:1px solid var(--bd);border-radius:10px;padding:16px 10px"><div style="font-size:24px;margin-bottom:6px">🔑</div><div style="font-size:12px;font-weight:600;margin-bottom:2px">Cho thuê</div><div style="font-size:10px;color:var(--tx3)">Đăng phòng của bạn</div></div>
+        <div class="hover-lift" style="border:2px solid var(--pu-m);border-radius:10px;padding:16px 10px;background:var(--pu-l);cursor:pointer"><div style="font-size:24px;margin-bottom:6px">💼</div><div style="font-size:12px;font-weight:600;color:var(--pu);margin-bottom:2px">Tìm việc</div><div style="font-size:10px;color:var(--pu-m)">Nail, nhà hàng, IT...</div></div>
+        <div class="hover-lift" style="border:1px solid var(--bd);border-radius:10px;padding:16px 10px;cursor:pointer"><div style="font-size:24px;margin-bottom:6px">📋</div><div style="font-size:12px;font-weight:600;margin-bottom:2px">Tuyển dụng</div><div style="font-size:10px;color:var(--tx3)">Đăng tin nhân viên</div></div>
+        <div class="hover-lift" style="border:1px solid var(--bd);border-radius:10px;padding:16px 10px;cursor:pointer"><div style="font-size:24px;margin-bottom:6px">🏠</div><div style="font-size:12px;font-weight:600;margin-bottom:2px">Tìm nhà</div><div style="font-size:10px;color:var(--tx3)">WG, phòng, ngắn hạn</div></div>
+        <div class="hover-lift" style="border:1px solid var(--bd);border-radius:10px;padding:16px 10px;cursor:pointer"><div style="font-size:24px;margin-bottom:6px">🔑</div><div style="font-size:12px;font-weight:600;margin-bottom:2px">Cho thuê</div><div style="font-size:10px;color:var(--tx3)">Đăng phòng của bạn</div></div>
       </div>
       <div style="display:inline-block;background:var(--pu);color:#fff;border-radius:8px;padding:9px 30px;font-size:12px;font-weight:600;margin-bottom:7px">Bắt đầu →</div>
       <div style="font-size:10px;color:var(--tx3)">Bỏ qua, tôi tự khám phá</div>
@@ -387,7 +410,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 </section>
 
 <!-- ══ LAYOUTS: JOBS ══ -->
-<section class="pg" id="lo-jobs">
+<section class="pg reveal" id="lo-jobs">
   <span class="tag" style="background:var(--te-l);color:var(--te)">Layouts · Việc làm · 6 trang</span>
   <h1>Giao diện trang Việc làm</h1>
   <p class="sub">Feed, Detail, Post form (3 bước + live preview), Manage, Search, Employer Profile.</p>
@@ -395,7 +418,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
   <!-- /jobs -->
   <div style="margin-bottom:24px">
     <div class="pg-title">Job Feed <span class="pg-url">/jobs</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/jobs</div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/jobs</div></div>
     <div class="bscreen">
       <div class="mnav"><div class="mnav-logo">Vi<span>Vi</span></div><div class="mnav-link on">Việc làm</div><div class="mnav-link">Nhà ở</div><div class="mnav-link">Tin nhắn</div><div class="mnav-r"><div class="mbtn o">Đăng tin</div><div class="mbtn f">Tài khoản</div></div></div>
       <div style="background:var(--gr-l);padding:12px 14px;border-bottom:1px solid var(--bd)">
@@ -434,7 +457,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
   <!-- /jobs/:id -->
   <div style="margin-bottom:24px">
     <div class="pg-title">Job Detail <span class="pg-url">/jobs/:id</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/jobs/tho-nail-kinh-nghiem</div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/jobs/tho-nail-kinh-nghiem</div></div>
     <div class="bscreen">
       <div class="mnav"><div class="mnav-logo">Vi<span>Vi</span></div><div class="mnav-link on">Việc làm</div><div class="mnav-r"><div class="mbtn f">Tài khoản</div></div></div>
       <div style="padding:8px 14px;font-size:10px;color:var(--tx3);border-bottom:1px solid var(--bd)">Việc làm → Nail → <span style="color:var(--tx)">Thợ nail kinh nghiệm</span></div>
@@ -474,45 +497,53 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
   <!-- /jobs/post -->
   <div style="margin-bottom:24px">
     <div class="pg-title">Post Job — 3 bước + live preview <span class="pg-url">/jobs/post</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/jobs/post</div></div>
-    <div class="bscreen">
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/jobs/post</div></div>
+    <div class="bscreen" style="min-height:360px">
       <div class="mnav"><div class="mnav-logo">Vi<span>Vi</span></div><div class="mnav-r"><div class="mbtn f">Tài khoản</div></div></div>
-      <div style="display:grid;grid-template-columns:1fr 260px;min-height:300px">
-        <div style="padding:14px">
+      <div style="display:grid;grid-template-columns:1fr 260px;min-height:320px">
+        <div style="padding:14px;border-right:1px solid var(--bd)">
           <div style="font-size:13px;font-weight:700;margin-bottom:10px">Đăng tin tuyển dụng</div>
           <div style="display:flex;align-items:center;gap:0;margin-bottom:14px">
-            <div style="display:flex;align-items:center;gap:4px"><div style="width:22px;height:22px;border-radius:50%;background:var(--pu);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">1</div><span style="font-size:10px;font-weight:600;color:var(--pu)">Thông tin</span></div>
-            <div style="flex:1;height:2px;background:var(--pu-m);margin:0 5px"></div>
-            <div style="display:flex;align-items:center;gap:4px;opacity:.4"><div style="width:22px;height:22px;border-radius:50%;border:1.5px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--tx3)">2</div><span style="font-size:10px;color:var(--tx3)">Mô tả & ảnh</span></div>
+            <div style="display:flex;align-items:center;gap:4px"><div style="width:20px;height:20px;border-radius:50%;background:var(--te-m);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">✓</div><span style="font-size:10px;color:var(--te-m)">Thông tin</span></div>
+            <div style="flex:1;height:2px;background:var(--te-m);margin:0 5px"></div>
+            <div style="display:flex;align-items:center;gap:4px"><div style="width:20px;height:20px;border-radius:50%;background:var(--pu);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">2</div><span style="font-size:10px;font-weight:600;color:var(--pu)">Mô tả & ảnh</span></div>
             <div style="flex:1;height:2px;background:var(--bd);margin:0 5px"></div>
-            <div style="display:flex;align-items:center;gap:4px;opacity:.4"><div style="width:22px;height:22px;border-radius:50%;border:1.5px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--tx3)">3</div><span style="font-size:10px;color:var(--tx3)">Chọn gói</span></div>
+            <div style="display:flex;align-items:center;gap:4px;opacity:.4"><div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--tx3)">3</div><span style="font-size:10px;color:var(--tx3)">Chọn gói</span></div>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:8px">
-            <div><div style="font-size:10px;color:var(--tx2);margin-bottom:2px">Tên vị trí *</div><div style="border:1px solid var(--pu-m);border-radius:5px;padding:6px 8px;font-size:10px;background:var(--pu-l);color:var(--pu)">Thợ nail kinh nghiệm</div></div>
-            <div><div style="font-size:10px;color:var(--tx2);margin-bottom:2px">Thành phố *</div><div style="border:1px solid var(--bd);border-radius:5px;padding:6px 8px;font-size:10px;color:var(--tx3)">Chọn ▾</div></div>
-            <div><div style="font-size:10px;color:var(--tx2);margin-bottom:2px">Ngành *</div><div style="border:1px solid var(--bd);border-radius:5px;padding:6px 8px;font-size:10px;color:var(--tx3)">Nail / Làm đẹp ▾</div></div>
-            <div><div style="font-size:10px;color:var(--tx2);margin-bottom:2px">Loại *</div><div style="border:1px solid var(--bd);border-radius:5px;padding:6px 8px;font-size:10px;color:var(--tx3)">Full-time ▾</div></div>
+          <div style="margin-bottom:10px">
+            <div style="font-size:10px;color:var(--tx2);margin-bottom:4px">Mô tả công việc *</div>
+            <div style="border:1px solid var(--pu-m);border-radius:5px;padding:8px;font-size:10px;background:var(--pu-l);color:var(--pu);min-height:80px">Nail Studio Linh tìm kiếm thợ nail có ít nhất 2 năm kinh nghiệm. Môi trường làm việc thân thiện, đồng nghiệp người Việt...|</div>
           </div>
-          <div style="display:flex;justify-content:flex-end;margin-top:8px"><div style="background:var(--pu);color:#fff;border-radius:6px;padding:7px 16px;font-size:11px;font-weight:600">Tiếp theo →</div></div>
+          <div style="margin-bottom:12px">
+            <div style="font-size:10px;color:var(--tx2);margin-bottom:4px">Ảnh nơi làm việc (tối đa 5)</div>
+            <div style="display:flex;gap:6px">
+              <div style="width:50px;height:50px;background:var(--gr-l);border:1px solid var(--bd);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--tx3)">+</div>
+              <div style="width:50px;height:50px;background:#D4DFE3;border-radius:5px"></div>
+              <div style="width:50px;height:50px;background:#DDE5E8;border-radius:5px"></div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:10px"><div style="border:1px solid var(--bd);color:var(--tx2);border-radius:6px;padding:7px 16px;font-size:11px">← Quay lại</div><div style="background:var(--pu);color:#fff;border-radius:6px;padding:7px 16px;font-size:11px;font-weight:600">Tiếp theo (Bước 3) →</div></div>
         </div>
-        <div style="border-left:1px solid var(--bd);padding:12px;background:var(--gr-l)">
-          <div style="font-size:10px;font-weight:600;color:var(--tx2);margin-bottom:7px">Preview bài đăng</div>
-          <div style="background:var(--wh);border:1px solid var(--pu-m);border-radius:7px;padding:9px">
-            <div style="font-size:11px;font-weight:600;margin-bottom:2px">Thợ nail kinh nghiệm</div>
-            <div style="font-size:9px;color:var(--tx2);margin-bottom:4px">Nail Studio · Berlin</div>
-            <div style="display:flex;gap:3px"><span style="background:var(--te-l);color:var(--te);font-size:8px;padding:1px 5px;border-radius:3px">€1.200/th</span><span style="background:var(--pu-l);color:var(--pu);font-size:8px;padding:1px 5px;border-radius:3px">Full-time</span></div>
+        <div style="padding:12px;background:var(--gr-l)">
+          <div style="font-size:10px;font-weight:600;color:var(--tx2);margin-bottom:7px">Live Preview</div>
+          <div style="background:var(--wh);border:1px solid var(--bd);border-radius:8px;overflow:hidden">
+            <div style="height:60px;background:#D4DFE3"></div>
+            <div style="padding:10px">
+              <div style="font-size:11px;font-weight:700;margin-bottom:2px">Thợ nail kinh nghiệm</div>
+              <div style="font-size:9px;color:var(--tx2);margin-bottom:6px">Nail Studio Linh · Berlin</div>
+              <div style="font-size:9px;color:var(--tx3);line-height:1.4">Nail Studio Linh tìm kiếm thợ nail có ít nhất 2 năm kinh nghiệm...</div>
+            </div>
           </div>
-          <div style="font-size:9px;color:var(--tx3);text-align:center;margin-top:6px">Live preview khi bạn gõ</div>
         </div>
       </div>
     </div></div>
-    <ul class="spec"><li>Stepper 3 bước · form 2 cột · live preview phải</li><li>Bước 3: chọn gói Free/Paid → /premium</li></ul>
+    <ul class="spec"><li>Stepper 3 bước: Thông tin cơ bản -> Mô tả/Ảnh -> Chọn gói</li><li>Live preview cột phải cập nhật real-time khi người dùng nhập mô tả hoặc upload ảnh.</li></ul>
   </div>
 
   <!-- /jobs/manage -->
   <div style="margin-bottom:24px">
     <div class="pg-title">Manage Listings <span class="pg-url">/jobs/manage</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/jobs/manage</div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/jobs/manage</div></div>
     <div class="bscreen">
       <div class="mnav"><div class="mnav-logo">Vi<span>Vi</span></div><div class="mnav-link on">Quản lý tin</div><div class="mnav-r"><div class="mbtn f">+ Đăng tin mới</div></div></div>
       <div style="padding:12px">
@@ -535,26 +566,67 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 
   <div style="margin-bottom:24px">
     <div class="pg-title">Job Search <span class="pg-url">/jobs/search</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/jobs/search</div></div>
-    <div class="bscreen" style="height:100px;background:var(--gr-l)"></div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/jobs/search?q=nail&city=berlin</div></div>
+    <div class="bscreen" style="min-height:300px">
+      <div class="mnav"><div class="mnav-logo">Vi<span>Vi</span></div><div class="mnav-r"><div class="mbtn f">Tài khoản</div></div></div>
+      <div style="padding:15px;background:var(--gr-l);border-bottom:1px solid var(--bd)">
+        <div style="display:flex;gap:8px;max-width:600px;margin:0 auto">
+          <div style="flex:1;background:#fff;border:1px solid var(--pu-m);border-radius:6px;padding:8px 12px;font-size:11px;color:var(--tx)">nail|</div>
+          <div style="width:120px;background:#fff;border:1px solid var(--bd);border-radius:6px;padding:8px 12px;font-size:11px;color:var(--tx)">Berlin ▾</div>
+          <div style="background:var(--pu);color:#fff;border-radius:6px;padding:8px 18px;font-size:11px;font-weight:600">Tìm kiếm</div>
+        </div>
+      </div>
+      <div style="padding:15px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div style="font-size:11px;font-weight:600">8 kết quả cho "nail" tại Berlin</div>
+          <div style="font-size:10px;color:var(--pu);font-weight:600;display:flex;align-items:center;gap:4px">🔔 Lưu tìm kiếm</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid var(--pu-m);border-radius:8px;padding:12px;display:flex;gap:12px;background:var(--pu-l)">
+            <div style="width:40px;height:40px;background:#D4DFE3;border-radius:6px;flex-shrink:0"></div>
+            <div><div style="font-size:11px;font-weight:700">Thợ nail kinh nghiệm</div><div style="font-size:10px;color:var(--tx2);margin:2px 0 6px">Nail Studio Linh · Berlin Mitte</div><div style="display:flex;gap:4px"><span style="background:var(--te-l);color:var(--te);font-size:9px;padding:1px 6px;border-radius:3px">€1.200/th</span><span style="background:var(--pu-l);color:var(--pu);font-size:9px;padding:1px 6px;border-radius:3px">Full-time</span></div></div>
+          </div>
+          <div style="border:1px solid var(--bd);border-radius:8px;padding:12px;display:flex;gap:12px">
+            <div style="width:40px;height:40px;background:#DDE5E8;border-radius:6px;flex-shrink:0"></div>
+            <div><div style="font-size:11px;font-weight:700">Nail technician (Part-time)</div><div style="font-size:10px;color:var(--tx2);margin:2px 0 6px">Mimi Nails · Berlin Charlottenburg</div><div style="display:flex;gap:4px"><span style="background:var(--te-l);color:var(--te);font-size:9px;padding:1px 6px;border-radius:3px">€14/h</span><span style="background:var(--pu-l);color:var(--pu);font-size:9px;padding:1px 6px;border-radius:3px">Part-time</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div></div>
   </div>
 
   <div style="margin-bottom:24px">
     <div class="pg-title">Employer Profile <span class="pg-url">/employer/:id</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/employer/nail-studio-linh</div></div>
-    <div class="bscreen" style="height:100px;background:var(--pu-l)"></div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/employer/nail-studio-linh</div></div>
+    <div class="bscreen" style="padding:20px;background:#fcfcfc">
+      <div style="display:flex;gap:20px;margin-bottom:20px;align-items:flex-start">
+        <div style="width:70px;height:70px;background:var(--gr-l);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--tx3);border:1px solid var(--bd);flex-shrink:0">💅</div>
+        <div style="flex:1">
+          <div style="font-size:18px;font-weight:800;margin-bottom:4px">Nail Studio Linh <span style="background:var(--te-l);color:var(--te);font-size:10px;padding:2px 8px;border-radius:12px;font-weight:600;margin-left:6px">Đã xác minh KYC ✓</span></div>
+          <div style="font-size:11px;color:var(--tx2);display:flex;gap:12px;margin-bottom:10px"><span>📍 Berlin, Mitte</span><span>🏢 Doanh nghiệp Việt</span><span>⭐ 4.8 (24 đánh giá)</span></div>
+          <div style="font-size:11px;color:var(--tx);line-height:1.6">Chúng tôi là studio nail lâu đời nhất tại Berlin Mitte, chuyên cung cấp các dịch vụ làm đẹp cao cấp cho cộng đồng. Chào đón các bạn thợ có tâm gia nhập đội ngũ.</div>
+        </div>
+        <div style="background:var(--pu);color:#fff;border-radius:6px;padding:8px 20px;font-size:11px;font-weight:600">Theo dõi</div>
+      </div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:12px;padding-bottom:8px;border-bottom:1.5px solid var(--bd)">Bài đăng đang hoạt động (1)</div>
+      <div style="border:1px solid var(--bd);border-radius:8px;padding:12px;max-width:400px">
+        <div style="font-size:12px;font-weight:700;margin-bottom:2px">Thợ nail kinh nghiệm</div>
+        <div style="font-size:10px;color:var(--tx3);margin-bottom:8px">Đăng 2 ngày trước · Berlin</div>
+        <div style="display:flex;gap:6px"><span style="background:var(--te-l);color:var(--te);font-size:9px;padding:2px 7px;border-radius:4px">€1.200/th</span><span style="background:var(--pu-l);color:var(--pu);font-size:9px;padding:2px 7px;border-radius:4px">Full-time</span></div>
+      </div>
+    </div></div>
   </div>
 </section>
 
 <!-- ══ LAYOUTS: HOUSING ══ -->
-<section class="pg" id="lo-housing">
+<section class="pg reveal" id="lo-housing">
   <span class="tag" style="background:var(--co-l);color:var(--co)">Layouts · Nhà ở · 4 trang chính</span>
   <h1>Giao diện trang Nhà ở</h1>
   <p class="sub">Housing Feed, Detail với gallery + map, Post Room form, Manage listing.</p>
 
   <div style="margin-bottom:24px">
     <div class="pg-title">Housing Feed <span class="pg-url">/housing</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/housing</div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/housing</div></div>
     <div class="bscreen">
       <div class="mnav"><div class="mnav-logo">Vi<span>Vi</span></div><div class="mnav-link">Việc làm</div><div class="mnav-link on">Nhà ở</div><div class="mnav-link">Tin nhắn</div><div class="mnav-r"><div class="mbtn o">Đăng phòng</div><div class="mbtn f">Tài khoản</div></div></div>
       <div style="background:var(--gr-l);padding:12px 14px;border-bottom:1px solid var(--bd)">
@@ -588,7 +660,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 
   <div style="margin-bottom:24px">
     <div class="pg-title">Housing Detail — Gallery + Map <span class="pg-url">/housing/:id</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/housing/phong-18m-prenzlauer-berg</div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/housing/phong-18m-prenzlauer-berg</div></div>
     <div class="bscreen">
       <div class="mnav"><div class="mnav-logo">Vi<span>Vi</span></div><div class="mnav-link on">Nhà ở</div><div class="mnav-r"><div class="mbtn f">Tài khoản</div></div></div>
       <div style="display:grid;grid-template-columns:1fr 248px">
@@ -629,39 +701,148 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
   </div>
 
   <div style="margin-bottom:24px">
-    <div class="pg-title">Post Room <span class="pg-url">/housing/post</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/housing/post</div></div>
-    <div class="bscreen" style="height:100px;background:var(--co-l)"></div></div>
+    <div class="pg-title">Post Room — 3 bước <span class="pg-url">/housing/post</span></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/housing/post</div></div>
+    <div class="bscreen" style="min-height:360px;background:#fff">
+      <div class="mnav" style="background:var(--og-l)"><div class="mnav-logo">Vi<span>Vi</span></div><div class="mnav-r"><div class="mbtn f" style="background:var(--og);color:#fff">Tài khoản</div></div></div>
+      <div style="max-width:520px;margin:0 auto;padding:15px">
+        <div style="display:flex;justify-content:center;gap:15px;margin-bottom:15px;position:relative">
+          <div style="position:absolute;top:10px;left:100px;right:100px;height:2px;background:var(--bd);z-index:0"></div>
+          <div style="position:absolute;top:10px;left:100px;width:50px;height:2px;background:var(--te-m);z-index:1"></div>
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--te-m);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;z-index:2;position:relative">✓</div>
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--og);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;z-index:2;position:relative">2</div>
+          <div style="width:22px;height:22px;border-radius:50%;background:#fff;border:1.5px solid var(--bd);color:var(--tx3);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;z-index:2;position:relative">3</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--bd);border-radius:10px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,0.05)">
+          <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--og)">Bước 2: Hình ảnh & Tiện ích</div>
+          <p style="font-size:10px;color:var(--tx2);margin-bottom:10px">Tải lên tối đa 10 ảnh. Ảnh đầu tiên sẽ là ảnh bìa.</p>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px">
+            <div style="aspect-ratio:1;background:#D4DFE3;border-radius:8px;position:relative"><span style="position:absolute;bottom:4px;left:4px;background:var(--og);color:#fff;font-size:8px;padding:1px 4px;border-radius:30px">Bìa</span></div>
+            <div style="aspect-ratio:1;background:#DDE5E8;border-radius:8px"></div>
+            <div style="aspect-ratio:1;background:#f8f7f4;border:1.5px dashed var(--bd);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--tx3);cursor:pointer">+</div>
+          </div>
+          <div style="font-size:11px;font-weight:600;margin-bottom:8px">Tiện ích cơ bản</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px">
+            <div style="display:flex;gap:6px;font-size:10px"><input type="checkbox" checked> Wifi tốc độ cao</div>
+            <div style="display:flex;gap:6px;font-size:10px"><input type="checkbox" checked> Máy giặt riêng</div>
+            <div style="display:flex;gap:6px;font-size:10px"><input type="checkbox"> Ban công / Sân vườn</div>
+            <div style="display:flex;gap:6px;font-size:10px"><input type="checkbox" checked> Nội thất cơ bản</div>
+          </div>
+          <div style="display:flex;justify-content:space-between"><div style="border:1px solid var(--bd);color:var(--tx2);border-radius:6px;padding:8px 20px;font-size:11px;cursor:pointer">← Quay lại</div><div style="background:var(--og);color:#fff;border-radius:6px;padding:8px 20px;font-size:11px;font-weight:600;cursor:pointer">Tiếp theo (Review) →</div></div>
+        </div>
+      </div>
+    </div></div>
   </div>
 
   <div style="margin-bottom:24px">
     <div class="pg-title">Manage Listings <span class="pg-url">/housing/manage</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/housing/manage</div></div>
-    <div class="bscreen" style="height:100px;background:var(--te-l)"></div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/housing/manage</div></div>
+    <div class="bscreen" style="min-height:300px;background:#fcfcfc;padding:15px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
+        <h3 style="font-size:14px;font-weight:800;margin:0">Quản lý phòng của tôi</h3>
+        <div style="background:var(--og);color:#fff;border-radius:6px;padding:8px 15px;font-size:11px;font-weight:600;cursor:pointer">+ Đăng tin mới</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--bd);border-radius:10px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,0.03)">
+        <table style="width:100%;border-collapse:collapse;font-size:11px">
+          <thead>
+            <tr style="background:var(--gr-l);border-bottom:1px solid var(--bd)">
+              <th style="padding:12px;text-align:left;color:var(--tx2);font-weight:600">Phòng / Địa chỉ</th>
+              <th style="padding:12px;text-align:left;color:var(--tx2);font-weight:600">Giá thuê</th>
+              <th style="padding:12px;text-align:left;color:var(--tx2);font-weight:600">Lượt xem</th>
+              <th style="padding:12px;text-align:left;color:var(--tx2);font-weight:600">Trạng thái</th>
+              <th style="padding:12px;text-align:right;color:var(--tx2);font-weight:600">Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--bd)">
+              <td style="padding:12px"><div style="font-weight:700">Phòng Mitte 18m2</div><div style="font-size:9px;color:var(--tx3)">Berlin, Torstraße 12</div></td>
+              <td style="padding:12px">€550/th</td>
+              <td style="padding:12px">124</td>
+              <td style="padding:12px"><span style="background:var(--te-l);color:var(--te);padding:2px 8px;border-radius:30px;font-size:9px;font-weight:700">Đang hiện</span></td>
+              <td style="padding:12px;text-align:right"><span style="color:var(--og);cursor:pointer">Sửa</span> · <span style="color:var(--co);cursor:pointer">Tạm ẩn</span></td>
+            </tr>
+            <tr>
+              <td style="padding:12px"><div style="font-weight:700">Shared Wedding</div><div style="font-size:9px;color:var(--tx3)">Berlin, Müllerstr.</div></td>
+              <td style="padding:12px">€420/th</td>
+              <td style="padding:12px">45</td>
+              <td style="padding:12px"><span style="background:var(--gr-l);color:var(--tx3);padding:2px 8px;border-radius:30px;font-size:9px">Hết hạn</span></td>
+              <td style="padding:12px;text-align:right"><span style="color:var(--og);cursor:pointer">Gia hạn</span> · <span style="color:var(--co);cursor:pointer">Xóa</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
   </div>
 
   <div style="margin-bottom:24px">
     <div class="pg-title">Search Map <span class="pg-url">/housing/search</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/housing/search</div></div>
-    <div class="bscreen" style="height:100px;background:var(--am-l)"></div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/housing/search?lat=52.52&lng=13.40</div></div>
+    <div class="bscreen" style="height:360px;display:grid;grid-template-columns:300px 1fr">
+      <div style="padding:15px;border-right:1px solid var(--bd);overflow-y:auto;background:#fff">
+        <div style="font-size:12px;font-weight:800;margin-bottom:12px">24 phòng cho thuê</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="border:1px solid var(--og-m);border-radius:10px;overflow:hidden;background:var(--og-l)">
+            <div style="height:90px;background:#D4DFE3;position:relative"><span style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.5);color:#fff;font-size:8px;padding:2px 6px;border-radius:4px">1/6</span></div>
+            <div style="padding:10px">
+              <div style="font-size:11px;font-weight:700;margin-bottom:3px">Phòng Mitte cổ kính</div>
+              <div style="font-size:10px;color:var(--tx2)">€620/th · 18m2 · WG 3</div>
+            </div>
+          </div>
+          <div style="border:1px solid var(--bd);border-radius:10px;overflow:hidden">
+            <div style="height:90px;background:#DDE5E8"></div>
+            <div style="padding:10px">
+              <div style="font-size:11px;font-weight:700;margin-bottom:3px">Phòng SV Wedding</div>
+              <div style="font-size:10px;color:var(--tx2)">€450/th · 20m2 · WG 2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#EBF3F0;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden">
+        <div style="position:absolute;inset:0;background-image:radial-gradient(circle, #d0e0d8 1px, transparent 1px);background-size:20px 20px;opacity:0.5"></div>
+        <div style="position:absolute;top:15px;left:15px;background:#fff;border-radius:6px;padding:6px 12px;font-size:10px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.1);border:1px solid var(--bd)">Filter ▾</div>
+        <!-- Pins -->
+        <div style="position:absolute;top:30%;left:45%;background:var(--og);color:#fff;font-size:10px;font-weight:800;padding:4px 8px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,0.2);cursor:pointer">€620</div>
+        <div style="position:absolute;top:55%;left:60%;background:var(--og);color:#fff;font-size:10px;font-weight:800;padding:4px 8px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,0.2);cursor:pointer">€450</div>
+        <div style="font-size:10px;color:var(--tx3);font-family:serif;opacity:0.4;transform:rotate(-45deg)">MAP ENGINE SIMULATION</div>
+      </div>
+    </div></div>
   </div>
 
   <div style="margin-bottom:24px">
     <div class="pg-title">Host Profile <span class="pg-url">/host/:id</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/host/thanh-hoang</div></div>
-    <div class="bscreen" style="height:100px;background:var(--gr-l)"></div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/host/thanh-hoang</div></div>
+    <div class="bscreen" style="padding:24px;background:#fcfcfc">
+      <div style="background:#fff;border:1px solid var(--bd);border-radius:15px;padding:20px;display:flex;gap:20px;align-items:center;margin-bottom:24px;box-shadow:0 2px 10px rgba(0,0,0,0.02)">
+        <div style="width:70px;height:70px;background:var(--og-l);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;border:3px solid #fff;box-shadow:0 0 0 2px var(--og-m)">👤</div>
+        <div style="flex:1">
+          <div style="font-size:18px;font-weight:800;margin-bottom:4px">Thanh Hoàng <span style="font-size:11px;color:var(--te);margin-left:8px;font-weight:600">Verified Host ✓</span></div>
+          <p style="font-size:11px;color:var(--tx2);margin:0">Tham gia từ 2026 · Phản hồi cực nhanh (< 1 giờ)</p>
+          <div style="display:flex;gap:15px;margin-top:10px">
+            <div style="font-size:11px">⭐ <b>4.9</b> (12 đánh giá)</div>
+            <div style="font-size:11px">🏠 <b>2</b> phòng đã đăng</div>
+          </div>
+        </div>
+      </div>
+      <h4 style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--tx)">Phòng đang cho thuê</h4>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px">
+        <div style="border:1px solid var(--bd);border-radius:10px;overflow:hidden;background:#fff">
+          <div style="height:80px;background:#D4DFE3"></div>
+          <div style="padding:10px"><div style="font-size:11px;font-weight:700">Phòng Mitte 18m2</div><div style="font-size:11px;font-weight:800;color:var(--og);margin-top:4px">€550/th</div></div>
+        </div>
+      </div>
+    </div></div>
   </div>
 </section>
 
 <!-- ══ LAYOUTS: SHARED ══ -->
-<section class="pg" id="lo-shared">
+<section class="pg reveal" id="lo-shared">
   <span class="tag" style="background:var(--gr-m);color:var(--wh)">Layouts · Shared · 9 trang</span>
   <h1>Giao diện trang Chức năng chung</h1>
   <p class="sub">Messages, Premium, Profile, Settings và Admin Dashboard.</p>
 
   <div style="margin-bottom:24px">
     <div class="pg-title">Messages — 3-col layout <span class="pg-url">/messages · /messages/:id</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/messages/nail-studio-linh</div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/messages/nail-studio-linh</div></div>
     <div class="bscreen">
       <div class="mnav"><div class="mnav-logo">Vi<span>Vi</span></div><div class="mnav-link on">Tin nhắn <span style="background:var(--pu);color:#fff;border-radius:50%;width:13px;height:13px;display:inline-flex;align-items:center;justify-content:center;font-size:8px;margin-left:2px">2</span></div><div class="mnav-r"><div class="mbtn f">Tài khoản</div></div></div>
       <div style="display:grid;grid-template-columns:240px 1fr 200px;min-height:280px">
@@ -671,7 +852,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
             <div style="display:flex;align-items:center;gap:6px"><div style="width:28px;height:28px;border-radius:50%;background:var(--pu-l);border:1.5px solid var(--pu-m);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--pu);flex-shrink:0">NL</div><div style="flex:1;min-width:0"><div style="font-size:10px;font-weight:600;display:flex;justify-content:space-between"><span>Nail Studio Linh</span><span style="font-size:9px;font-weight:400;color:var(--tx3)">10:32</span></div><div style="font-size:9px;color:var(--tx2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Bạn có thể đến thử việc...</div></div><div style="width:15px;height:15px;border-radius:50%;background:var(--pu);display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;flex-shrink:0">2</div></div>
           </div>
           <div style="padding:7px 9px;border-bottom:1px solid var(--bd);cursor:pointer">
-            <div style="display:flex;align-items:center;gap:6px"><div style="width:28px;height:28px;border-radius:50%;background:var(--co-l);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--co);flex-shrink:0">TH</div><div style="flex:1;min-width:0"><div style="font-size:10px;display:flex;justify-content:space-between"><span>Thanh (chủ nhà)</span><span style="font-size:9px;color:var(--tx3)">Hôm qua</span></div><div style="font-size:9px;color:var(--tx3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Phòng vẫn còn trống...</div></div></div>
+            <div style="display:flex;align-items:center;gap:6px"><div style="width:28px;height:28px;border-radius:50%;background:var(--co-l);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--co);flex-shrink:0">TH</div><div style="flex:1;min-width:0"><div style="font-size:10px;display:flex;justify-content:space-between"><span>Toàn (chủ nhà)</span><span style="font-size:9px;color:var(--tx3)">Hôm qua</span></div><div style="font-size:9px;color:var(--tx3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Phòng vẫn còn trống...</div></div></div>
           </div>
         </div>
         <div style="display:flex;flex-direction:column">
@@ -691,7 +872,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 
   <div style="margin-bottom:24px">
     <div class="pg-title">Premium & Checkout <span class="pg-url">/premium · /premium/checkout</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/premium?listing=XYZ</div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/premium?listing=XYZ</div></div>
     <div class="bscreen" style="padding:18px">
       <div style="text-align:center;margin-bottom:16px"><div style="font-size:14px;font-weight:700;margin-bottom:3px">Tăng độ tiếp cận cho tin đăng</div><div style="font-size:11px;color:var(--tx3)">Tin miễn phí của bạn đang nhận ít lượt xem. Nâng cấp để tiếp cận nhiều người hơn.</div></div>
       <div style="background:var(--gr-l);border-radius:7px;padding:10px;margin-bottom:14px;display:flex;justify-content:center;gap:28px"><div style="text-align:center"><div style="font-size:18px;font-weight:700;color:var(--tx2)">12</div><div style="font-size:10px;color:var(--tx3)">Views/ngày hiện tại</div></div><div style="font-size:18px;color:var(--tx3);display:flex;align-items:center">→</div><div style="text-align:center"><div style="font-size:18px;font-weight:700;color:var(--pu)">36+</div><div style="font-size:10px;color:var(--pu-m)">Views với gói Nổi bật</div></div></div>
@@ -708,7 +889,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 
   <div style="margin-bottom:24px">
     <div class="pg-title">Premium Success <span class="pg-url">/premium/success</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/premium/success</div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/premium/success</div></div>
     <div class="bscreen" style="padding:40px;text-align:center">
       <div style="width:50px;height:50px;background:var(--te-l);color:var(--te);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 12px">✓</div>
       <div style="font-size:16px;font-weight:700;margin-bottom:4px">Thanh toán thành công!</div>
@@ -719,7 +900,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 
   <div style="margin-bottom:24px">
     <div class="pg-title">Saved Listings <span class="pg-url">/saved</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/saved</div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/saved</div></div>
     <div class="bscreen">
       <div class="mnav"><div class="mnav-logo">Vi<span>Vi</span></div><div class="mnav-link on">Đã lưu</div><div class="mnav-r"><div class="mbtn f">Tài khoản</div></div></div>
       <div style="padding:12px">
@@ -734,9 +915,9 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 
   <div style="margin-bottom:24px">
     <div class="pg-title">Public Profile <span class="pg-url">/profile/:id</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/profile/thanh-nguyen</div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/profile/toan-nguyen</div></div>
     <div class="bscreen" style="padding:24px">
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><div style="width:50px;height:50px;border-radius:50%;background:var(--pu-l);border:2px solid var(--pu-m);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--pu)">TN</div><div><div style="font-size:15px;font-weight:700">Thanh Nguyễn</div><div style="font-size:11px;color:var(--te)">Đã xác minh ✓ · 4.9★ (12 review)</div></div></div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><div style="width:50px;height:50px;border-radius:50%;background:var(--pu-l);border:2px solid var(--pu-m);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--pu)">TN</div><div><div style="font-size:15px;font-weight:700">Toàn Nguyễn</div><div style="font-size:11px;color:var(--te)">Đã xác minh ✓ · 4.9★ (12 review)</div></div></div>
       <div style="font-size:11px;color:var(--tx2);line-height:1.6;margin-bottom:14px">Thành viên từ 2024. Sống tại Berlin. Ưu tiên tìm các công việc trong ngành làm đẹp và nhà hàng.</div>
       <div style="background:var(--gr-l);border-radius:6px;padding:12px;font-size:10px;color:var(--tx3)">Thông tin bảo mật · Chỉ Employer mới có thể xem profile đầy đủ.</div>
     </div></div>
@@ -744,11 +925,11 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 
   <div style="margin-bottom:24px">
     <div class="pg-title">ViVi Bot <span class="pg-url">/messages/bot</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/messages/bot</div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/messages/bot</div></div>
     <div class="bscreen" style="background:#f0f2f5;min-height:220px;display:flex;flex-direction:column">
       <div style="padding:10px;background:#fff;border-bottom:1px solid #ddd;font-weight:600;font-size:11px">ViVi Assistant</div>
       <div style="flex:1;padding:15px;display:flex;flex-direction:column;gap:10px">
-        <div style="background:#fff;padding:8px 12px;border-radius:12px 12px 12px 0;font-size:11px;align-self:flex-start;max-width:80%;box-shadow:0 1px 2px rgba(0,0,0,.1)">Chào Thanh! Đang có 3 công việc nail mới ở Berlin phù hợp với bạn. Bạn có muốn xem không?</div>
+        <div style="background:#fff;padding:8px 12px;border-radius:12px 12px 12px 0;font-size:11px;align-self:flex-start;max-width:80%;box-shadow:0 1px 2px rgba(0,0,0,.1)">Chào Toàn! Đang có 3 công việc nail mới ở Berlin phù hợp với bạn. Bạn có muốn xem không?</div>
         <div style="background:var(--pu);color:#fff;padding:8px 12px;border-radius:12px 12px 0 12px;font-size:11px;align-self:flex-end">Có, hãy cho mình xem</div>
       </div>
     </div></div>
@@ -756,7 +937,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 
   <div style="margin-bottom:24px">
     <div class="pg-title">Profile Edit & Settings <span class="pg-url">/profile/edit · /settings</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/profile/edit</div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/profile/edit</div></div>
     <div class="bscreen">
       <div class="mnav"><div class="mnav-logo">Vi<span>Vi</span></div><div class="mnav-r"><div class="mbtn f">Tài khoản</div></div></div>
       <div style="display:grid;grid-template-columns:190px 1fr;min-height:260px">
@@ -775,7 +956,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
           <div style="font-size:13px;font-weight:600;margin-bottom:12px">Hồ sơ cá nhân</div>
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:44px;height:44px;border-radius:50%;background:var(--pu-l);border:2px solid var(--pu-m);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--pu)">NT</div><div style="font-size:10px;color:var(--pu)">Đổi ảnh</div><span style="background:var(--te-l);color:var(--te);font-size:9px;padding:2px 6px;border-radius:10px;margin-left:auto">KYC xác minh ✓</span></div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
-            <div><div style="font-size:10px;color:var(--tx2);margin-bottom:2px">Họ và tên</div><div style="border:1px solid var(--pu-m);border-radius:5px;padding:6px 8px;font-size:10px;background:var(--pu-l);color:var(--pu)">Nguyễn Thanh</div></div>
+            <div><div style="font-size:10px;color:var(--tx2);margin-bottom:2px">Họ và tên</div><div style="border:1px solid var(--pu-m);border-radius:5px;padding:6px 8px;font-size:10px;background:var(--pu-l);color:var(--pu)">Nguyễn Thanh Toàn</div></div>
             <div><div style="font-size:10px;color:var(--tx2);margin-bottom:2px">Thành phố</div><div style="border:1px solid var(--bd);border-radius:5px;padding:6px 8px;font-size:10px;color:var(--tx3)">Berlin</div></div>
           </div>
           <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--tx2);margin-bottom:2px">Mục đích sử dụng</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:3px"><span style="background:var(--pu-l);border:1px solid var(--pu-m);color:var(--pu);font-size:10px;padding:3px 9px;border-radius:11px">Tìm việc ✓</span><span style="border:1px solid var(--bd);font-size:10px;padding:3px 9px;border-radius:11px;color:var(--tx2)">Tuyển dụng</span><span style="border:1px solid var(--bd);font-size:10px;padding:3px 9px;border-radius:11px;color:var(--tx2)">Tìm nhà</span></div></div>
@@ -788,7 +969,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 
   <div style="margin-bottom:24px">
     <div class="pg-title">Admin Dashboard <span class="pg-url">/admin</span> <span style="font-size:10px;color:var(--co);background:var(--co-l);padding:2px 7px;border-radius:10px;margin-left:4px">Internal only</span></div>
-    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/admin</div></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/admin</div></div>
     <div class="bscreen">
       <div style="background:#1a1a18;padding:0 12px;display:flex;align-items:center;height:34px"><div style="font-size:12px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-right:14px">Vi<span style="color:var(--pu-m)">Vi</span> <span style="font-size:10px;font-weight:400;color:rgba(255,255,255,.4)">Admin</span></div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center;border-bottom:2px solid var(--pu-m);color:#fff">Dashboard</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">KYC</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Bài đăng</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Báo cáo</div></div>
       <div style="padding:14px">
@@ -802,7 +983,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
         <table style="width:100%;border-collapse:collapse;font-size:11px">
           <thead><tr style="background:var(--gr-l)"><th style="padding:5px 8px;text-align:left;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Tên</th><th style="padding:5px 8px;text-align:left;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Email</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Nộp lúc</th><th style="padding:5px 8px;text-align:right;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Hành động</th></tr></thead>
           <tbody>
-            <tr style="border-bottom:1px solid var(--bd)"><td style="padding:5px 8px;font-size:10px">Nguyễn Thanh</td><td style="padding:5px 8px;font-size:10px;color:var(--tx3)">thanh@gmail.com</td><td style="padding:5px 8px;font-size:10px;color:var(--tx3)">2 giờ trước</td><td style="padding:5px 8px;text-align:right"><span style="color:var(--te);font-size:10px;cursor:pointer">Duyệt</span> · <span style="color:var(--co);font-size:10px;cursor:pointer">Từ chối</span></td></tr>
+            <tr style="border-bottom:1px solid var(--bd)"><td style="padding:5px 8px;font-size:10px">Nguyễn Thanh Toàn</td><td style="padding:5px 8px;font-size:10px;color:var(--tx3)">toan@gmail.com</td><td style="padding:5px 8px;font-size:10px;color:var(--tx3)">2 giờ trước</td><td style="padding:5px 8px;text-align:right"><span style="color:var(--te);font-size:10px;cursor:pointer">Duyệt</span> · <span style="color:var(--co);font-size:10px;cursor:pointer">Từ chối</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -812,7 +993,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 </section>
 
 <!-- ══ TIMELINE ══ -->
-<section class="pg" id="timeline">
+<section class="pg reveal" id="timeline">
   <span class="tag" style="background:var(--pu-l);color:var(--pu)">Timeline chi tiết</span>
   <h1>Kế hoạch 2 tháng (MVP Focus)</h1>
   <p class="sub">Phân công cụ thể từng tuần cho Dev 1 (Backend), Dev 2 (Frontend), Designer — tập trung ra mắt bản MVP trong tối đa 8 tuần.</p>
@@ -820,7 +1001,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 </section>
 
 <!-- ══ SPEC ══ -->
-<section class="pg" id="spec">
+<section class="pg reveal" id="spec">
   <span class="tag" style="background:var(--pu-l);color:var(--pu)">Spec & Phân công</span>
   <h1>Bảng spec chi tiết</h1>
   <p class="sub">Ưu tiên, phân công, tech stack và ghi chú kỹ thuật.</p>
@@ -880,7 +1061,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 </section>
 
 <!-- ══ RISK ══ -->
-<section class="pg" id="risk">
+<section class="pg reveal" id="risk">
   <span class="tag" style="background:var(--co-l);color:var(--co)">Rủi ro & Lưu ý</span>
   <h1>Rủi ro & Điểm cần lưu ý</h1>
   <p class="sub">Những vấn đề thực tế team cần chuẩn bị trước khi bắt đầu build.</p>
@@ -954,89 +1135,89 @@ function buildTL(){
   if(w.children.length)return;
 
   const MONTHS=['Tháng 1','Tháng 2'];
-  const QS=[{label:'GĐ 1 — Nền tảng (Tuần 1-4)',color:'#534AB7',span:1},{label:'GĐ 2 — Core MVP (Tuần 5-8)',color:'#0F6E56',span:1}];
-  // Tasks: [who, label, start(0-based week), duration(weeks), color]
+  const WEEKS=['T1','T2','T3','T4','T5','T6','T7','T8'];
+  const QS=[{label:'GĐ 1: Foundation (Tuần 1-4)',color:'#534AB7',span:1},{label:'GĐ 2: Completion (Tuần 5-8)',color:'#0F6E56',span:1}];
   const TASKS=[
-    // DESIGNER (row 0)
-    ['Des','Design system & UI Kit',0,1,'#7F77DD'],
-    ['Des','Mockup Login/KYC/Profile',1,1,'#7F77DD'],
-    ['Des','Mockup Jobs & Housing',2,2,'#5DCAA5'],
-    ['Des','Mockup Messages & Premium',4,2,'#EF9F27'],
-    ['Des','Testing & Refinement',6,1,'#D85A30'],
-    ['Des','Marketing assets',7,1,'#854F0B'],
-    // DEV 2 FE (row 1)
-    ['FE','Setup Next.js + CI/CD',0,1,'#534AB7'],
-    ['FE','Login, Register, KYC UI',1,1,'#534AB7'],
-    ['FE','Job Feed & Add Job Form',2,2,'#1D9E75'],
-    ['FE','Housing Feed & Form',4,1,'#D85A30'],
-    ['FE','Chat UI + Premium UI',5,2,'#EF9F27'],
-    ['FE','SEO & Bug Fixes',7,1,'#6366f1'],
-    // DEV 1 BE (row 2)
-    ['BE','DB schema, Auth, JWT',0,1,'#534AB7'],
-    ['BE','Job API & Post flow',1,2,'#1D9E75'],
-    ['BE','Housing API & Search',3,1,'#D85A30'],
-    ['BE','Firebase Realtime DB',4,2,'#EF9F27'],
+    // DESIGNER
+    ['Des','UI/UX System & Auth',0,1.2,'#7F77DD'],
+    ['Des','Mockup Jobs & Housing',1.2,1.8,'#5DCAA5'],
+    ['Des','Message & Premium UI',3,2,'#EF9F27'],
+    ['Des','Admin & Landing Page',5,1.5,'#854F0B'],
+    ['Des','Fixing & Final Assets',6.5,1.5,'#D85A30'],
+    // FE DEVELOPER
+    ['FE','Next.js Boilerplate',0,1,'#534AB7'],
+    ['FE','Auth & KYC Flow',1,1,'#534AB7'],
+    ['FE','Jobs Module Integration',2,2,'#1D9E75'],
+    ['FE','Housing Module Integration',4,2,'#D85A30'],
+    ['FE','Chat & Premium Page',6,1,'#EF9F27'],
+    ['FE','Optimizing & SEO',7,1,'#6366f1'],
+    // BE DEVELOPER
+    ['BE','DB Schema & Auth API',0,1.5,'#534AB7'],
+    ['BE','Jobs API + Search',1.5,1.5,'#1D9E75'],
+    ['BE','Housing API + Filters',3,2,'#D85A30'],
+    ['BE','Messaging & Real-time',5,1,'#EF9F27'],
     ['BE','Stripe & Admin Dashboard',6,1,'#854F0B'],
-    ['BE','Rate limits & Deploy',7,1,'#6366f1'],
+    ['BE','Deploy & Security',7,1,'#6366f1'],
   ];
 
   const MILESTONES=[
-    {week:1,label:'Auth OK'},
-    {week:4,label:'Job API OK'},
-    {week:6,label:'Chat OK'},
-    {week:8,label:'🚀 MVP Live'},
+    {week:1.5,label:'Core OK'},
+    {week:3,label:'Jobs Beta'},
+    {week:5,label:'Housing Beta'},
+    {week:7.6,label:'🚀 Launch MVP'},
   ];
 
   const TOTAL_WEEKS=8;
-  const COL_W=65; // px per week
-  const LEFT_W=52;
-  const ROW_H=30;
-  const HEADER_H=52;
+  const LEFT_W=64; // Back to a slightly wider fixed labels column
+  const ROW_H=38;
   const ROWS=['Des','FE','BE'];
-  const ROW_COLORS={'Des':'#EEEDFE','FE':'#E1F5EE','BE':'#FAEEDA'};
+  const ROW_COLORS={'Des':'#fdf8ff','FE':'#f0fff4','BE':'#fffaf0'};
   const ROW_TC={'Des':'#534AB7','FE':'#0F6E56','BE':'#854F0B'};
 
-  const totalW=LEFT_W+TOTAL_WEEKS*COL_W;
+  let html=`<div style="margin-bottom:24px;background:#fff;border:1px solid #eee;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.03)">`;
+  html+=`<div style="min-width:600px;padding:12px">`; // Prevent too much squishing
 
-  let html=`<div style="overflow-x:auto;margin-bottom:20px"><div style="min-width:${totalW}px">`;
-  // Quarter headers
-  html+=`<div style="display:flex;margin-left:${LEFT_W}px;margin-bottom:0">`;
-  QS.forEach(q=>{html+=`<div style="flex:${q.span*4};background:${q.color};color:#fff;font-size:10px;font-weight:600;padding:4px 8px;border-right:1px solid rgba(255,255,255,.3)">${q.label}</div>`;});
-  html+=`</div>`;
-  // Month headers
-  html+=`<div style="display:flex;margin-left:${LEFT_W}px;background:#f8f7f4;border-bottom:1px solid #e2e0d8">`;
-  MONTHS.forEach(m=>{html+=`<div style="flex:4;font-size:9px;color:#888;text-align:center;padding:2px 0;border-right:1px solid #e2e0d8">${m}</div>`;});
+  // Phase headers
+  html+=`<div style="display:flex;margin-left:${LEFT_W}px;margin-bottom:2px;gap:2px">`;
+  QS.forEach(q=>{html+=`<div style="flex:${q.span};background:${q.color};color:#fff;font-size:10px;font-weight:700;padding:6px 12px;border-radius:4px;text-transform:uppercase;letter-spacing:0.8px;display:flex;align-items:center;justify-content:center">${q.label}</div>`;});
   html+=`</div>`;
 
-  // Rows
+  // Week headers
+  html+=`<div style="display:flex;margin-left:${LEFT_W}px;background:#fafafa;border-bottom:1px solid #eee;margin-bottom:4px">`;
+  WEEKS.forEach(w=>{html+=`<div style="flex:1;font-size:10px;color:#aaa;text-align:center;padding:6px 0;font-weight:700;border-right:1px solid #f0f0f0">${w}</div>`;});
+  html+=`</div>`;
+
+  // Timeline Rows
   ROWS.forEach((role,ri)=>{
-    html+=`<div style="display:flex;align-items:center;min-height:${ROW_H}px;border-bottom:1px solid #e2e0d8;position:relative">`;
-    html+=`<div style="width:${LEFT_W}px;flex-shrink:0;font-size:10px;font-weight:600;color:${ROW_TC[role]};background:${ROW_COLORS[role]};height:${ROW_H}px;display:flex;align-items:center;padding:0 6px;border-right:2px solid ${ROW_TC[role]}40">${role}</div>`;
-    html+=`<div style="flex:1;position:relative;height:${ROW_H}px;overflow:visible">`;
-    // Grid lines (every week = 1 line)
-    for(let w=0;w<=TOTAL_WEEKS;w+=1){
-      html+=`<div style="position:absolute;top:0;bottom:0;left:${w*COL_W}px;width:1px;background:#e2e0d8;z-index:0"></div>`;
+    html+=`<div style="display:flex;align-items:center;min-height:${ROW_H}px;background:${ROW_COLORS[role]};margin-bottom:4px;border-radius:6px;overflow:hidden">`;
+    html+=`<div style="width:${LEFT_W}px;flex-shrink:0;font-size:11px;font-weight:900;color:${ROW_TC[role]};display:flex;align-items:center;justify-content:center;height:${ROW_H}px;background:#fff;border-right:1px solid #eee;box-shadow:inset -2px 0 4px rgba(0,0,0,0.02)">${role}</div>`;
+    
+    // Task Area
+    html+=`<div style="flex:1;position:relative;height:${ROW_H}px">`;
+    // Grid lines (vertical)
+    for(let w=1;w<TOTAL_WEEKS;w++){
+      html+=`<div style="position:absolute;left:${(w/TOTAL_WEEKS)*100}%;top:0;bottom:0;width:1px;background:rgba(0,0,0,0.03)"></div>`;
     }
     // Tasks
     TASKS.filter(t=>t[0]===role).forEach(([,label,start,dur,color])=>{
-      const left=start*COL_W;const width=dur*COL_W-2;
-      html+=`<div title="${label}" style="position:absolute;left:${left}px;top:4px;width:${width}px;height:22px;background:${color};border-radius:4px;display:flex;align-items:center;padding:0 5px;z-index:1;overflow:hidden;cursor:default" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'"><span style="font-size:9px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${label}</span></div>`;
-    });
-    // Milestones
-    MILESTONES.forEach(m=>{
-      html+=`<div style="position:absolute;left:${m.week*COL_W-6}px;top:50%;transform:translateY(-50%);width:12px;height:12px;background:#fff;border:2px solid #1a1a18;border-radius:50%;z-index:3"></div>`;
+      const left=(start/TOTAL_WEEKS)*100;
+      const width=(dur/TOTAL_WEEKS)*100;
+      html+=`<div title="${label}" style="position:absolute;left:${left}%;top:8px;width:calc(${width}% - 4px);height:22px;background:${color};border-radius:30px;display:flex;align-items:center;padding:0 12px;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,0.1);transition:transform 0.2s" onmouseover="this.style.transform='scale(1.02)';this.style.zIndex='10'" onmouseout="this.style.transform='scale(1)';this.style.zIndex='2'"><span style="font-size:10px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${label}</span></div>`;
     });
     html+=`</div></div>`;
   });
 
-  // Milestone labels
-  html+=`<div style="display:flex;margin-left:${LEFT_W}px;height:28px;position:relative;border-top:1px dashed #e2e0d8">`;
-  html+=`<div style="flex:1;position:relative">`;
+  // Milestones row
+  html+=`<div style="display:flex;margin-left:${LEFT_W}px;position:relative;height:50px;margin-top:8px">`;
   MILESTONES.forEach(m=>{
-    const left=m.week*COL_W;
-    html+=`<div style="position:absolute;left:${left}px;top:4px;transform:translateX(-50%);font-size:9px;font-weight:600;color:#1a1a18;white-space:nowrap;text-align:center">▲<br><span style="color:#5F5E5A">${m.label}</span></div>`;
+    const left=(m.week/TOTAL_WEEKS)*100;
+    html+=`<div style="position:absolute;left:${left}%;top:0;transform:translateX(-50%);text-align:center;width:90px">
+      <div class="pulse-node" style="font-size:10px;color:var(--co);margin-bottom:2px">●</div>
+      <div style="background:#fff;border:1px solid #ddd;padding:4px 8px;border-radius:6px;font-size:10px;font-weight:800;color:#333;box-shadow:0 2px 10px rgba(0,0,0,0.05);white-space:nowrap">${m.label}</div>
+    </div>`;
   });
-  html+=`</div></div>`;
+  html+=`</div>`;
+
   html+=`</div></div>`;
 
   // Sprint breakdown table
@@ -1109,19 +1290,61 @@ function buildSeqs(){
 }
 
 /* ══ USE CASE ══ */
+/* ══ USE CASE ══ */
 function buildUC(){
   const w=document.getElementById('uc-render');if(w.children.length)return;
-  function ell(cx,cy,rx,ry,fill,stroke,text){return `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${fill}" stroke="${stroke}" stroke-width="1"/><text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#444441">${text}</text>`;}
-  function actor(x,y,color,label){return `<circle cx="${x}" cy="${y}" r="13" fill="${color}" stroke="${color}" stroke-width="1.5" opacity=".7"/><line x1="${x}" y1="${y+13}" x2="${x}" y2="${y+38}" stroke="${color}" stroke-width="1.5"/><line x1="${x-20}" y1="${y+24}" x2="${x+20}" y2="${y+24}" stroke="${color}" stroke-width="1.5"/><line x1="${x}" y1="${y+38}" x2="${x-14}" y2="${y+55}" stroke="${color}" stroke-width="1.5"/><line x1="${x}" y1="${y+38}" x2="${x+14}" y2="${y+55}" stroke="${color}" stroke-width="1.5"/><text x="${x}" y="${y+70}" text-anchor="middle" font-size="10" font-weight="600" fill="${color}">${label}</text>`;}
+  function ell(cx,cy,rx,ry,fill,stroke,text){return `<ellipse class="svg-hover" cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/><text class="svg-hover" x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="500" fill="#444441" style="pointer-events:none">${text}</text>`;}
+  function actor(x,y,color,label){return `<g class="svg-hover"><circle cx="${x}" cy="${y}" r="13" fill="${color}" stroke="${color}" stroke-width="1.5" opacity=".8"/><line x1="${x}" y1="${y+13}" x2="${x}" y2="${y+38}" stroke="${color}" stroke-width="2"/><line x1="${x-20}" y1="${y+24}" x2="${x+20}" y2="${y+24}" stroke="${color}" stroke-width="2"/><line x1="${x}" y1="${y+38}" x2="${x-14}" y2="${y+55}" stroke="${color}" stroke-width="2"/><line x1="${x}" y1="${y+38}" x2="${x+14}" y2="${y+55}" stroke="${color}" stroke-width="2"/><text x="${x}" y="${y+70}" text-anchor="middle" font-size="10" font-weight="600" fill="${color}" style="pointer-events:none">${label}</text></g>`;}
+  function ln(x1,y1,x2,y2,c,d){return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="1.5" ${d?'stroke-dasharray="4 3"':''} style="transition:all 0.2s;cursor:pointer" onmouseover="this.setAttribute('stroke-width','3')" onmouseout="this.setAttribute('stroke-width','1.5')"/>`;}
+  
   const W=880,H=980;
   let s=`<svg width="100%" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="display:block">
   <rect x="165" y="16" width="555" height="950" rx="10" fill="none" stroke="#D3D1C7" stroke-width="1.5" stroke-dasharray="6 3"/>
   <text x="442" y="40" text-anchor="middle" font-size="12" font-weight="600" fill="#888780">Hệ thống ViVi</text>
-  ${actor(75,130,'#D3D1C7','Guest')}
-  ${actor(75,310,'#7F77DD','Job Seeker')}
-  ${actor(75,510,'#1D9E75','Employer')}
-  ${actor(75,700,'#D85A30','Host')}
-  ${actor(820,430,'#EF9F27','Admin')}
+  
+  ${actor(75,120,'#D3D1C7','Guest')}
+  ${actor(75,290,'#7F77DD','Job Seeker')}
+  ${actor(75,400,'#1D9E75','Employer')}
+  ${actor(75,520,'#D85A30','Home Seeker')}
+  ${actor(75,680,'#EF9F27','Host')}
+  ${actor(820,430,'#444441','Admin')}
+
+  <!-- Connections: Guest -->
+  ${ln(110,120,250,108,'#D3D1C7')}
+  ${ln(110,120,250,153,'#D3D1C7')}
+  
+  <!-- Connections: Job Seeker -->
+  ${ln(110,290,248,290,'#7F77DD')}
+  ${ln(110,290,248,336,'#7F77DD')}
+  ${ln(110,290,248,382,'#7F77DD')}
+  ${ln(110,290,240,662,'#7F77DD',true)}
+  ${ln(110,290,240,708,'#7F77DD',true)}
+
+  <!-- Connections: Employer -->
+  ${ln(110,400,442,290,'#1D9E75')}
+  ${ln(110,400,442,336,'#1D9E75')}
+  ${ln(110,400,442,382,'#1D9E75')}
+  ${ln(110,400,426,662,'#1D9E75')}
+
+  <!-- Connections: Home Seeker -->
+  ${ln(110,520,252,476,'#D85A30')}
+  ${ln(110,520,252,522,'#D85A30')}
+  ${ln(110,520,252,568,'#D85A30')}
+  ${ln(110,520,240,662,'#D85A30',true)}
+  ${ln(110,520,240,708,'#D85A30',true)}
+
+  <!-- Connections: Host -->
+  ${ln(110,680,442,476,'#EF9F27')}
+  ${ln(110,680,442,522,'#EF9F27')}
+  ${ln(110,680,442,568,'#EF9F27')}
+  ${ln(110,680,426,662,'#EF9F27')}
+
+  <!-- Connections: Admin -->
+  ${ln(785,430,566,754,'#444441')}
+  ${ln(785,430,566,800,'#444441')}
+  ${ln(785,430,566,846,'#444441')}
+  ${ln(785,430,356,754,'#444441',true)}
+
   <rect x="180" y="58" width="520" height="165" rx="7" fill="#F8F7F4" stroke="#e2e0d8" stroke-width="1"/>
   <text x="196" y="76" font-size="10" font-weight="600" fill="#888780">Xác thực</text>
   ${ell(318,108,68,18,'white','#D3D1C7','Đăng ký tài khoản')}
@@ -1130,6 +1353,7 @@ function buildUC(){
   ${ell(508,108,68,18,'white','#D3D1C7','Chọn ngôn ngữ VI/DE')}
   ${ell(508,153,64,18,'white','#D3D1C7','Chọn mục đích dùng')}
   ${ell(508,200,60,18,'white','#D3D1C7','Đặt lại mật khẩu')}
+  
   <rect x="180" y="238" width="520" height="170" rx="7" fill="#F0F8FF" stroke="#AFA9EC" stroke-width="1"/>
   <text x="196" y="256" font-size="10" font-weight="600" fill="#534AB7">Việc làm</text>
   ${ell(320,290,72,18,'white','#AFA9EC','Tìm & lọc việc làm')}
@@ -1138,6 +1362,7 @@ function buildUC(){
   ${ell(510,290,68,18,'white','#AFA9EC','Đăng tin tuyển dụng')}
   ${ell(510,336,68,18,'white','#AFA9EC','Quản lý listings')}
   ${ell(510,382,64,18,'white','#AFA9EC','Xem thống kê tin')}
+  
   <rect x="180" y="424" width="520" height="170" rx="7" fill="#FFF5F3" stroke="#F0997B" stroke-width="1"/>
   <text x="196" y="442" font-size="10" font-weight="600" fill="#993C1D">Nhà ở</text>
   ${ell(320,476,68,18,'white','#F0997B','Tìm & lọc phòng thuê')}
@@ -1146,6 +1371,7 @@ function buildUC(){
   ${ell(510,476,68,18,'white','#F0997B','Đăng phòng cho thuê')}
   ${ell(510,522,60,18,'white','#F0997B','Quản lý phòng')}
   ${ell(510,568,64,18,'white','#F0997B','Đánh dấu đã thuê')}
+  
   <rect x="180" y="610" width="520" height="250" rx="7" fill="#FFFCF0" stroke="#FAC775" stroke-width="1"/>
   <text x="196" y="628" font-size="10" font-weight="600" fill="#854F0B">Chức năng chung</text>
   ${ell(300,662,60,18,'white','#FAC775','Chat real-time')}
@@ -1157,28 +1383,11 @@ function buildUC(){
   ${ell(490,754,68,18,'white','#FAC775','Duyệt KYC (Admin)')}
   ${ell(490,800,76,18,'white','#FAC775','Duyệt bài đăng (Admin)')}
   ${ell(490,846,68,18,'white','#FAC775','Quản lý báo cáo')}
-  <line x1="120" y1="150" x2="250" y2="108" stroke="#D3D1C7" stroke-width="1"/>
-  <line x1="120" y1="155" x2="250" y2="153" stroke="#D3D1C7" stroke-width="1"/>
-  <line x1="120" y1="330" x2="248" y2="290" stroke="#7F77DD" stroke-width="1"/>
-  <line x1="120" y1="336" x2="248" y2="336" stroke="#7F77DD" stroke-width="1"/>
-  <line x1="120" y1="342" x2="248" y2="382" stroke="#7F77DD" stroke-width="1"/>
-  <line x1="120" y1="348" x2="248" y2="662" stroke="#7F77DD" stroke-width="1" stroke-dasharray="3 3"/>
-  <line x1="120" y1="530" x2="442" y2="290" stroke="#1D9E75" stroke-width="1"/>
-  <line x1="120" y1="535" x2="442" y2="336" stroke="#1D9E75" stroke-width="1"/>
-  <line x1="120" y1="540" x2="442" y2="382" stroke="#1D9E75" stroke-width="1"/>
-  <line x1="120" y1="545" x2="426" y2="662" stroke="#1D9E75" stroke-width="1"/>
-  <line x1="120" y1="718" x2="252" y2="476" stroke="#D85A30" stroke-width="1"/>
-  <line x1="120" y1="724" x2="252" y2="522" stroke="#D85A30" stroke-width="1"/>
-  <line x1="120" y1="730" x2="252" y2="568" stroke="#D85A30" stroke-width="1"/>
-  <line x1="120" y1="736" x2="426" y2="800" stroke="#D85A30" stroke-width="1"/>
-  <line x1="775" y1="450" x2="704" y2="662" stroke="#EF9F27" stroke-width="1" stroke-dasharray="3 3"/>
-  <line x1="778" y1="444" x2="704" y2="754" stroke="#EF9F27" stroke-width="1"/>
-  <line x1="780" y1="438" x2="704" y2="800" stroke="#EF9F27" stroke-width="1"/>
-  <line x1="782" y1="432" x2="704" y2="846" stroke="#EF9F27" stroke-width="1"/>
-  <line x1="212" y1="960" x2="248" y2="960" stroke="#888" stroke-width="1.5"/>
+  
+  <line x1="212" y1="960" x2="248" y2="960" stroke="#888" stroke-width="2"/>
   <text x="255" y="964" font-size="10" fill="#888780">Tương tác trực tiếp</text>
-  <line x1="360" y1="960" x2="396" y2="960" stroke="#888" stroke-width="1.5" stroke-dasharray="4 3"/>
-  <text x="403" y="964" font-size="10" fill="#888780">Kế thừa / mở rộng</text>
+  <line x1="360" y1="960" x2="396" y2="960" stroke="#888" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="403" y="964" font-size="10" fill="#888780">Nhánh chức năng phụ</text>
 </svg>`;
   w.innerHTML=s;
 }
@@ -1410,6 +1619,57 @@ function buildSM(){
 </svg>`;
   w.innerHTML=s;
 }
+
+// --- NEW ANIMATION & NAV LOGIC ---
+const observerOptions = { threshold: 0.1 };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+    }
+  });
+}, observerOptions);
+
+function initReveals() {
+  document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+  });
+}
+
+function go(id, btn) {
+  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
+  const target = document.getElementById(id);
+  if (target) {
+    target.classList.add('on');
+    btn.classList.add('on');
+    
+    // Trigger builds
+    if(id==='sequence') buildSeqs();
+    if(id==='usecase') buildUC();
+    if(id==='activity') buildAct();
+    if(id==='sitemap') buildSM();
+    if(id==='timeline') buildTL();
+
+    // Re-trigger reveal for fresh content
+    target.querySelectorAll('.reveal').forEach(el => {
+      el.classList.remove('active');
+      setTimeout(() => el.classList.add('active'), 10);
+      observer.observe(el);
+    });
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initReveals();
+  // Auto-click the first/active button to trigger initial render
+  const activeBtn = document.querySelector('.nb.on');
+  if (activeBtn) {
+    const id = activeBtn.getAttribute('onclick').match(/'([^']+)'/)[1];
+    go(id, activeBtn);
+  }
+});
 </script>
 </body>
 </html>
