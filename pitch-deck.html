@@ -28,8 +28,9 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
 #nav{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;z-index:100;
   background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.18);
   border-radius:40px;padding:8px 16px}
-.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .25s}
-.dot.on{background:#fff;width:20px;border-radius:4px}
+.slide-num{width:22px;height:22px;border-radius:6px;background:rgba(255,255,255,.1);cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:rgba(255,255,255,.5)}
+.slide-num.on{background:#fff;color:#1a1a18;transform:scale(1.15);box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.slide-num:hover{background:rgba(255,255,255,.2);color:#fff}
 .nav-btn{background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:18px;padding:0 4px;
   transition:color .2s;line-height:1}
 .nav-btn:hover{color:#fff}
@@ -394,18 +395,17 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
 .sim-stripe-logo{font-size:10px;font-weight:900;color:#635BFF}
 .sim-pay-btn{background:linear-gradient(135deg,#1D9E75,#0F6E56);color:#fff;border:none;border-radius:8px;padding:10px;font-size:11px;font-weight:700;width:100%;cursor:pointer}
 
-/* ── Jobs grid layout ── */
-.sim-jobs-layout{display:grid;grid-template-columns:140px 1fr;height:100%}
-.sim-sidebar{background:#fff;border-right:1px solid #e2e0d8;padding:10px;overflow:hidden}
-.sim-sb-title{font-size:9px;font-weight:700;color:#1a1a18;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
-.sim-sb-section{margin-bottom:10px}
-.sim-sb-label{font-size:8px;font-weight:600;color:#888;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
-.sim-sb-chip{font-size:9px;padding:3px 7px;border-radius:6px;background:#f8f7f4;border:1px solid #e2e0d8;color:#5F5E5A;display:inline-block;margin:2px;cursor:pointer}
+/* ── Jobs layout (Horizontal) ── */
+.sim-jobs-layout{display:flex;flex-direction:column;height:100%}
+.sim-sidebar{background:#fff;border-bottom:1px solid #e2e0d8;padding:8px 14px;overflow:hidden;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.sim-sb-title{display:none}
+.sim-sb-section{display:flex;align-items:center;gap:8px}
+.sim-sb-label{font-size:8px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.sim-sb-chip{font-size:8px;padding:2px 6px;border-radius:4px;background:#f8f7f4;border:1px solid #e2e0d8;color:#5F5E5A;white-space:nowrap}
 .sim-sb-chip.on{background:#EEEDFE;border-color:#AFA9EC;color:#534AB7}
-.sim-sb-range{background:#e2e0d8;border-radius:2px;height:3px;margin-top:6px;position:relative}
-.sim-sb-range::after{content:'';position:absolute;left:0;width:60%;height:3px;background:#534AB7;border-radius:2px}
-.sim-main-content{padding:10px;background:#f8f7f4}
-.sim-jobs-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.sim-sb-range{display:none}
+.sim-main-content{padding:10px;background:#f8f7f4;flex:1;overflow:auto}
+.sim-jobs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .sim-job-card{background:#fff;border:1px solid #e2e0d8;border-radius:9px;padding:10px}
 .sim-job-card.feat{border-color:#FAC775;background:linear-gradient(135deg,#fffcf0,#fff)}
 .sim-job-logo{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:7px}
@@ -434,13 +434,12 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
 .sim-room-btn.pri{background:#D85A30;color:#fff}
 .sim-room-btn.sec{background:#FAECE7;color:#D85A30}
 
-/* ── Admin Dashboard ── */
-.sim-admin-layout{display:grid;grid-template-columns:100px 1fr;height:100%}
-.sim-admin-side{background:#1a1a18;padding:10px;display:flex;flex-direction:column;gap:6px}
-.sim-admin-logo{font-size:12px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.1)}
-.sim-admin-logo b{color:#7F77DD}
-.sim-admin-item{display:flex;align-items:center;gap:6px;padding:5px 7px;border-radius:6px;font-size:9px;color:rgba(255,255,255,.5);cursor:pointer}
-.sim-admin-item.on{background:rgba(83,74,183,.3);color:#AFA9EC}
+/* ── Admin Dashboard (Horizontal) ── */
+.sim-admin-layout{display:flex;flex-direction:column;height:100%}
+.sim-admin-side{background:#1a1a18;padding:0 14px;height:32px;display:flex;flex-direction:row;align-items:center;gap:12px;flex-shrink:0}
+.sim-admin-logo{font-size:11px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:0;padding-bottom:0;border-bottom:none;margin-right:8px}
+.sim-admin-item{display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:4px;font-size:9px;color:rgba(255,255,255,.5);white-space:nowrap}
+.sim-admin-item.on{background:rgba(83,74,183,.4);color:#fff}
 .sim-admin-content{background:#f8f7f4;padding:10px;overflow:hidden}
 .sim-admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
 .sim-admin-stat{background:#fff;border:1px solid #e2e0d8;border-radius:7px;padding:8px;text-align:center}
@@ -1138,30 +1137,19 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
         </div>
         <div class="sim-jobs-layout" style="height:310px">
           <div class="sim-sidebar">
-            <div class="sim-sb-title">Bộ lọc</div>
             <div class="sim-sb-section">
-              <div class="sim-sb-label">Ngành nghề</div>
+              <span class="sim-sb-label">Nhu cầu:</span>
               <span class="sim-sb-chip on">💅 Nail</span>
               <span class="sim-sb-chip">🍜 Nhà hàng</span>
-              <span class="sim-sb-chip">💻 IT</span>
-              <span class="sim-sb-chip">🏪 Bán lẻ</span>
             </div>
             <div class="sim-sb-section">
-              <div class="sim-sb-label">Thành phố</div>
+              <span class="sim-sb-label">Vùng:</span>
               <span class="sim-sb-chip on">Berlin</span>
-              <span class="sim-sb-chip">München</span>
-              <span class="sim-sb-chip">Hamburg</span>
+              <span class="sim-sb-chip">Hessen</span>
             </div>
             <div class="sim-sb-section">
-              <div class="sim-sb-label">Mức lương</div>
-              <div style="display:flex;justify-content:space-between;font-size:8px;color:#888;margin-bottom:3px"><span>€12/h</span><span>€25/h</span></div>
-              <div class="sim-sb-range"></div>
-            </div>
-            <div class="sim-sb-section">
-              <div class="sim-sb-label">Hợp đồng</div>
+              <span class="sim-sb-label">Loại:</span>
               <span class="sim-sb-chip on">Full-time</span>
-              <span class="sim-sb-chip">Part-time</span>
-              <span class="sim-sb-chip">Mini-job</span>
             </div>
           </div>
           <div class="sim-main-content">
@@ -1539,12 +1527,12 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
         <div class="mock-h">Site Map — 34 Routes</div>
       </div>
       <div class="sm-stats-row">
-        <div class="sm-stat-chip"><div class="scn" style="color:#AFA9EC">6</div><div class="scl">Auth</div></div>
-        <div class="sm-stat-chip"><div class="scn" style="color:#5DCAA5">6</div><div class="scl">Jobs</div></div>
-        <div class="sm-stat-chip"><div class="scn" style="color:#F0997B">6</div><div class="scl">Housing</div></div>
-        <div class="sm-stat-chip"><div class="scn" style="color:#FAC775">10</div><div class="scl">Shared</div></div>
-        <div class="sm-stat-chip"><div class="scn" style="color:#D3D1C7">6</div><div class="scl">Admin</div></div>
-        <div class="sm-stat-chip" style="border-color:rgba(239,159,39,.3)"><div class="scn" style="color:#fff">34</div><div class="scl">Tổng routes</div></div>
+        <div class="sm-stat-chip"><div class="scn" style="color:#AFA9EC">6</div><div class="scl" style="color:rgba(255,255,255,.55)">Auth</div></div>
+        <div class="sm-stat-chip"><div class="scn" style="color:#5DCAA5">6</div><div class="scl" style="color:rgba(255,255,255,.55)">Jobs</div></div>
+        <div class="sm-stat-chip"><div class="scn" style="color:#F0997B">6</div><div class="scl" style="color:rgba(255,255,255,.55)">Housing</div></div>
+        <div class="sm-stat-chip"><div class="scn" style="color:#FAC775">10</div><div class="scl" style="color:rgba(255,255,255,.55)">Shared</div></div>
+        <div class="sm-stat-chip"><div class="scn" style="color:#D3D1C7">6</div><div class="scl" style="color:rgba(255,255,255,.55)">Admin</div></div>
+        <div class="sm-stat-chip" style="border-color:rgba(239,159,39,.3)"><div class="scn" style="color:#fff">34</div><div class="scl" style="color:rgba(255,255,255,.55)">Tổng routes</div></div>
       </div>
     </div>
 
@@ -1568,31 +1556,31 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
         <div class="sm-col-routes">
           <div class="sm-route sm-r-auth">
             <span class="sm-route-path">/register</span>
-            <span class="sm-route-label">Đăng ký tài khoản</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Đăng ký tài khoản</span>
             <span class="sm-route-mvp"></span>
           </div>
           <div class="sm-route sm-r-auth">
             <span class="sm-route-path">/login</span>
-            <span class="sm-route-label">Đăng nhập</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Đăng nhập</span>
             <span class="sm-route-mvp"></span>
           </div>
           <div class="sm-route sm-r-auth">
             <span class="sm-route-path">/kyc</span>
-            <span class="sm-route-label">Xác minh KYC ✦</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Xác minh KYC ✦</span>
             <span class="sm-route-mvp"></span>
           </div>
           <div class="sm-route sm-r-auth">
             <span class="sm-route-path">/onboarding</span>
-            <span class="sm-route-label">Chọn mục đích</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Chọn mục đích</span>
             <span class="sm-route-mvp"></span>
           </div>
           <div class="sm-route sm-r-auth">
             <span class="sm-route-path">/forgot-password</span>
-            <span class="sm-route-label">Quên mật khẩu</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Quên mật khẩu</span>
           </div>
           <div class="sm-route sm-r-auth" style="border-style:dashed;opacity:.65">
             <span class="sm-route-path">/verify-email</span>
-            <span class="sm-route-label">Xác nhận email</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Xác nhận email</span>
           </div>
         </div>
       </div>
@@ -1603,30 +1591,30 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
         <div class="sm-col-routes">
           <div class="sm-route sm-r-jobs">
             <span class="sm-route-path">/jobs</span>
-            <span class="sm-route-label">Trang tìm việc</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Trang tìm việc</span>
             <span class="sm-route-mvp"></span>
           </div>
           <div class="sm-route sm-r-jobs">
             <span class="sm-route-path">/jobs/search</span>
-            <span class="sm-route-label">Tìm kiếm & lọc</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Tìm kiếm & lọc</span>
           </div>
           <div class="sm-route sm-r-jobs">
             <span class="sm-route-path">/jobs/:id</span>
-            <span class="sm-route-label">Chi tiết bài đăng</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Chi tiết bài đăng</span>
             <span class="sm-route-mvp"></span>
           </div>
           <div class="sm-route sm-r-jobs">
             <span class="sm-route-path">/jobs/post</span>
-            <span class="sm-route-label">Đăng tuyển (3 bước)</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Đăng tuyển (3 bước)</span>
             <span class="sm-route-mvp"></span>
           </div>
           <div class="sm-route sm-r-jobs">
             <span class="sm-route-path">/jobs/manage</span>
-            <span class="sm-route-label">Quản lý tin đăng</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Quản lý tin đăng</span>
           </div>
           <div class="sm-route sm-r-jobs">
             <span class="sm-route-path">/employer/:id</span>
-            <span class="sm-route-label">Hồ sơ nhà tuyển dụng</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Hồ sơ nhà tuyển dụng</span>
           </div>
         </div>
       </div>
@@ -1637,30 +1625,30 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
         <div class="sm-col-routes">
           <div class="sm-route sm-r-hou">
             <span class="sm-route-path">/housing</span>
-            <span class="sm-route-label">Trang tìm nhà ở</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Trang tìm nhà ở</span>
             <span class="sm-route-mvp"></span>
           </div>
           <div class="sm-route sm-r-hou">
             <span class="sm-route-path">/housing/search</span>
-            <span class="sm-route-label">Tìm kiếm & lọc</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Tìm kiếm & lọc</span>
           </div>
           <div class="sm-route sm-r-hou">
             <span class="sm-route-path">/housing/:id</span>
-            <span class="sm-route-label">Chi tiết phòng thuê</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Chi tiết phòng thuê</span>
             <span class="sm-route-mvp"></span>
           </div>
           <div class="sm-route sm-r-hou">
             <span class="sm-route-path">/housing/post</span>
-            <span class="sm-route-label">Đăng phòng (3 bước)</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Đăng phòng (3 bước)</span>
             <span class="sm-route-mvp"></span>
           </div>
           <div class="sm-route sm-r-hou">
             <span class="sm-route-path">/housing/manage</span>
-            <span class="sm-route-label">Quản lý phòng</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Quản lý phòng</span>
           </div>
           <div class="sm-route sm-r-hou">
             <span class="sm-route-path">/host/:id</span>
-            <span class="sm-route-label">Hồ sơ chủ nhà</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Hồ sơ chủ nhà</span>
           </div>
         </div>
       </div>
@@ -1671,46 +1659,46 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
         <div class="sm-col-routes">
           <div class="sm-route sm-r-sh">
             <span class="sm-route-path">/messages</span>
-            <span class="sm-route-label">Inbox tin nhắn</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Inbox tin nhắn</span>
             <span class="sm-route-mvp"></span>
           </div>
           <div class="sm-route sm-r-sh">
             <span class="sm-route-path">/messages/:id</span>
-            <span class="sm-route-label">Chat room real-time</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Chat room real-time</span>
             <span class="sm-route-mvp"></span>
           </div>
           <div class="sm-route sm-r-sh">
             <span class="sm-route-path">/messages/bot</span>
-            <span class="sm-route-label">ViVi AI Bot</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">ViVi AI Bot</span>
           </div>
           <div class="sm-route sm-r-sh">
             <span class="sm-route-path">/profile/:id</span>
-            <span class="sm-route-label">Hồ sơ người dùng</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Hồ sơ người dùng</span>
           </div>
           <div class="sm-route sm-r-sh">
             <span class="sm-route-path">/profile/edit</span>
-            <span class="sm-route-label">Chỉnh sửa hồ sơ</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Chỉnh sửa hồ sơ</span>
             <span class="sm-route-mvp"></span>
           </div>
           <div class="sm-route sm-r-sh">
             <span class="sm-route-path">/saved</span>
-            <span class="sm-route-label">Danh sách đã lưu</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Danh sách đã lưu</span>
           </div>
           <div class="sm-route sm-r-sh">
             <span class="sm-route-path">/settings</span>
-            <span class="sm-route-label">Cài đặt tài khoản</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Cài đặt tài khoản</span>
           </div>
           <div class="sm-route sm-r-sh">
             <span class="sm-route-path">/premium</span>
-            <span class="sm-route-label">Gói Premium</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Gói Premium</span>
           </div>
           <div class="sm-route sm-r-sh">
             <span class="sm-route-path">/premium/checkout</span>
-            <span class="sm-route-label">Thanh toán Stripe</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Thanh toán Stripe</span>
           </div>
           <div class="sm-route sm-r-sh">
             <span class="sm-route-path">/premium/success</span>
-            <span class="sm-route-label">Xác nhận thanh toán</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Xác nhận thanh toán</span>
           </div>
         </div>
       </div>
@@ -1721,27 +1709,27 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
         <div class="sm-col-routes">
           <div class="sm-route sm-r-adm">
             <span class="sm-route-path">/admin</span>
-            <span class="sm-route-label">Dashboard tổng quan</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Dashboard tổng quan</span>
           </div>
           <div class="sm-route sm-r-adm">
             <span class="sm-route-path">/admin/kyc</span>
-            <span class="sm-route-label">Duyệt KYC</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Duyệt KYC</span>
           </div>
           <div class="sm-route sm-r-adm">
             <span class="sm-route-path">/admin/users</span>
-            <span class="sm-route-label">Quản lý người dùng</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Quản lý người dùng</span>
           </div>
           <div class="sm-route sm-r-adm">
             <span class="sm-route-path">/admin/listings</span>
-            <span class="sm-route-label">Duyệt bài đăng</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Duyệt bài đăng</span>
           </div>
           <div class="sm-route sm-r-adm">
             <span class="sm-route-path">/admin/reports</span>
-            <span class="sm-route-label">Báo cáo vi phạm</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Báo cáo vi phạm</span>
           </div>
           <div class="sm-route sm-r-adm">
             <span class="sm-route-path">/admin/payments</span>
-            <span class="sm-route-label">Lịch sử thanh toán</span>
+            <span class="sm-route-label" style="color:rgba(255,255,255,.55)">Lịch sử thanh toán</span>
           </div>
           <!-- lock badge -->
           <div style="margin-top:6px;background:rgba(216,90,48,.15);border:1px solid rgba(216,90,48,.25);border-radius:6px;padding:5px 7px;font-size:8px;color:#F0997B;line-height:1.4">
@@ -1791,15 +1779,11 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
       <div class="browser-body">
         <div class="sim-admin-layout" style="height:310px">
           <div class="sim-admin-side">
-            <div class="sim-admin-logo">Vi<b>Vi</b></div>
+            <div class="sim-admin-logo">Vi<b>Vi</b> Admin</div>
             <div class="sim-admin-item on">🛡️ KYC</div>
             <div class="sim-admin-item">👥 Users</div>
             <div class="sim-admin-item">📋 Listings</div>
-            <div class="sim-admin-item">🚨 Báo cáo
-              <span style="margin-left:auto;background:#D85A30;color:#fff;font-size:8px;padding:1px 5px;border-radius:8px;font-weight:700">3</span>
-            </div>
-            <div class="sim-admin-item">📊 Thống kê</div>
-            <div class="sim-admin-item">⚙️ Cài đặt</div>
+            <div class="sim-admin-item">🚨 Báo cáo (3)</div>
           </div>
           <div class="sim-admin-content">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
@@ -1868,8 +1852,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
 <!-- NAV -->
 <div id="nav">
   <button class="nav-btn" id="prevBtn" onclick="go(-1)">‹</button>
-  <div id="dots"></div>
-  <span id="counter">1 / 9</span>
+  <div id="slides-grid" style="display:flex;gap:6px"></div>
+  <span id="counter">- / -</span>
   <button class="nav-btn" id="nextBtn" onclick="go(1)">›</button>
 </div>
 <div id="keyhint">← → keys to navigate</div>
@@ -1879,7 +1863,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
 // Order: Cover → Problem → Features → KYC mockup → Routes → SiteMap → Jobs mockup → Roles → Housing mockup → Revenue → Chat&Premium → Admin mockup → Tech → Roadmap → CTA
 const ORDER = ['s1','s2','s3','sm1','s4','sm6','sm2','s5','sm3','s6','sm4','sm5','s7','s8','s9'];
 const slides = ORDER.map(id=>document.getElementById(id));
-const dotsEl = document.getElementById('dots');
+const dotsEl = document.getElementById('slides-grid');
 const counter = document.getElementById('counter');
 let cur = 0;
 const N = slides.length;
@@ -1887,10 +1871,11 @@ const N = slides.length;
 // Slide labels for dots tooltip
 const LABELS=['Cover','Vấn đề','Tính năng','KYC mockup','34 Routes','Site Map','Jobs mockup','6 Roles','Housing mockup','Doanh thu','Chat & Premium','Admin','Tech Stack','Roadmap','CTA'];
 
-// Build dots
+// Build slide numbers
 for(let i=0;i<N;i++){
   const d=document.createElement('div');
-  d.className='dot'+(i===0?' on':'');
+  d.className='slide-num'+(i===0?' on':'');
+  d.textContent = i + 1;
   d.title=LABELS[i]||'';
   d.onclick=()=>goTo(i);
   dotsEl.appendChild(d);
@@ -1903,7 +1888,7 @@ function goTo(idx){
   setTimeout(()=>slides[cur].classList.remove('exit'),550);
   cur=idx;
   slides[cur].classList.add('active');
-  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
+  document.querySelectorAll('.slide-num').forEach((d,i)=>d.classList.toggle('on',i===cur));
   counter.textContent=`${cur+1} / ${N}`;
 }
 
@@ -1936,7 +1921,8 @@ const obs=new IntersectionObserver(entries=>{
   });
 },{threshold:.5});
 const s6=document.getElementById('s6');
-if(s6)obs.observe(s6);
+// Initialize
+goTo(0);
 </script>
 </body>
 </html>
