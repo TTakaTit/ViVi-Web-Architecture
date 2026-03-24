@@ -147,6 +147,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
   <div class="side-logo"><div class="logo">Vi<span>Vi</span></div><div class="logo-sub">Web · Architecture · 2026</div></div>
   <div class="ng"><div class="nl">Hệ thống</div>
     <button class="nb on" onclick="go('overview',this)"><div class="d"></div>Tổng quan</button>
+    <button class="nb" onclick="go('techstack',this)"><div class="d"></div>Tech Stack</button>
     <button class="nb" onclick="go('flow',this)"><div class="d"></div>Screen flow</button>
     <button class="nb" onclick="go('sequence',this)"><div class="d"></div>Sequence</button>
   </div>
@@ -157,10 +158,10 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
     <button class="nb" onclick="go('sitemap',this)"><div class="d"></div>Site Map</button>
   </div>
   <div class="ng"><div class="nl">Layouts</div>
-    <button class="nb" onclick="go('lo-onboard',this)"><div class="d"></div>Onboarding <span class="c">5</span></button>
+    <button class="nb" onclick="go('lo-onboard',this)"><div class="d"></div>Onboarding <span class="c">6</span></button>
     <button class="nb" onclick="go('lo-jobs',this)"><div class="d"></div>Việc làm <span class="c">6</span></button>
     <button class="nb" onclick="go('lo-housing',this)"><div class="d"></div>Nhà ở <span class="c">6</span></button>
-    <button class="nb" onclick="go('lo-shared',this)"><div class="d"></div>Chức năng chung <span class="c">9</span></button>
+    <button class="nb" onclick="go('lo-shared',this)"><div class="d"></div>Chức năng chung <span class="c">10</span></button>
   </div>
   <div class="ng"><div class="nl">Kế hoạch</div>
     <button class="nb" onclick="go('timeline',this)"><div class="d"></div>Timeline chi tiết</button>
@@ -175,27 +176,88 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 <section class="pg on reveal" id="overview">
   <span class="tag" style="background:var(--pu-l);color:var(--pu)">Tổng quan</span>
   <h1>ViVi — Web Architecture</h1>
-  <p class="sub">Nền tảng kết nối người Việt tại Đức: tìm việc + tìm nhà. 6 vai trò, 32 routes, 2 tháng hoàn thiện MVP với team 2 dev + 1 des.</p>
+  <p class="sub">Nền tảng kết nối người Việt tại Đức: tìm việc + tìm nhà. 6 vai trò, 34 routes, 2 tháng hoàn thiện MVP với team 2 dev + 1 des.</p>
   <div class="stats">
-    <div class="stat p hover-lift" style="transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);"><div class="stat-n" style="text-shadow: 0 4px 10px rgba(127,119,221,0.3)">32</div><div class="stat-l">Tổng routes</div></div>
+    <div class="stat p hover-lift" style="transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);"><div class="stat-n" style="text-shadow: 0 4px 10px rgba(127,119,221,0.3)">34</div><div class="stat-l">Tổng routes</div></div>
     <div class="stat t hover-lift" style="transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);"><div class="stat-n" style="text-shadow: 0 4px 10px rgba(29,158,117,0.3)">6</div><div class="stat-l">Vai trò</div></div>
     <div class="stat c hover-lift" style="transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);"><div class="stat-n" style="text-shadow: 0 4px 10px rgba(216,90,48,0.3)">3</div><div class="stat-l">Luồng doanh thu</div></div>
     <div class="stat a hover-lift" style="transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);"><div class="stat-n" style="text-shadow: 0 4px 10px rgba(239,159,39,0.3)">2 th</div><div class="stat-l">Timeline (MVP)</div></div>
   </div>
   <h2>Cấu trúc trang</h2>
   <div class="g4" style="margin-bottom:20px">
-    <div class="card"><div class="badge bp" style="margin-bottom:8px">Onboarding · 5</div><div style="font-size:11px;color:var(--tx2);line-height:2">/login · /register<br>/kyc · /onboarding<br>/forgot-password</div></div>
+    <div class="card"><div class="badge bp" style="margin-bottom:8px">Onboarding · 6</div><div style="font-size:11px;color:var(--tx2);line-height:2">/ · /login · /register<br>/kyc · /onboarding<br>/forgot-password</div></div>
     <div class="card"><div class="badge bt" style="margin-bottom:8px">Việc làm · 6</div><div style="font-size:11px;color:var(--tx2);line-height:2">/jobs · /jobs/:id<br>/jobs/post · /jobs/manage<br>/employer/:id · /jobs/search</div></div>
     <div class="card"><div class="badge bc" style="margin-bottom:8px">Nhà ở · 6</div><div style="font-size:11px;color:var(--tx2);line-height:2">/housing · /housing/:id<br>/housing/post · /housing/manage<br>/host/:id · /housing/search</div></div>
-    <div class="card"><div class="badge bg" style="margin-bottom:8px">Shared + Admin · 15</div><div style="font-size:11px;color:var(--tx2);line-height:2">/messages · /saved · /profile<br>/settings · /premium<br>/admin/* (6 trang)</div></div>
+    <div class="card"><div class="badge bg" style="margin-bottom:8px">Shared + Admin · 16</div><div style="font-size:11px;color:var(--tx2);line-height:2">/messages · /messages/:id · /messages/bot<br>/saved · /profile/:id · /profile/edit<br>/settings · /premium · /premium/checkout · /premium/success<br>/admin · /admin/kyc · /admin/users<br>/admin/listings · /admin/reports · /admin/payments</div></div>
   </div>
   <h2>MVP — 13 trang làm trước (Q1–Q2)</h2>
-  <div style="display:flex;flex-wrap:wrap;gap:7px">
+  <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px">
     <span class="badge bp" style="padding:5px 12px">/login</span><span class="badge bp" style="padding:5px 12px">/register</span><span class="badge bp" style="padding:5px 12px">/kyc</span>
     <span class="badge bt" style="padding:5px 12px">/jobs</span><span class="badge bt" style="padding:5px 12px">/jobs/:id</span><span class="badge bt" style="padding:5px 12px">/jobs/post</span>
     <span class="badge bc" style="padding:5px 12px">/housing</span><span class="badge bc" style="padding:5px 12px">/housing/:id</span><span class="badge bc" style="padding:5px 12px">/housing/post</span>
     <span class="badge ba" style="padding:5px 12px">/messages</span><span class="badge ba" style="padding:5px 12px">/messages/:id</span>
     <span class="badge bg" style="padding:5px 12px">/profile/edit</span><span class="badge bp" style="padding:5px 12px">/onboarding</span>
+  </div>
+
+  <h2>3 Luồng doanh thu chính</h2>
+  <div class="g3">
+    <div class="card hover-lift" style="border-top:3px solid var(--pu-m)">
+      <div style="font-size:11px;font-weight:700;color:var(--pu);margin-bottom:4px">1. Premium Job Posting</div>
+      <div style="font-size:10px;color:var(--tx2);line-height:1.7">Chủ tiệm nail, nhà hàng... trả phí (€15–50) để tin tuyển dụng luôn hiện ở đầu trang, tăng 5x lượt xem.</div>
+    </div>
+    <div class="card hover-lift" style="border-top:3px solid var(--co-m)">
+      <div style="font-size:11px;font-weight:700;color:var(--co);margin-bottom:4px">2. Premium Housing</div>
+      <div style="font-size:10px;color:var(--tx2);line-height:1.7">Chủ nhà/Host đẩy tin cho thuê phòng (WG) ưu tiên. Rất hiệu quả cho các vùng cạnh tranh cao như Berlin/Munich.</div>
+    </div>
+    <div class="card hover-lift" style="border-top:3px solid var(--am-m)">
+      <div style="font-size:11px;font-weight:700;color:var(--am);margin-bottom:4px">3. Affiliate & Services</div>
+      <div style="font-size:10px;color:var(--tx2);line-height:1.7">Hoa hồng từ đối tác bảo hiểm (TK/AOK), tài khoản phong tỏa (Expatrio) hoặc dịch vụ chuyển nhà cho du học sinh.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TECH STACK ══ -->
+<section class="pg reveal" id="techstack">
+  <span class="tag" style="background:var(--te-l);color:var(--te)">Tech Stack</span>
+  <h1>Công nghệ đề xuất</h1>
+  <p class="sub">Lựa chọn bộ công nghệ (Tech Stack) tối ưu cho khả năng scale, SEO và trải nghiệm người dùng cao cấp cho ViVi.</p>
+  
+  <div class="g2">
+    <div class="card hover-lift" style="border-top:3px solid var(--pu-m)">
+      <div style="font-size:13px;font-weight:700;color:var(--pu);margin-bottom:8px">Frontend & Backend: Next.js 14/15</div>
+      <div style="font-size:11px;color:var(--tx2);line-height:1.8">
+        • <b>Lý do:</b> Next.js là "Gold Standard" hiện nay. Nó hỗ trợ SSR (Server Side Rendering) cực tốt, giúp các bài đăng việc làm/nhà ở được Google index ngay lập tức (SEO).<br>
+        • <b>App Router:</b> Tận dụng Server Components để giảm bundle size, tăng tốc độ load trang.<br>
+        • <b>TypeScript:</b> Bắt buộc để đảm bảo code sạch, ít lỗi khi team 2 dev làm việc chung.
+      </div>
+    </div>
+    <div class="card hover-lift" style="border-top:3px solid var(--te-m)">
+      <div style="font-size:13px;font-weight:700;color:var(--te);margin-bottom:8px">Database: MongoDB vs PostgreSQL</div>
+      <div style="font-size:11px;color:var(--tx2);line-height:1.8">
+        • <b>MongoDB:</b> Linh hoạt cho dữ liệu tin đăng (Listings) có cấu trúc thay đổi thường xuyên. Tuy nhiên cần cẩn thận với Transaction tài chính.<br>
+        • <b>PostgreSQL (Đề xuất):</b> Kết hợp với <b>Prisma</b> hoặc <b>Drizzle ORM</b>. Phù hợp hơn cho hệ thống có quan hệ phức tạp (User - Job - Payment - Message) và đảm bảo tính nhất quán dữ liệu cao.<br>
+        • <b>Lựa chọn:</b> Cả hai đều tốt, nhưng PostgreSQL mang lại cảm giác "Premium" và bền vững hơn cho dự án này.
+      </div>
+    </div>
+  </div>
+
+  <h2 style="margin-top:24px">Hệ sinh thái bổ trợ</h2>
+  <div class="g4">
+    <div class="card hover-lift" style="border-left:3px solid var(--pu-m)"><div style="font-size:11px;font-weight:700;margin-bottom:4px">Authentication</div><div style="font-size:10px;color:var(--tx3)">Auth.js (NextAuth)<br>Apple/Google Social Login</div></div>
+    <div class="card hover-lift" style="border-left:3px solid var(--te-m)"><div style="font-size:11px;font-weight:700;margin-bottom:4px">Real-time / Chat</div><div style="font-size:10px;color:var(--tx3)">Supabase Realtime<br>Pusher hoặc Socket.io</div></div>
+    <div class="card hover-lift" style="border-left:3px solid var(--co-m)"><div style="font-size:11px;font-weight:700;margin-bottom:4px">Payments</div><div style="font-size:10px;color:var(--tx3)">Stripe SDK<br>Tích hợp Webhook an toàn</div></div>
+    <div class="card hover-lift" style="border-left:3px solid var(--am-m)"><div style="font-size:11px;font-weight:700;margin-bottom:4px">Media Storage</div><div style="font-size:10px;color:var(--tx3)">Cloudinary / AWS S3<br>Xử lý ảnh (Resize, WebP)</div></div>
+  </div>
+
+  <div class="card hover-lift" style="background:var(--bg);border:1px dashed var(--bd);margin-top:20px;padding:18px">
+    <div style="font-size:12px;font-weight:700;margin-bottom:6px">💡 Tổng kết đề xuất (Premium Choice)</div>
+    <div style="font-size:11px;color:var(--tx2);font-family:monospace;background:rgba(0,0,0,0.03);padding:10px;border-radius:6px">
+      • Framework: Next.js 14+ (App Router, TS)<br>
+      • Styling: Tailwind CSS (speed) + Framer Motion (animations)<br>
+      • Database: PostgreSQL (Prisma ORM)<br>
+      • Real-time: Supabase (Auth + DB + Storage + Realtime)<br>
+      • Deployment: Vercel (Auto CICD)
+    </div>
   </div>
 </section>
 
@@ -305,9 +367,32 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 
 <!-- ══ LAYOUTS: ONBOARDING ══ -->
 <section class="pg reveal" id="lo-onboard">
-  <span class="tag" style="background:var(--pu-l);color:var(--pu)">Layouts · Onboarding · 4 trang</span>
+  <span class="tag" style="background:var(--pu-l);color:var(--pu)">Layouts · Onboarding · 6 trang</span>
   <h1>Giao diện Onboarding</h1>
   <p class="sub">Luồng đầu tiên người dùng gặp.</p>
+
+  <div style="margin-bottom:24px">
+    <div class="pg-title">Landing Page <span class="pg-url">/</span></div>
+    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/</div></div>
+    <div class="bscreen">
+      <div class="mnav"><div class="mnav-logo">Vi<span>Vi</span></div><div class="mnav-link on">Trang chủ</div><div class="mnav-link">Việc làm</div><div class="mnav-link">Nhà ở</div><div class="mnav-r"><div class="mbtn o">Đăng nhập</div><div class="mbtn f">Đăng ký</div></div></div>
+      <div style="background:linear-gradient(135deg,#1a1a18 0%,#2d2b6b 100%);padding:40px 32px;text-align:center;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+        <div style="font-size:32px;font-weight:800;color:#fff;letter-spacing:-1.5px;margin-bottom:8px">Vi<span style="color:var(--pu-m)">Vi</span></div>
+        <div style="font-size:13px;color:rgba(255,255,255,.7);margin-bottom:6px">Nền tảng việc làm &amp; nhà ở cho người Việt tại Đức</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:22px">For Vietnamese · By Vietnamese · Made in Germany</div>
+        <div style="display:flex;gap:10px;justify-content:center">
+          <div style="background:var(--pu);color:#fff;border-radius:7px;padding:9px 22px;font-size:11px;font-weight:700">Tìm việc →</div>
+          <div style="background:rgba(255,255,255,.12);color:#fff;border-radius:7px;padding:9px 22px;font-size:11px;font-weight:600;border:1px solid rgba(255,255,255,.2)">Tìm nhà →</div>
+        </div>
+        <div style="display:flex;gap:18px;margin-top:18px">
+          <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:#fff">2k+</div><div style="font-size:9px;color:rgba(255,255,255,.4)">Tin việc</div></div>
+          <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:#fff">500+</div><div style="font-size:9px;color:rgba(255,255,255,.4)">Phòng trống</div></div>
+          <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:#fff">10k+</div><div style="font-size:9px;color:rgba(255,255,255,.4)">Người dùng</div></div>
+        </div>
+      </div>
+    </div></div>
+    <ul class="spec"><li>Hero dark gradient · CTA đôi (Tìm việc / Tìm nhà) · stat counters</li><li>Guest có thể xem feed giới hạn · CTA đăng ký nổi bật</li></ul>
+  </div>
 
   <div style="margin-bottom:24px">
     <div class="pg-title">/login <span class="pg-url">/login</span></div>
@@ -406,6 +491,25 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
       <div style="font-size:10px;color:var(--tx3)">Bỏ qua, tôi tự khám phá</div>
     </div></div>
     <ul class="spec"><li>Full-screen centered · 4 card · multi-select · chỉ hiện 1 lần</li></ul>
+  </div>
+
+  <div style="margin-bottom:24px">
+    <div class="pg-title">/forgot-password — Quên mật khẩu <span class="pg-url">/forgot-password</span></div>
+    <div class="browser"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/forgot-password</div></div>
+    <div class="bscreen"><div style="display:grid;grid-template-columns:1fr 1fr;min-height:260px">
+      <div style="background:#1a1a18;padding:28px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font-size:26px;font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:10px">Vi<span style="color:var(--pu-m)">Vi</span></div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.8">Nhập email đã đăng ký.<br>Chúng tôi sẽ gửi link<br>đặt lại mật khẩu cho bạn.</div>
+      </div>
+      <div style="padding:28px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font-size:15px;font-weight:700;margin-bottom:2px">Quên mật khẩu?</div>
+        <div style="font-size:10px;color:var(--tx3);margin-bottom:16px">Nhớ rồi? <span style="color:var(--pu)">Quay lại đăng nhập</span></div>
+        <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--tx2);margin-bottom:2px">Email đã đăng ký</div><div style="border:1px solid var(--bd);border-radius:5px;padding:7px 9px;font-size:10px;color:var(--tx3)">email@gmail.com</div></div>
+        <div style="background:var(--pu);color:#fff;border-radius:6px;padding:8px;text-align:center;font-size:11px;font-weight:600;margin-bottom:10px">Gửi link đặt lại →</div>
+        <div style="background:var(--te-l);border:1px solid #5DCAA5;border-radius:5px;padding:7px 10px;font-size:10px;color:var(--te);display:none">✓ Đã gửi! Kiểm tra hộp thư của bạn.</div>
+      </div>
+    </div></div>
+    <ul class="spec"><li>Split layout giống /login · email input · success state inline</li><li>Token reset hết hạn sau 30 phút · resend sau 60s</li></ul>
   </div>
 </section>
 
@@ -836,7 +940,7 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
 
 <!-- ══ LAYOUTS: SHARED ══ -->
 <section class="pg reveal" id="lo-shared">
-  <span class="tag" style="background:var(--gr-m);color:var(--wh)">Layouts · Shared · 9 trang</span>
+  <span class="tag" style="background:var(--gr-m);color:var(--wh)">Layouts · Shared + Admin · 10 trang</span>
   <h1>Giao diện trang Chức năng chung</h1>
   <p class="sub">Messages, Premium, Profile, Settings và Admin Dashboard.</p>
 
@@ -989,6 +1093,101 @@ h2::after{content:'';flex:1;height:1px;background:var(--bd)}
       </div>
     </div></div>
     <ul class="spec"><li>Dark navbar · 4 stat cards · KYC queue table</li><li>Internal only — không public, auth riêng</li></ul>
+  </div>
+
+  <div style="margin-bottom:24px">
+    <div class="pg-title">Admin — Duyệt KYC <span class="pg-url">/admin/kyc</span> <span style="font-size:10px;color:var(--co);background:var(--co-l);padding:2px 7px;border-radius:10px;margin-left:4px">Internal only</span></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/admin/kyc</div></div>
+    <div class="bscreen">
+      <div style="background:#1a1a18;padding:0 12px;display:flex;align-items:center;height:34px"><div style="font-size:12px;font-weight:800;color:#fff;margin-right:14px">Vi<span style="color:var(--pu-m)">Vi</span> <span style="font-size:10px;font-weight:400;color:rgba(255,255,255,.4)">Admin</span></div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Dashboard</div><div style="font-size:10px;padding:0 8px;height:34px;display:flex;align-items:center;border-bottom:2px solid var(--pu-m);color:#fff">KYC</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Bài đăng</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Báo cáo</div></div>
+      <div style="padding:14px">
+        <div style="display:flex;gap:8px;margin-bottom:10px"><div style="background:var(--am-l);border:1px solid #FAC775;border-radius:5px;padding:4px 10px;font-size:10px;color:var(--am);font-weight:600">Chờ duyệt (12)</div><div style="background:var(--te-l);border-radius:5px;padding:4px 10px;font-size:10px;color:var(--te)">Đã duyệt</div><div style="background:var(--co-l);border-radius:5px;padding:4px 10px;font-size:10px;color:var(--co)">Từ chối</div></div>
+        <table style="width:100%;border-collapse:collapse;font-size:11px">
+          <thead><tr style="background:var(--gr-l)"><th style="padding:5px 8px;text-align:left;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Người dùng</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Loại giấy tờ</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Nộp lúc</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Ảnh</th><th style="padding:5px 8px;text-align:right;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Hành động</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--bd)"><td style="padding:5px 8px;font-size:10px;font-weight:500">Nguyễn Thanh Toàn</td><td style="padding:5px 8px;font-size:10px;color:var(--tx3)">CCCD</td><td style="padding:5px 8px;font-size:10px;color:var(--tx3)">2 giờ trước</td><td style="padding:5px 8px"><span style="font-size:9px;background:var(--pu-l);color:var(--pu);padding:1px 6px;border-radius:8px">Xem ảnh</span></td><td style="padding:5px 8px;text-align:right"><span style="color:var(--te);font-size:10px;font-weight:600;cursor:pointer">✓ Duyệt</span> · <span style="color:var(--co);font-size:10px;cursor:pointer">✗ Từ chối</span></td></tr>
+            <tr style="border-bottom:1px solid var(--bd)"><td style="padding:5px 8px;font-size:10px;font-weight:500">Trần Thị Mai</td><td style="padding:5px 8px;font-size:10px;color:var(--tx3)">Passport</td><td style="padding:5px 8px;font-size:10px;color:var(--tx3)">5 giờ trước</td><td style="padding:5px 8px"><span style="font-size:9px;background:var(--pu-l);color:var(--pu);padding:1px 6px;border-radius:8px">Xem ảnh</span></td><td style="padding:5px 8px;text-align:right"><span style="color:var(--te);font-size:10px;font-weight:600;cursor:pointer">✓ Duyệt</span> · <span style="color:var(--co);font-size:10px;cursor:pointer">✗ Từ chối</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+    <ul class="spec"><li>Tab filter: Chờ duyệt / Đã duyệt / Từ chối · xem ảnh modal · audit log</li></ul>
+  </div>
+
+  <div style="margin-bottom:24px">
+    <div class="pg-title">Admin — Quản lý Users <span class="pg-url">/admin/users</span> <span style="font-size:10px;color:var(--co);background:var(--co-l);padding:2px 7px;border-radius:10px;margin-left:4px">Internal only</span></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/admin/users</div></div>
+    <div class="bscreen">
+      <div style="background:#1a1a18;padding:0 12px;display:flex;align-items:center;height:34px"><div style="font-size:12px;font-weight:800;color:#fff;margin-right:14px">Vi<span style="color:var(--pu-m)">Vi</span> <span style="font-size:10px;font-weight:400;color:rgba(255,255,255,.4)">Admin</span></div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Dashboard</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">KYC</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Bài đăng</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Báo cáo</div><div style="font-size:10px;padding:0 8px;height:34px;display:flex;align-items:center;border-bottom:2px solid var(--pu-m);color:#fff">Users</div></div>
+      <div style="padding:14px">
+        <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center"><div style="flex:1;background:var(--wh);border:1px solid var(--bd);border-radius:5px;padding:5px 9px;font-size:10px;color:var(--tx3)">Tìm email, tên...</div><div style="font-size:10px;background:var(--wh);border:1px solid var(--bd);border-radius:5px;padding:5px 9px;color:var(--tx2)">Role ▾</div><div style="font-size:10px;background:var(--wh);border:1px solid var(--bd);border-radius:5px;padding:5px 9px;color:var(--tx2)">KYC ▾</div></div>
+        <table style="width:100%;border-collapse:collapse;font-size:11px">
+          <thead><tr style="background:var(--gr-l)"><th style="padding:5px 8px;text-align:left;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Tên</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Email</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Role</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">KYC</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Đăng ký</th><th style="padding:5px 8px;text-align:right;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Hành động</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--bd)"><td style="padding:5px 8px;font-size:10px;font-weight:500">Nguyễn Thanh Toàn</td><td style="padding:5px 8px;font-size:10px;color:var(--tx3)">toan@gmail.com</td><td style="padding:5px 8px"><span style="font-size:9px;background:var(--pu-l);color:var(--pu);padding:1px 6px;border-radius:8px">Job Seeker</span></td><td style="padding:5px 8px"><span style="font-size:9px;background:var(--te-l);color:var(--te);padding:1px 6px;border-radius:8px">✓ Verified</span></td><td style="padding:5px 8px;font-size:10px;color:var(--tx3)">2 ngày trước</td><td style="padding:5px 8px;text-align:right"><span style="color:var(--pu);font-size:10px;cursor:pointer">Xem</span> · <span style="color:var(--co);font-size:10px;cursor:pointer">Ban</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+    <ul class="spec"><li>Search + filter role/KYC · xem profile đầy đủ · ban/unban user · export CSV</li></ul>
+  </div>
+
+  <div style="margin-bottom:24px">
+    <div class="pg-title">Admin — Duyệt bài đăng <span class="pg-url">/admin/listings</span> <span style="font-size:10px;color:var(--co);background:var(--co-l);padding:2px 7px;border-radius:10px;margin-left:4px">Internal only</span></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/admin/listings</div></div>
+    <div class="bscreen">
+      <div style="background:#1a1a18;padding:0 12px;display:flex;align-items:center;height:34px"><div style="font-size:12px;font-weight:800;color:#fff;margin-right:14px">Vi<span style="color:var(--pu-m)">Vi</span> <span style="font-size:10px;font-weight:400;color:rgba(255,255,255,.4)">Admin</span></div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Dashboard</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">KYC</div><div style="font-size:10px;padding:0 8px;height:34px;display:flex;align-items:center;border-bottom:2px solid var(--pu-m);color:#fff">Bài đăng</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Báo cáo</div></div>
+      <div style="padding:14px">
+        <div style="display:flex;gap:6px;margin-bottom:10px"><div style="background:var(--te-l);border:1px solid #5DCAA5;border-radius:5px;padding:4px 10px;font-size:10px;color:var(--te);font-weight:600">Việc làm (67)</div><div style="background:var(--gr-l);border-radius:5px;padding:4px 10px;font-size:10px;color:var(--tx2)">Nhà ở (34)</div><div style="margin-left:auto;font-size:10px;background:var(--wh);border:1px solid var(--bd);border-radius:5px;padding:4px 10px;color:var(--tx2)">Trạng thái ▾</div></div>
+        <table style="width:100%;border-collapse:collapse;font-size:11px">
+          <thead><tr style="background:var(--gr-l)"><th style="padding:5px 8px;text-align:left;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Tiêu đề</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Người đăng</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Trạng thái</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Premium</th><th style="padding:5px 8px;text-align:right;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Hành động</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--bd)"><td style="padding:5px 8px;font-size:10px;font-weight:500">Tìm thợ nail kinh nghiệm</td><td style="padding:5px 8px;font-size:10px;color:var(--tx3)">Nail Studio Linh</td><td style="padding:5px 8px"><span style="font-size:9px;background:var(--te-l);color:var(--te);padding:1px 6px;border-radius:8px">Active</span></td><td style="padding:5px 8px;font-size:10px;color:var(--am)">✓ 7 ngày</td><td style="padding:5px 8px;text-align:right"><span style="color:var(--pu);font-size:10px;cursor:pointer">Xem</span> · <span style="color:var(--co);font-size:10px;cursor:pointer">Ẩn</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+    <ul class="spec"><li>Tab Job / Housing · filter trạng thái · ẩn/xóa bài vi phạm · view chi tiết</li></ul>
+  </div>
+
+  <div style="margin-bottom:24px">
+    <div class="pg-title">Admin — Báo cáo vi phạm <span class="pg-url">/admin/reports</span> <span style="font-size:10px;color:var(--co);background:var(--co-l);padding:2px 7px;border-radius:10px;margin-left:4px">Internal only</span></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/admin/reports</div></div>
+    <div class="bscreen">
+      <div style="background:#1a1a18;padding:0 12px;display:flex;align-items:center;height:34px"><div style="font-size:12px;font-weight:800;color:#fff;margin-right:14px">Vi<span style="color:var(--pu-m)">Vi</span> <span style="font-size:10px;font-weight:400;color:rgba(255,255,255,.4)">Admin</span></div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Dashboard</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">KYC</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Bài đăng</div><div style="font-size:10px;padding:0 8px;height:34px;display:flex;align-items:center;border-bottom:2px solid var(--co-m);color:#fff">Báo cáo</div></div>
+      <div style="padding:14px">
+        <div style="display:flex;gap:6px;margin-bottom:10px"><div style="background:var(--co-l);border:1px solid #F0997B;border-radius:5px;padding:4px 10px;font-size:10px;color:var(--co);font-weight:600">Chưa xử lý (3)</div><div style="background:var(--gr-l);border-radius:5px;padding:4px 10px;font-size:10px;color:var(--tx2)">Đã xử lý</div></div>
+        <table style="width:100%;border-collapse:collapse;font-size:11px">
+          <thead><tr style="background:var(--gr-l)"><th style="padding:5px 8px;text-align:left;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Nội dung bị báo</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Loại</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Người báo</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Lý do</th><th style="padding:5px 8px;text-align:right;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Hành động</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--bd)"><td style="padding:5px 8px;font-size:10px;font-weight:500">Tin đăng phòng 15m² Berlin</td><td style="padding:5px 8px"><span style="font-size:9px;background:var(--co-l);color:var(--co);padding:1px 6px;border-radius:8px">Housing</span></td><td style="padding:5px 8px;font-size:10px;color:var(--tx3)">Trần Thị Mai</td><td style="padding:5px 8px;font-size:10px;color:var(--tx2)">Giá sai thực tế</td><td style="padding:5px 8px;text-align:right"><span style="color:var(--pu);font-size:10px;cursor:pointer">Xem</span> · <span style="color:var(--co);font-size:10px;cursor:pointer">Xử lý</span> · <span style="color:var(--tx3);font-size:10px;cursor:pointer">Bỏ qua</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+    <ul class="spec"><li>Queue báo cáo · xem context đầy đủ · hành động: ẩn nội dung / cảnh báo user / ban</li></ul>
+  </div>
+
+  <div style="margin-bottom:24px">
+    <div class="pg-title">Admin — Lịch sử thanh toán <span class="pg-url">/admin/payments</span> <span style="font-size:10px;color:var(--co);background:var(--co-l);padding:2px 7px;border-radius:10px;margin-left:4px">Internal only</span></div>
+    <div class="browser hover-lift"><div class="bbar"><div class="bwin"><span></span><span></span><span></span></div><div class="burl">vivi.de/admin/payments</div></div>
+    <div class="bscreen">
+      <div style="background:#1a1a18;padding:0 12px;display:flex;align-items:center;height:34px"><div style="font-size:12px;font-weight:800;color:#fff;margin-right:14px">Vi<span style="color:var(--pu-m)">Vi</span> <span style="font-size:10px;font-weight:400;color:rgba(255,255,255,.4)">Admin</span></div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Dashboard</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">KYC</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Bài đăng</div><div style="font-size:10px;color:rgba(255,255,255,.5);padding:0 8px;height:34px;display:flex;align-items:center">Báo cáo</div><div style="font-size:10px;padding:0 8px;height:34px;display:flex;align-items:center;border-bottom:2px solid var(--am-m);color:#fff">Payments</div></div>
+      <div style="padding:14px">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
+          <div style="background:var(--te-l);border-radius:6px;padding:8px 10px"><div style="font-size:16px;font-weight:700;color:var(--te)">€340</div><div style="font-size:9px;color:var(--te-m)">Doanh thu tháng này</div></div>
+          <div style="background:var(--am-l);border-radius:6px;padding:8px 10px"><div style="font-size:16px;font-weight:700;color:var(--am)">28</div><div style="font-size:9px;color:var(--am-m)">Giao dịch thành công</div></div>
+          <div style="background:var(--co-l);border-radius:6px;padding:8px 10px"><div style="font-size:16px;font-weight:700;color:var(--co)">2</div><div style="font-size:9px;color:var(--co-m)">Giao dịch thất bại</div></div>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:11px">
+          <thead><tr style="background:var(--gr-l)"><th style="padding:5px 8px;text-align:left;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">User</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Gói</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Số tiền</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Stripe ID</th><th style="padding:5px 8px;font-size:10px;color:var(--tx2);border-bottom:1px solid var(--bd)">Trạng thái</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--bd)"><td style="padding:5px 8px;font-size:10px;font-weight:500">Nail Studio Linh</td><td style="padding:5px 8px;font-size:10px;color:var(--tx2)">Premium 7 ngày</td><td style="padding:5px 8px;font-size:10px;font-weight:600;color:var(--te)">€30</td><td style="padding:5px 8px;font-size:9px;font-family:monospace;color:var(--tx3)">pi_3Pxxx...</td><td style="padding:5px 8px"><span style="font-size:9px;background:var(--te-l);color:var(--te);padding:1px 6px;border-radius:8px">✓ Thành công</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+    <ul class="spec"><li>Stat cards doanh thu · bảng giao dịch · filter theo tháng · link Stripe dashboard</li></ul>
   </div>
 </section>
 
@@ -1552,7 +1751,7 @@ function buildSM(){
   const w=document.getElementById('sm-render');if(w.children.length)return;
   function sn(x,y,route,label,fill,stroke,tc){return `<rect x="${x}" y="${y-13}" width="158" height="26" rx="5" fill="${fill}" stroke="${stroke}" stroke-width="1"/><text x="${x+79}" y="${y-4}" text-anchor="middle" dominant-baseline="central" font-size="9" font-weight="600" fill="${tc}">${label}</text><text x="${x+79}" y="${y+9}" text-anchor="middle" dominant-baseline="central" font-size="8" fill="${tc}" opacity=".65">${route}</text>`;}
   function sb(lx,ly,cx2,ys){let r=`<line x1="${lx}" y1="${ly}" x2="${lx}" y2="${Math.max(...ys)}" stroke="#ccc" stroke-width="1.2"/>`;ys.forEach(y=>r+=`<line x1="${lx}" y1="${y}" x2="${cx2}" y2="${y}" stroke="#ccc" stroke-width="1.2"/>`);return r;}
-  const W=900,H=720;
+  const W=900,H=780;
   const s=`<svg width="100%" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="display:block;border:1px solid #e2e0d8;border-radius:9px">
   <rect width="${W}" height="${H}" fill="white" rx="9"/>
   <rect x="370" y="12" width="160" height="32" rx="7" fill="#1a1a18"/>
@@ -1574,12 +1773,13 @@ function buildSM(){
   <line x1="400" y1="66" x2="400" y2="84" stroke="#ccc" stroke-width="1.2"/>
   <line x1="565" y1="66" x2="565" y2="84" stroke="#ccc" stroke-width="1.2"/>
   <line x1="730" y1="66" x2="730" y2="84" stroke="#ccc" stroke-width="1.2"/>
-  ${sb(80,112,1,[160,208,256,304,352])}
+  ${sb(80,112,1,[160,208,256,304,352,400])}
   ${sn(1,160,'/login','Đăng nhập','#EEEDFE','#AFA9EC','#3C3489')}
   ${sn(1,208,'/register','Đăng ký','#EEEDFE','#AFA9EC','#3C3489')}
   ${sn(1,256,'/kyc','Xác minh KYC','#EEEDFE','#AFA9EC','#3C3489')}
   ${sn(1,304,'/onboarding','Chọn mục đích','#EEEDFE','#AFA9EC','#3C3489')}
-  ${sn(1,352,'/forgot-password','Quên mật khẩu','#F1EFE8','#D3D1C7','#444441')}
+  ${sn(1,352,'/forgot-password','Quên mật khẩu','#EEEDFE','#AFA9EC','#3C3489')}
+  ${sn(1,400,'/','Landing Page','#EEEDFE','#AFA9EC','#3C3489')}
   ${sb(240,112,161,[160,208,256,304,352,400])}
   ${sn(161,160,'/jobs','Job Feed','#E1F5EE','#5DCAA5','#0F6E56')}
   ${sn(161,208,'/jobs/search','Tìm kiếm & Filter','#E1F5EE','#5DCAA5','#0F6E56')}
@@ -1594,7 +1794,7 @@ function buildSM(){
   ${sn(321,304,'/housing/post','Đăng phòng (3 bước)','#FAECE7','#F0997B','#993C1D')}
   ${sn(321,352,'/housing/manage','Quản lý phòng','#FAECE7','#F0997B','#993C1D')}
   ${sn(321,400,'/host/:id','Hồ sơ Host','#FAECE7','#F0997B','#993C1D')}
-  ${sb(565,112,481,[160,208,256,304,352,400,448,496,544])}
+  ${sb(565,112,481,[160,208,256,304,352,400,448,496,544,592])}
   ${sn(481,160,'/messages','Inbox tin nhắn','#FAEEDA','#FAC775','#633806')}
   ${sn(481,208,'/messages/:id','Chat room','#FAEEDA','#FAC775','#633806')}
   ${sn(481,256,'/messages/bot','ViVi Bot (urgent)','#FAEEDA','#FAC775','#633806')}
@@ -1604,6 +1804,7 @@ function buildSM(){
   ${sn(481,448,'/settings','Cài đặt','#FAEEDA','#FAC775','#633806')}
   ${sn(481,496,'/premium','Premium & Checkout','#FAEEDA','#FAC775','#633806')}
   ${sn(481,544,'/premium/success','Thanh toán thành công','#FAEEDA','#FAC775','#633806')}
+  ${sn(481,592,'/premium/checkout','Thanh toán Stripe','#FAEEDA','#FAC775','#633806')}
   ${sb(730,112,651,[160,208,256,304,352,400])}
   ${sn(651,160,'/admin','Dashboard','#F1EFE8','#D3D1C7','#444441')}
   ${sn(651,208,'/admin/users','Quản lý User','#F1EFE8','#D3D1C7','#444441')}
@@ -1611,11 +1812,11 @@ function buildSM(){
   ${sn(651,304,'/admin/listings','Duyệt bài đăng','#F1EFE8','#D3D1C7','#444441')}
   ${sn(651,352,'/admin/reports','Báo cáo vi phạm','#F1EFE8','#D3D1C7','#444441')}
   ${sn(651,400,'/admin/payments','Lịch sử thanh toán','#F1EFE8','#D3D1C7','#444441')}
-  <rect x="0" y="600" width="${W}" height="1" fill="#e2e0d8"/>
-  <text x="20" y="626" font-size="10" font-weight="600" fill="#1a1a18">MVP:</text>
-  <text x="60" y="626" font-size="10" fill="#534AB7">/login  /register  /kyc  /onboarding  /jobs  /jobs/:id  /jobs/post  /housing  /housing/:id  /housing/post  /messages  /messages/:id  /profile/edit</text>
-  <text x="20" y="648" font-size="10" fill="#888780">Tổng: 32 routes  ·  5 Auth  ·  6 Jobs  ·  6 Housing  ·  9 Shared  ·  6 Admin</text>
-  <text x="20" y="666" font-size="10" fill="#888780">Admin routes bảo vệ bởi role = admin  ·  Không accessible từ public sitemap</text>
+  <rect x="0" y="650" width="${W}" height="1" fill="#e2e0d8"/>
+  <text x="20" y="670" font-size="10" font-weight="600" fill="#1a1a18">MVP:</text>
+  <text x="60" y="670" font-size="10" fill="#534AB7">/login  /register  /kyc  /onboarding  /jobs  /jobs/:id  /jobs/post  /housing  /housing/:id  /housing/post  /messages  /messages/:id  /profile/edit</text>
+  <text x="20" y="692" font-size="10" fill="#888780">Tổng: 34 routes  ·  6 Auth (incl. /)  ·  6 Jobs  ·  6 Housing  ·  10 Shared  ·  6 Admin</text>
+  <text x="20" y="710" font-size="10" fill="#888780">Admin routes bảo vệ bởi role = admin  ·  Không accessible từ public sitemap</text>
 </svg>`;
   w.innerHTML=s;
 }
@@ -1637,7 +1838,10 @@ function initReveals() {
 }
 
 function go(id, btn) {
-  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.pg').forEach(p => {
+    p.classList.remove('on', 'active');
+    p.querySelectorAll('.reveal').forEach(el => el.classList.remove('active'));
+  });
   document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
   const target = document.getElementById(id);
   if (target) {
@@ -1651,11 +1855,13 @@ function go(id, btn) {
     if(id==='sitemap') buildSM();
     if(id==='timeline') buildTL();
 
-    // Re-trigger reveal for fresh content
-    target.querySelectorAll('.reveal').forEach(el => {
-      el.classList.remove('active');
-      setTimeout(() => el.classList.add('active'), 10);
-      observer.observe(el);
+    // Re-observe target and its children to trigger reveal animations organically
+    const reveals = [target, ...target.querySelectorAll('.reveal')];
+    reveals.forEach(el => {
+      if (el.classList.contains('reveal')) {
+        observer.unobserve(el);
+        observer.observe(el);
+      }
     });
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
