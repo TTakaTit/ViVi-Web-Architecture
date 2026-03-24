@@ -1459,27 +1459,45 @@ function seqTable(id,actors,rows){
 function buildSeqs(){
   seqTable('s1',['User','Frontend','Backend API','Auth Service','Database'],[
     {t:'s',c:['Nhập email + mật khẩu',null,null,null,null]},
-    {t:'a',from:0,to:2,l:'POST /api/register'},{t:'s',c:[null,null,'Validate · hash pw',null,null]},
-    {t:'a',from:2,to:3,l:'createUser()'},{t:'s',c:[null,null,null,'Generate JWT',null]},
-    {t:'a',from:3,to:1,l:'Return JWT',d:true},{t:'a',from:1,to:0,l:'Redirect /kyc',d:true},
-    {t:'s',c:['Upload CCCD',null,null,null,null]},{t:'a',from:0,to:2,l:'POST /api/kyc/upload'},
+    {t:'a',from:0,to:1,l:'Điền & submit form'},
+    {t:'a',from:1,to:2,l:'POST /api/register'},{t:'s',c:[null,null,'Validate · hash pw',null,null]},
+    {t:'a',from:2,to:3,l:'createUser()'},{t:'s',c:[null,null,null,'Gen JWT + gửi OTP email',null]},
+    {t:'a',from:3,to:2,l:'OTP sent',d:true},{t:'a',from:2,to:1,l:'Prompt nhập OTP',d:true},
+    {t:'a',from:1,to:0,l:'Hiển thị form OTP',d:true},
+    {t:'s',c:['Nhập mã OTP',null,null,null,null]},
+    {t:'a',from:0,to:1,l:'Submit OTP'},
+    {t:'a',from:1,to:2,l:'POST /api/verify-otp'},{t:'s',c:[null,null,null,'Verify · issue JWT',null]},
+    {t:'a',from:2,to:1,l:'JWT token',d:true},{t:'a',from:1,to:0,l:'Redirect /kyc',d:true},
+    {t:'s',c:['Upload CCCD',null,null,null,null]},
+    {t:'a',from:0,to:1,l:'Chọn file ảnh'},
+    {t:'a',from:1,to:2,l:'POST /api/kyc/upload'},
     {t:'a',from:2,to:4,l:'Save S3 + INSERT kyc'},{t:'s',c:[null,null,null,null,'kyc_status=pending']},
     {t:'a',from:2,to:1,l:'pending',d:true},{t:'a',from:1,to:0,l:'"Đang xét duyệt"',d:true},
   ]);
   seqTable('s2',['User','Frontend','Backend','Search','Firebase'],[
-    {t:'s',c:['Mở /jobs · filter',null,null,null,null]},{t:'a',from:0,to:2,l:'GET /api/jobs?city=berlin'},
+    {t:'s',c:['Mở /jobs · filter',null,null,null,null]},
+    {t:'a',from:0,to:1,l:'Mở /jobs'},
+    {t:'a',from:1,to:2,l:'GET /api/jobs?city=berlin'},
     {t:'a',from:2,to:3,l:'Query index'},{t:'s',c:[null,null,null,'Results',null]},
     {t:'a',from:3,to:2,l:'JSON',d:true},{t:'a',from:2,to:1,l:'Listings',d:true},
     {t:'a',from:1,to:0,l:'Render cards',d:true},{t:'s',c:['Click Liên hệ',null,null,null,null]},
-    {t:'a',from:0,to:4,l:'Subscribe Firebase'},{t:'s',c:[null,null,null,null,'Channel open']},
-    {t:'s',c:['Gửi tin nhắn',null,null,null,null]},{t:'a',from:0,to:4,l:'sendMessage()'},
-    {t:'a',from:4,to:0,l:'Broadcast real-time',d:true},
+    {t:'a',from:0,to:1,l:'Click nút Liên hệ'},
+    {t:'a',from:1,to:4,l:'Subscribe Firebase channel'},{t:'s',c:[null,null,null,null,'Channel open']},
+    {t:'s',c:['Gửi tin nhắn',null,null,null,null]},
+    {t:'a',from:0,to:1,l:'Nhập & gửi tin'},
+    {t:'a',from:1,to:4,l:'sendMessage()'},
+    {t:'a',from:4,to:1,l:'Broadcast real-time',d:true},
+    {t:'a',from:1,to:0,l:'Hiển thị tin nhắn',d:true},
   ]);
   seqTable('s3',['Employer','Frontend','Backend','Stripe','Database'],[
-    {t:'s',c:['Điền form post',null,null,null,null]},{t:'a',from:0,to:2,l:'POST /api/listings (draft)'},
+    {t:'s',c:['Điền form post',null,null,null,null]},
+    {t:'a',from:0,to:1,l:'Điền & submit form'},
+    {t:'a',from:1,to:2,l:'POST /api/listings (draft)'},
     {t:'a',from:2,to:4,l:'INSERT draft'},{t:'s',c:[null,null,null,null,'listing_id=XYZ']},
     {t:'a',from:2,to:1,l:'listing_id',d:true},{t:'a',from:1,to:0,l:'→ /premium',d:true},
-    {t:'s',c:['Chọn €10',null,null,null,null]},{t:'a',from:0,to:2,l:'POST /payment/create-intent'},
+    {t:'s',c:['Chọn €10',null,null,null,null]},
+    {t:'a',from:0,to:1,l:'Chọn gói Premium'},
+    {t:'a',from:1,to:2,l:'POST /payment/create-intent'},
     {t:'a',from:2,to:3,l:'createIntent(€10)'},{t:'a',from:3,to:2,l:'client_secret',d:true},
     {t:'a',from:2,to:1,l:'client_secret',d:true},{t:'s',c:[null,'confirmPayment()',null,null,null]},
     {t:'a',from:1,to:3,l:'confirm()'},{t:'s',c:[null,null,null,'payment_succeeded webhook',null]},
@@ -1511,11 +1529,13 @@ function buildUC(){
   <!-- Connections: Guest -->
   ${ln(110,120,250,108,'#D3D1C7')}
   ${ln(110,120,250,153,'#D3D1C7')}
-  
+  ${ln(110,120,448,200,'#D3D1C7',true)}
+
   <!-- Connections: Job Seeker -->
   ${ln(110,290,248,290,'#7F77DD')}
   ${ln(110,290,248,336,'#7F77DD')}
   ${ln(110,290,248,382,'#7F77DD')}
+  ${ln(110,290,262,200,'#7F77DD',true)}
   ${ln(110,290,240,662,'#7F77DD',true)}
   ${ln(110,290,240,708,'#7F77DD',true)}
 
@@ -1524,11 +1544,13 @@ function buildUC(){
   ${ln(110,400,442,336,'#1D9E75')}
   ${ln(110,400,442,382,'#1D9E75')}
   ${ln(110,400,426,662,'#1D9E75')}
+  ${ln(110,400,240,662,'#1D9E75',true)}
 
   <!-- Connections: Home Seeker -->
   ${ln(110,520,252,476,'#D85A30')}
   ${ln(110,520,252,522,'#D85A30')}
   ${ln(110,520,252,568,'#D85A30')}
+  ${ln(110,520,262,200,'#D85A30',true)}
   ${ln(110,520,240,662,'#D85A30',true)}
   ${ln(110,520,240,708,'#D85A30',true)}
 
@@ -1537,12 +1559,13 @@ function buildUC(){
   ${ln(110,680,442,522,'#EF9F27')}
   ${ln(110,680,442,568,'#EF9F27')}
   ${ln(110,680,426,662,'#EF9F27')}
+  ${ln(110,680,240,662,'#EF9F27',true)}
 
   <!-- Connections: Admin -->
   ${ln(785,430,566,754,'#444441')}
   ${ln(785,430,566,800,'#444441')}
   ${ln(785,430,566,846,'#444441')}
-  ${ln(785,430,356,754,'#444441',true)}
+  ${ln(785,430,356,754,'#444441')}
 
   <rect x="180" y="58" width="520" height="165" rx="7" fill="#F8F7F4" stroke="#e2e0d8" stroke-width="1"/>
   <text x="196" y="76" font-size="10" font-weight="600" fill="#888780">Xác thực</text>
@@ -1625,7 +1648,7 @@ function buildAct(){
     {t:'act',v:[cx(1),120,140,28,'Hiện form đăng ký','#EEEDFE','#AFA9EC']},
     {t:'arr',v:[cx(0),134,cx(0),165,'','']},
     {t:'act',v:[cx(0),180,140,28,'Điền & submit form','#F1EFE8','#D3D1C7']},
-    {t:'arr',v:[cx(0)+70,180,cx(2)-70,200,'POST /register','']},
+    {t:'arr',v:[cx(0)+70,180,cx(1),188,'','']},{t:'arr',v:[cx(1),188,cx(2)-70,200,'POST /register','']},
     {t:'act',v:[cx(2),200,140,28,'Validate + hash pw','#E1F5EE','#5DCAA5']},
     {t:'dia',v:[cx(2),250,130,30,'Email tồn tại?']},
     {t:'arr',v:[cx(2)+65,250,cx(3)-20,280,'Có','']},
@@ -1636,14 +1659,14 @@ function buildAct(){
     {t:'act',v:[cx(2),375,140,28,'Gửi OTP email','#E1F5EE','#5DCAA5']},
     {t:'arr',v:[cx(2)-70,375,cx(0)+70,400,'OTP sent','true']},
     {t:'act',v:[cx(0),415,140,28,'Nhập mã OTP','#F1EFE8','#D3D1C7']},
-    {t:'arr',v:[cx(0)+70,415,cx(2)-0,440,'Verify OTP','']},
+    {t:'arr',v:[cx(0)+70,415,cx(1),425,'','']},{t:'arr',v:[cx(1),425,cx(2)-0,440,'POST /verify-otp','']},
     {t:'dia',v:[cx(2),455,100,30,'OTP hợp lệ?']},
     {t:'arr',v:[cx(2)-50,455,cx(0)+70,430,'Không','']},
     {t:'arr',v:[cx(2),470,cx(2),500,'Có','']},
     {t:'act',v:[cx(2),515,140,28,'Redirect /kyc','#E1F5EE','#5DCAA5']},
     {t:'arr',v:[cx(2)-70,515,cx(0)+70,540,'','true']},
     {t:'act',v:[cx(0),555,140,28,'Upload ảnh CCCD','#F1EFE8','#D3D1C7']},
-    {t:'arr',v:[cx(0)+70,555,cx(2)-70,610,'POST /kyc','']},
+    {t:'arr',v:[cx(0)+70,555,cx(1),570,'','']},{t:'arr',v:[cx(1),570,cx(2)-70,585,'POST /kyc','']},
     {t:'arr',v:[cx(2),569,cx(2),595,'','']},
     {t:'act',v:[cx(2),610,140,28,'Lưu S3 + DB pending','#E1F5EE','#5DCAA5']},
     {t:'arr',v:[cx(2)+70,610,cx(3)-60,650,'task','']},
@@ -1655,13 +1678,13 @@ function buildAct(){
   const a2=mkAct('Activity 2 — Tìm việc & Chat',['Job Seeker','Frontend','Backend / Search','Firebase'],[
     {t:'start',x:cx(0),y:75},{t:'arr',v:[cx(0),83,cx(0),100,'','']},
     {t:'act',v:[cx(0),115,130,26,'Mở /jobs','#EEEDFE','#AFA9EC']},
-    {t:'arr',v:[cx(0)+65,115,cx(2)-65,115,'GET /jobs','']},
+    {t:'arr',v:[cx(0)+65,115,cx(1),115,'','']},{t:'arr',v:[cx(1),115,cx(2)-65,115,'GET /api/jobs','']},
     {t:'act',v:[cx(2),115,130,26,'Query + rank','#E1F5EE','#5DCAA5']},
     {t:'arr',v:[cx(2)-65,115,cx(1)+65,140,'render',true]},
     {t:'act',v:[cx(1),155,130,26,'Render cards','#EEEDFE','#AFA9EC']},
     {t:'arr',v:[cx(0),128,cx(0),165,'','']},
     {t:'act',v:[cx(0),180,130,26,'Nhập filter','#EEEDFE','#AFA9EC']},
-    {t:'arr',v:[cx(0)+65,180,cx(2)-65,180,'filter params','']},
+    {t:'arr',v:[cx(0)+65,180,cx(1),180,'','']},{t:'arr',v:[cx(1),180,cx(2)-65,180,'filter params','']},
     {t:'act',v:[cx(2),180,130,26,'Search index','#E1F5EE','#5DCAA5']},
     {t:'dia',v:[cx(0),235,110,30,'Xem chi tiết?']},
     {t:'arr',v:[cx(0),250,cx(0),275,'Có','']},
@@ -1676,8 +1699,8 @@ function buildAct(){
     {t:'act',v:[cx(3),393,110,26,'Open channel','#FAECE7','#F0997B']},
     {t:'arr',v:[cx(0),304,cx(0),425,'','']},
     {t:'act',v:[cx(0),440,130,26,'Gửi tin nhắn','#EEEDFE','#AFA9EC']},
-    {t:'arr',v:[cx(0)+65,440,cx(3)-55,440,'sendMsg()','']},
-    {t:'arr',v:[cx(3)-55,460,cx(0)+65,460,'broadcast',true]},
+    {t:'arr',v:[cx(0)+65,440,cx(1),440,'','']},{t:'arr',v:[cx(1),440,cx(3)-55,440,'sendMsg()','']},
+    {t:'arr',v:[cx(3)-55,460,cx(1),460,'broadcast',true]},{t:'arr',v:[cx(1),460,cx(0)+65,460,'',true]},
     {t:'end',x:cx(1),y:490},
   ],760,520);
 
@@ -1686,7 +1709,7 @@ function buildAct(){
     {t:'start',x:cx(0),y:75},
     {t:'arr',v:[cx(0),83,cx(0),100,'','']},
     {t:'act',v:[cx(0),115,140,26,'Điền form bước 1+2','#E1F5EE','#5DCAA5']},
-    {t:'arr',v:[cx(0)+70,115,cx(2)-70,115,'POST /listings','']},
+    {t:'arr',v:[cx(0)+70,115,cx(1),115,'','']},{t:'arr',v:[cx(1),115,cx(2)-70,115,'POST /listings','']},
     {t:'act',v:[cx(2),115,130,26,'Validate + save draft','#E1F5EE','#5DCAA5']},
     {t:'dia',v:[cx(1),160,110,30,'Form hợp lệ?']},
     {t:'arr',v:[cx(2)-65,115,cx(1)+55,143,'','true']},
@@ -1716,11 +1739,11 @@ function buildAct(){
     {t:'start',x:cx(0),y:75},
     {t:'arr',v:[cx(0),83,cx(0),100,'','']},
     {t:'act',v:[cx(0),115,130,26,'Mở /housing','#FAECE7','#F0997B']},
-    {t:'arr',v:[cx(0)+65,115,cx(2)-65,115,'GET /housing','']},
+    {t:'arr',v:[cx(0)+65,115,cx(1),115,'','']},{t:'arr',v:[cx(1),115,cx(2)-65,115,'GET /housing','']},
     {t:'act',v:[cx(2),115,130,26,'Query + rank','#E1F5EE','#5DCAA5']},
     {t:'arr',v:[cx(0),128,cx(0),155,'','']},
     {t:'act',v:[cx(0),170,130,26,'Áp dụng 8 filter','#FAECE7','#F0997B']},
-    {t:'arr',v:[cx(0)+65,170,cx(2)-65,170,'filter query','']},
+    {t:'arr',v:[cx(0)+65,170,cx(1),170,'','']},{t:'arr',v:[cx(1),170,cx(2)-65,170,'filter query','']},
     {t:'act',v:[cx(2),170,130,26,'Filter + search','#E1F5EE','#5DCAA5']},
     {t:'arr',v:[cx(2)-65,170,cx(1)+65,200,'results','true']},
     {t:'act',v:[cx(1),215,130,26,'Render kết quả','#EEEDFE','#AFA9EC']},
