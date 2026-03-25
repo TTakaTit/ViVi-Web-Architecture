@@ -1877,17 +1877,75 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
   </div>
 </section>
 
+<!-- ══════════ SLIDE: DESIGN & BRANDING ══════════ -->
+<section class="slide" id="s-design" style="background:var(--bg)">
+  <div class="slide-inner">
+    <div class="slide-tag fade-up" style="background:var(--pu-l);color:var(--pu-d)">🎨 Thiết kế & Thương hiệu</div>
+    <div class="slide-h1 fade-up">Bản sắc thị giác ViVi</div>
+    <div class="slide-sub fade-up">Bảng màu và phong cách logo tham khảo cho dự án.</div>
+    
+    <div style="display:grid;grid-template-columns:1fr;gap:20px;margin-top:20px">
+      <!-- Card 1: Colors (Full Width) -->
+      <div style="background:#fff;border:1px solid var(--bd);border-radius:20px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,0.05)">
+        <h3 style="font-size:18px;margin-bottom:20px;color:var(--tx);display:flex;align-items:center;gap:8px">
+          <span style="width:4px;height:18px;background:#077ACD;border-radius:2px"></span>Bảng màu chiến lược
+        </h3>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px">
+          <div style="text-align:center">
+            <div style="aspect-ratio:1/1;border-radius:12px;background:#81BBFB;margin-bottom:8px"></div>
+            <code style="font-size:11px;font-weight:700">#81BBFB</code>
+          </div>
+          <div style="text-align:center">
+            <div style="aspect-ratio:1/1;border-radius:12px;background:#077ACD;margin-bottom:8px"></div>
+            <code style="font-size:11px;font-weight:700">#077ACD</code>
+          </div>
+          <div style="text-align:center">
+            <div style="aspect-ratio:1/1;border-radius:12px;background:#69C0FF;margin-bottom:8px"></div>
+            <code style="font-size:11px;font-weight:700">#69C0FF</code>
+          </div>
+          <div style="text-align:center">
+            <div style="aspect-ratio:1/1;border-radius:12px;background:#025794;margin-bottom:8px"></div>
+            <code style="font-size:11px;font-weight:700">#025794</code>
+          </div>
+          <div style="text-align:center">
+            <div style="aspect-ratio:1/1;border-radius:12px;background:#1262F6;margin-bottom:8px"></div>
+            <code style="font-size:11px;font-weight:700">#1262F6</code>
+          </div>
+        </div>
+      </div>
+      
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <!-- Card 2: Logo Concepts -->
+        <div style="background:#fff;border:1px solid var(--bd);border-radius:20px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,0.05)">
+          <h3 style="font-size:18px;margin-bottom:20px;color:var(--tx);display:flex;align-items:center;gap:8px">
+            <span style="width:4px;height:18px;background:#1262F6;border-radius:2px"></span>Logo Concept
+          </h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <img src="assets/vivi/20260325-153522.jpg" style="width:100%;border-radius:14px;border:1px solid #f0f0f0" />
+            <img src="assets/vivi/20260325-153526.jpg" style="width:100%;border-radius:14px;border:1px solid #f0f0f0" />
+          </div>
+        </div>
+        
+        <!-- Card 3: Style References -->
+        <div style="background:#fff;border:1px solid var(--bd);border-radius:20px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,0.05)">
+          <h3 style="font-size:18px;margin-bottom:20px;color:var(--tx);display:flex;align-items:center;gap:8px">
+            <span style="width:4px;height:18px;background:#444;border-radius:2px"></span>Style References
+          </h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <img src="assets/vivi/20260325-153530.jpg" style="width:100%;border-radius:14px;border:1px solid #f0f0f0" />
+            <img src="assets/vivi/20260325-153534.jpg" style="width:100%;border-radius:14px;border:1px solid #f0f0f0" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════ SLIDE: INTERACTIVE DEMO ══════════ -->
 <section class="slide" id="s-demo" style="background:#f0f2f5">
   <div class="slide-inner" style="width:100%;height:100%;max-width:1440px;display:flex;flex-direction:column;padding:20px">
-    <div style="display:flex;align-items:center;gap:20px;margin-bottom:15px">
+    <div style="display:flex;align-items:center;gap:20px;margin-bottom:10px;margin-top: 5px;">
       <div class="slide-tag" style="background:var(--pu-l);color:var(--pu-d);margin-bottom:0">🎮 Demo thực tế</div>
-      <div class="slide-h1" style="font-size:24px;margin-bottom:0">Interactive Exploration</div>
-      <div style="margin-left:auto;display:flex;gap:10px">
-        <button class="btn btn-primary" onclick="switchDemo('preview.html')">Trang chủ</button>
-        <button class="btn btn-outline" style="background:#fff" onclick="switchDemo('housing.html')">Nhà ở</button>
-        <button class="btn btn-outline" style="background:#fff" onclick="switchDemo('job.html')">Việc làm</button>
-      </div>
     </div>
     <div style="flex:1;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.1);position:relative">
       <iframe id="demo-iframe" src="preview.html" style="width:100%;height:100%;border:none"></iframe>
@@ -1925,7 +1983,7 @@ function switchDemo(url) {
 <script>
 // Define presentation order: s1→s2→s3→sm1(KYC)→s4(Routes)→sm2(Jobs)→s5(Roles)→sm3(Housing)→s6(Revenue)→sm4(Chat)→sm5(Admin)→s7(Tech)→s8(Roadmap)→s9(CTA)
 // Order: Cover → Problem → Features → KYC mockup → Routes → SiteMap → Jobs mockup → Roles → Housing mockup → Revenue → Chat&Premium → Admin mockup → Tech → Roadmap → CTA
-const ORDER = ['s1','s2','s3','sm1','s5','s4','sm6','sm2','sm3','s6','sm4','sm5','s7','s8','s-clarity','s-demo','s9'];
+const ORDER = ['s1','s2','s3','sm1','s5','s4','sm6','sm2','sm3','s6','sm4','sm5','s7','s8','s-clarity','s-design','s-demo','s9'];
 const slides = ORDER.map(id=>document.getElementById(id));
 const dotsEl = document.getElementById('slides-grid');
 const counter = document.getElementById('counter');
@@ -1933,7 +1991,7 @@ let cur = 0;
 const N = slides.length;
 
 // Slide labels for dots tooltip
-const LABELS=['Cover','Vấn đề','Tính năng','KYC mockup','6 Roles','34 Routes','Site Map','Jobs mockup','Housing mockup','Doanh thu','Chat & Premium','Admin','Tech Stack','Roadmap','Làm rõ vận hành','Demo tương tác','CTA'];
+const LABELS=['Cover','Vấn đề','Tính năng','KYC mockup','6 Roles','34 Routes','Site Map','Jobs mockup','Housing mockup','Doanh thu','Chat & Premium','Admin','Tech Stack','Roadmap','Làm rõ vận hành','Thiết kế','Demo tương tác','CTA'];
 
 // Build slide numbers
 for(let i=0;i<N;i++){
