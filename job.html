@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ViVi - Việc làm</title>
+  <style>
+    :root {
+      --primary: #2563EB;
+      --primary-dark: #0F5A9A;
+      --primary-soft: #EAF2FF;
+      --primary-border: #CFE0FF;
+      --text: #111111;
+      --text-soft: #4B5563;
+      --text-light: #6B7280;
+      --line: #E5E7EB;
+      --bg: #FFFFFF;
+      --bg-soft: #F8FAFC;
+      --warning: #D97706;
+      --success: #16A34A;
+      --shadow: 0 10px 30px rgba(17, 17, 17, 0.06);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: #f1f1f1;
+      color: var(--text);
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .frame {
+      width: min(96%, 1920px);
+      margin: 24px auto;
+      background: #ececec;
+      border-radius: 20px;
+      padding: 18px 18px 28px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    .browser-bar {
+      background: #f7f7f7;
+      border: 1px solid #dcdcdc;
+      border-radius: 14px 14px 0 0;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .dots { display: flex; gap: 8px; }
+    .dot { width: 14px; height: 14px; border-radius: 50%; }
+    .dot.red { background: #ff8d7a; }
+    .dot.yellow { background: #f2ca6a; }
+    .dot.green { background: #9cd279; }
+
+    .url {
+      flex: 1;
+      height: 28px;
+      border-radius: 8px;
+      border: 1px solid #dcdcdc;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      color: #8b8b8b;
+      font-size: 14px;
+    }
+
+    .site {
+      background: white;
+      border-radius: 0 0 18px 18px;
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(1200px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .navbar-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .navbar {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--text);
+    }
+
+    .brand span { color: var(--primary); }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      margin-left: 14px;
+    }
+
+    .nav-links a {
+      color: #374151;
+      font-size: 17px;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 8px;
+    }
+
+    .nav-links a.active {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .nav-links a.active::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: -10px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 99px;
+    }
+
+    .btn {
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-outline {
+      background: white;
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
+    }
+
+    .btn-soft {
+      background: var(--primary-soft);
+      border-color: var(--primary-border);
+      color: var(--primary);
+    }
+
+    .hero {
+      background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+      border-bottom: 1px solid var(--line);
+      padding: 52px 0 36px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      border: 1px solid var(--primary-border);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(38px, 5vw, 60px);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      margin: 0 0 22px;
+      color: var(--text-soft);
+      font-size: 18px;
+      line-height: 1.75;
+      max-width: 680px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .hero-card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .hero-card p {
+      margin: 0 0 14px;
+      font-size: 15px;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    .hero-points {
+      display: grid;
+      gap: 10px;
+    }
+
+    .hero-point {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: #374151;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .search-section {
+      padding: 26px 0 12px;
+      background: white;
+    }
+
+    .search-box {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 2fr 1.3fr 1.2fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .field {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .field input, .field select {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .section {
+      padding: 32px 0 60px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .section-head h2 {
+      margin: 0 0 6px;
+      font-size: 30px;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--text-soft);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      border: 1px solid var(--primary-border);
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .sidebar, .main-panel, .card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar {
+      padding: 20px;
+      position: sticky;
+      top: 96px;
+    }
+
+    .sidebar h3 {
+      margin: 0 0 14px;
+      font-size: 20px;
+    }
+
+    .filter-group {
+      margin-bottom: 18px;
+    }
+
+    .filter-group strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 8px;
+      color: #374151;
+      font-size: 14px;
+    }
+
+    .main-panel {
+      padding: 20px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .toolbar .meta {
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    .listing-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .listing-card {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 74px 1fr auto;
+      gap: 16px;
+      align-items: start;
+      background: white;
+      transition: 0.2s ease;
+    }
+
+    .listing-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(17,17,17,0.06);
+    }
+
+    .logo-box {
+      width: 74px;
+      height: 74px;
+      border-radius: 18px;
+      background: var(--primary-soft);
+      border: 1px solid var(--primary-border);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .premium-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #FFF7E8;
+      border: 1px solid #FDE7B0;
+      color: var(--warning);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .listing-title {
+      margin: 0 0 6px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    .listing-sub {
+      margin: 0 0 12px;
+      color: var(--text-light);
+      font-size: 14px;
+    }
+
+    .listing-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .listing-desc {
+      margin: 0;
+      color: var(--text-soft);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .listing-side {
+      text-align: right;
+      min-width: 150px;
+    }
+
+    .salary {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .muted {
+      color: var(--text-light);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .card {
+      padding: 22px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--text-soft);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .footer {
+      padding: 18px 0 0;
+      text-align: center;
+      color: var(--text-light);
+      font-size: 14px;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .content-grid,
+      .cards-3,
+      .search-box {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links { display: none; }
+      .sidebar { position: static; }
+    }
+
+    @media (max-width: 768px) {
+      .container { width: min(100% - 28px, 1200px); }
+      .navbar {
+        height: auto;
+        padding: 18px 0;
+        flex-wrap: wrap;
+      }
+
+      .nav-right {
+        width: 100%;
+        justify-content: flex-end;
+      }
+
+      .hero-actions .btn,
+      .btn {
+        width: 100%;
+      }
+
+      .listing-card {
+        grid-template-columns: 1fr;
+      }
+
+      .listing-side {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="browser-bar">
+      <div class="dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <div class="url">vivi.de/jobs</div>
+    </div>
+
+    <div class="site">
+      <div class="navbar-wrap">
+        <header class="container">
+          <nav class="navbar">
+            <div class="nav-left">
+              <a href="preview.html" class="brand">Vi<span>Vi</span></a>
+              <div class="nav-links">
+                <a href="preview.html">Trang chủ</a>
+                <a href="preview.html#overview">Giới thiệu</a>
+                <a class="active" href="job.html">Việc làm</a>
+                <a href="housing.html">Nhà ở</a>
+              </div>
+            </div>
+
+            <div class="nav-right">
+              <a href="#" class="btn btn-outline">Đăng nhập</a>
+              <a href="#" class="btn btn-primary">Đăng tin tuyển dụng</a>
+            </div>
+          </nav>
+        </header>
+      </div>
+
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="eyebrow">Trang việc làm</div>
+            <h1>Tìm việc phù hợp với bạn tại Đức</h1>
+            <p>
+              Khám phá các cơ hội việc làm mới, lọc theo thành phố, ngành nghề và mức lương.
+              Kết nối nhanh với nhà tuyển dụng qua hệ thống nhắn tin nội bộ.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#" class="btn btn-primary">Khám phá việc làm</a>
+              <a href="#" class="btn btn-soft">Xem tin premium</a>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <h3>Trang này dùng để demo gì?</h3>
+            <p>
+              Đây là trang riêng cho module Việc làm, nơi người dùng xem danh sách tuyển dụng,
+              lọc theo nhu cầu, xem tin nổi bật và nhấn vào chi tiết từng công việc.
+            </p>
+
+            <div class="hero-points">
+              <div class="hero-point">Có hero + ô tìm kiếm rõ ràng ngay phần đầu trang.</div>
+              <div class="hero-point">Có bộ lọc bên trái và danh sách việc làm bên phải.</div>
+              <div class="hero-point">Có thể gắn vị trí premium để làm nổi bật tin trả phí.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="search-section">
+        <div class="container">
+          <div class="search-box">
+            <div class="field">
+              <label>Từ khóa công việc</label>
+              <input type="text" placeholder="VD: Nail, Marketing, Nhà hàng..." />
+            </div>
+
+            <div class="field">
+              <label>Khu vực</label>
+              <select>
+                <option>Berlin</option>
+                <option>Hamburg</option>
+                <option>Frankfurt</option>
+                <option>Munich</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Loại công việc</label>
+              <select>
+                <option>Toàn thời gian</option>
+                <option>Bán thời gian</option>
+                <option>Theo ca</option>
+                <option>Hybrid</option>
+              </select>
+            </div>
+
+            <button class="btn btn-primary" style="height:56px;">Tìm kiếm</button>
+          </div>
+
+          <div class="chips">
+            <span class="chip">Nhà hàng</span>
+            <span class="chip">Nail</span>
+            <span class="chip">Kho vận</span>
+            <span class="chip">Marketing</span>
+            <span class="chip">Lái xe</span>
+            <span class="chip">Part-time</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container content-grid">
+          <aside class="sidebar">
+            <h3>Bộ lọc việc làm</h3>
+
+            <div class="filter-group">
+              <strong>Loại công việc</strong>
+              <div class="check-list">
+                <label><input type="checkbox" /> Toàn thời gian</label>
+                <label><input type="checkbox" /> Bán thời gian</label>
+                <label><input type="checkbox" /> Theo ca</label>
+                <label><input type="checkbox" /> Hybrid</label>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <strong>Mức lương</strong>
+              <div class="check-list">
+                <label><input type="checkbox" /> &lt; 2.000€</label>
+                <label><input type="checkbox" /> 2.000€ - 3.000€</label>
+                <label><input type="checkbox" /> 3.000€ - 4.000€</label>
+                <label><input type="checkbox" /> &gt; 4.000€</label>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <strong>Khác</strong>
+              <div class="check-list">
+                <label><input type="checkbox" /> Tuyển gấp</label>
+                <label><input type="checkbox" /> Không yêu cầu kinh nghiệm</label>
+                <label><input type="checkbox" /> Hỗ trợ chỗ ở</label>
+                <label><input type="checkbox" /> Ưu tiên tiếng Đức</label>
+              </div>
+            </div>
+          </aside>
+
+          <section class="main-panel">
+            <div class="section-head">
+              <div>
+                <h2>Danh sách việc làm nổi bật</h2>
+                <p>Hơn 120 công việc phù hợp với nhu cầu của bạn.</p>
+              </div>
+              <a href="#" class="btn btn-soft">Sắp xếp mới nhất</a>
+            </div>
+
+            <div class="listing-list">
+              <article class="listing-card">
+                <div class="logo-box">JR</div>
+                <div>
+                  <div class="premium-badge">★ Premium Listing</div>
+                  <h3 class="listing-title">Nhân viên phục vụ nhà hàng</h3>
+                  <p class="listing-sub">Berlin • Nhà hàng Việt • 2 ngày trước</p>
+                  <div class="listing-tags">
+                    <span class="tag">Toàn thời gian</span>
+                    <span class="tag">Berlin</span>
+                    <span class="tag">Không yêu cầu kinh nghiệm</span>
+                  </div>
+                  <p class="listing-desc">
+                    Môi trường thân thiện, hỗ trợ người mới. Có thể làm theo ca, ưu tiên giao tiếp cơ bản tiếng Đức.
+                  </p>
+                </div>
+                <div class="listing-side">
+                  <div class="salary">2.200€/tháng</div>
+                  <div class="muted">20 lượt quan tâm</div>
+                  <button class="btn btn-soft" style="margin-bottom:8px;">Lưu tin</button><br />
+                  <button class="btn btn-primary">Xem chi tiết</button>
+                </div>
+              </article>
+
+              <article class="listing-card">
+                <div class="logo-box">NM</div>
+                <div>
+                  <div class="premium-badge">★ Premium Listing</div>
+                  <h3 class="listing-title">Nhân viên Nail Designer</h3>
+                  <p class="listing-sub">Hamburg • Beauty Salon • 5 giờ trước</p>
+                  <div class="listing-tags">
+                    <span class="tag">Lương tốt</span>
+                    <span class="tag">Hamburg</span>
+                    <span class="tag">Tuyển gấp</span>
+                  </div>
+                  <p class="listing-desc">
+                    Tiệm cần thêm thợ nail có kinh nghiệm cơ bản. Hỗ trợ chỗ ở cho nhân sự ở xa.
+                  </p>
+                </div>
+                <div class="listing-side">
+                  <div class="salary">3.000€/tháng</div>
+                  <div class="muted">12 lượt nhắn tin</div>
+                  <button class="btn btn-soft" style="margin-bottom:8px;">Lưu tin</button><br />
+                  <button class="btn btn-primary">Xem chi tiết</button>
+                </div>
+              </article>
+
+              <article class="listing-card">
+                <div class="logo-box">MK</div>
+                <div>
+                  <h3 class="listing-title">Marketing Executive</h3>
+                  <p class="listing-sub">Munich • Công ty dịch vụ • 1 ngày trước</p>
+                  <div class="listing-tags">
+                    <span class="tag">Full-time</span>
+                    <span class="tag">Marketing</span>
+                    <span class="tag">Hybrid</span>
+                  </div>
+                  <p class="listing-desc">
+                    Phụ trách nội dung, quảng cáo cơ bản và hỗ trợ truyền thông cho doanh nghiệp cộng đồng.
+                  </p>
+                </div>
+                <div class="listing-side">
+                  <div class="salary">3.200€/tháng</div>
+                  <div class="muted">8 lượt lưu tin</div>
+                  <button class="btn btn-soft" style="margin-bottom:8px;">Lưu tin</button><br />
+                  <button class="btn btn-primary">Xem chi tiết</button>
+                </div>
+              </article>
+            </div>
+
+            <div class="cards-3">
+              <div class="card">
+                <h3>Việc làm cho người mới sang</h3>
+                <p>Có thể gom các job dễ tiếp cận thành một nhóm riêng để người dùng bấm nhanh từ homepage hoặc trang jobs.</p>
+              </div>
+              <div class="card">
+                <h3>Khu vực tuyển dụng mạnh</h3>
+                <p>Có thể làm thêm block nhỏ hiển thị các thành phố nổi bật như Berlin, Hamburg, Frankfurt, Munich.</p>
+              </div>
+              <div class="card">
+                <h3>CTA cho nhà tuyển dụng</h3>
+                <p>Một block riêng để dẫn người có nhu cầu tuyển dụng sang form đăng tin trả phí hoặc tin thường.</p>
+              </div>
+            </div>
+
+            <div class="footer">ViVi Jobs Demo — tone trắng, chữ đen, điểm nhấn xanh</div>
+          </section>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

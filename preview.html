@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ViVi - Homepage Demo</title>
+  <style>
+    :root {
+      --primary: #2563EB;
+      --primary-dark: #0F5A9A;
+      --primary-soft: #EAF2FF;
+      --primary-border: #CFE0FF;
+      --text: #111111;
+      --text-soft: #4B5563;
+      --text-light: #6B7280;
+      --line: #E5E7EB;
+      --bg: #FFFFFF;
+      --bg-soft: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --success: #16A34A;
+      --warning: #D97706;
+      --shadow: 0 10px 30px rgba(17, 17, 17, 0.06);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background: #f1f1f1;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .frame {
+      width: min(96%, 1920px);
+      margin: 24px auto;
+      background: #ececec;
+      border-radius: 20px;
+      padding: 18px 18px 28px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .browser-bar {
+      background: #f7f7f7;
+      border: 1px solid #dcdcdc;
+      border-radius: 14px 14px 0 0;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+    }
+
+    .dot.red {
+      background: #ff8d7a;
+    }
+
+    .dot.yellow {
+      background: #f2ca6a;
+    }
+
+    .dot.green {
+      background: #9cd279;
+    }
+
+    .url {
+      flex: 1;
+      height: 28px;
+      border-radius: 8px;
+      border: 1px solid #dcdcdc;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      color: #8b8b8b;
+      font-size: 14px;
+    }
+
+    .site {
+      background: var(--bg);
+      border-radius: 0 0 18px 18px;
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(1200px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .navbar-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+    }
+
+    .navbar {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--text);
+    }
+
+    .brand span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      margin-left: 12px;
+    }
+
+    .nav-links a {
+      color: #374151;
+      font-size: 17px;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 8px;
+    }
+
+    .nav-links a.active {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .nav-links a.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -10px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 999px;
+    }
+
+    .btn {
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      font-weight: 700;
+      font-size: 15px;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: white;
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
+    }
+
+    .btn-soft {
+      background: var(--primary-soft);
+      color: var(--primary);
+      border-color: var(--primary-border);
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.12), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+      padding: 72px 0 56px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      border: 1px solid var(--primary-border);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(42px, 5vw, 68px);
+      line-height: 1.08;
+      letter-spacing: -0.05em;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p.main {
+      margin: 0 0 28px;
+      font-size: 20px;
+      line-height: 1.7;
+      color: var(--text-soft);
+      max-width: 720px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions .btn {
+      min-width: 170px;
+      min-height: 56px;
+      font-size: 18px;
+      border-radius: 16px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      background: white;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 20px;
+      padding: 18px 22px;
+      min-width: 148px;
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-size: 32px;
+      margin-bottom: 6px;
+      line-height: 1;
+    }
+
+    .hero-stat span {
+      color: var(--text-light);
+      font-size: 15px;
+    }
+
+    .hero-card {
+      background: white;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-xl);
+      padding: 26px;
+    }
+
+    .hero-card h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+
+    .hero-card p {
+      margin: 0 0 18px;
+      color: var(--text-soft);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .quick-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .quick-item {
+      border: 1px solid var(--line);
+      background: var(--bg-soft);
+      border-radius: 16px;
+      padding: 14px 14px 14px 48px;
+      position: relative;
+      color: #374151;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .quick-item::before {
+      content: "✓";
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    .section.alt {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head {
+      max-width: 820px;
+      margin: 0 auto 26px;
+      text-align: center;
+    }
+
+    .section-head h2 {
+      margin: 0 0 14px;
+      font-size: clamp(30px, 4vw, 50px);
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .market-board {
+      background: linear-gradient(135deg, #f7fbff 0%, #eef5ff 100%);
+      border: 1px solid var(--primary-border);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .market-title {
+      margin-bottom: 22px;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .market-title span {
+      color: var(--primary);
+    }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 22px;
+    }
+
+    .latest-box,
+    .chart-box,
+    .market-stat {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+    }
+
+    .latest-box {
+      padding: 18px;
+    }
+
+    .latest-box h4 {
+      margin: 0 0 14px;
+      font-size: 22px;
+    }
+
+    .latest-job {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .latest-job:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .job-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: var(--primary-soft);
+      border: 1px solid var(--primary-border);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+
+    .latest-job strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.45;
+      margin-bottom: 4px;
+    }
+
+    .latest-job span {
+      display: block;
+      color: var(--text-light);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .market-right {
+      display: grid;
+      gap: 18px;
+    }
+
+    .market-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .market-stat {
+      padding: 22px;
+    }
+
+    .market-stat strong {
+      display: block;
+      font-size: 34px;
+      line-height: 1;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .market-stat span {
+      color: var(--text-soft);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .market-charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .chart-box {
+      padding: 20px;
+    }
+
+    .chart-box h5 {
+      margin: 0 0 16px;
+      font-size: 18px;
+    }
+
+    .chart-area {
+      height: 220px;
+      border-radius: 16px;
+      background:
+        repeating-linear-gradient(to top,
+          rgba(107, 114, 128, 0.08) 0px,
+          rgba(107, 114, 128, 0.08) 1px,
+          transparent 1px,
+          transparent 28px);
+      overflow: hidden;
+    }
+
+    .chart-area svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .cards-3,
+    .cards-4,
+    .cards-2 {
+      display: grid;
+      gap: 20px;
+    }
+
+    .cards-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cards-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .cards-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .premium-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #FFF7E8;
+      border: 1px solid #FDE7B0;
+      color: var(--warning);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .listing-card h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    .listing-meta {
+      color: var(--text-light);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tags span {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .listing-desc {
+      color: var(--text-soft);
+      line-height: 1.7;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    .listing-price {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .section-actions {
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .module-card .module-badge {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      border: 1px solid var(--primary-border);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .module-card h3 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      line-height: 1.2;
+    }
+
+    .module-card p {
+      margin: 0 0 18px;
+      color: var(--text-soft);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: #374151;
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .feature-item .icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      flex: 0 0 22px;
+      margin-top: 2px;
+    }
+
+    .preview-box {
+      margin-top: 20px;
+      border: 1px solid var(--line);
+      background: var(--bg-soft);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .preview-title {
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .mini-cards {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .mini-card strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .mini-card span {
+      display: block;
+      color: var(--text-light);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .persona-card {
+      text-align: center;
+    }
+
+    .persona-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 20px;
+      background: var(--primary-soft);
+      border: 1px solid var(--primary-border);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 800;
+      margin: 0 auto 16px;
+    }
+
+    .persona-card h3 {
+      margin: 0 0 8px;
+      font-size: 21px;
+    }
+
+    .persona-card p {
+      margin: 0;
+      color: var(--text-soft);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .flow-card {
+      text-align: left;
+    }
+
+    .flow-step {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: var(--primary-soft);
+      border: 1px solid var(--primary-border);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .flow-card h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .flow-card p {
+      margin: 0;
+      color: var(--text-soft);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .benefit-card h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .benefit-card p {
+      margin: 0;
+      color: var(--text-soft);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .cta-final {
+      background: linear-gradient(135deg, #f7fbff 0%, #eef5ff 100%);
+      border: 1px solid var(--primary-border);
+      border-radius: 28px;
+      padding: 34px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-final h2 {
+      margin: 0 0 12px;
+      font-size: 38px;
+      line-height: 1.2;
+    }
+
+    .cta-final p {
+      margin: 0 auto 24px;
+      max-width: 760px;
+      color: var(--text-soft);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .footer {
+      padding: 26px 0 8px;
+      color: var(--text-light);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 1100px) {
+
+      .hero-grid,
+      .market-grid,
+      .market-charts,
+      .cards-4,
+      .cards-3,
+      .cards-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .market-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        width: min(100% - 28px, 1200px);
+      }
+
+      .navbar {
+        height: auto;
+        padding: 18px 0;
+        flex-wrap: wrap;
+      }
+
+      .nav-right {
+        width: 100%;
+        justify-content: flex-end;
+      }
+
+      .hero {
+        padding: 52px 0 40px;
+      }
+
+      .hero-actions .btn,
+      .btn {
+        width: 100%;
+      }
+
+      .hero-stat {
+        width: 100%;
+      }
+
+      .market-board,
+      .card,
+      .hero-card {
+        padding: 20px;
+      }
+
+      .section {
+        padding: 48px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <div class="browser-bar">
+      <div class="dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <div class="url">vivi.de/</div>
+    </div>
+
+    <div class="site">
+      <div class="navbar-wrap">
+        <header class="container">
+          <nav class="navbar">
+            <div class="nav-left">
+              <div class="brand">Vi<span>Vi</span></div>
+              <div class="nav-links">
+                <a class="active" href="#">Trang chủ</a>
+                <a href="#overview">Giới thiệu</a>
+                <a href="job.html">Việc làm</a>
+                <a href="housing.html">Nhà ở</a>
+              </div>
+            </div>
+
+            <div class="nav-right">
+              <a href="#" class="btn btn-outline">Đăng nhập</a>
+              <a href="#" class="btn btn-primary">Đăng ký</a>
+            </div>
+          </nav>
+        </header>
+      </div>
+
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="eyebrow">Nền tảng cộng đồng Việt tại Đức</div>
+            <h1>Nền tảng <span>việc làm</span> & <span>nhà ở</span> cho người Việt tại Đức</h1>
+            <p class="main">
+              Một website kết hợp cả tìm việc và tìm nhà, giúp người dùng xem tin, lọc nhu cầu,
+              liên hệ an toàn và đăng tin dễ dàng trên cùng một nền tảng.
+            </p>
+
+            <div class="hero-actions">
+              <a href="job.html" class="btn btn-primary">Tìm việc →</a>
+              <a href="housing.html" class="btn btn-soft">Tìm nhà →</a>
+            </div>
+
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <strong>2k+</strong>
+                <span>Tin việc</span>
+              </div>
+              <div class="hero-stat">
+                <strong>500+</strong>
+                <span>Phòng trống</span>
+              </div>
+              <div class="hero-stat">
+                <strong>10k+</strong>
+                <span>Người dùng</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <h3>Trang chủ này dùng để làm gì?</h3>
+            <p>
+              Đây là homepage tổng hợp, giúp khách nhìn vào là hiểu ngay ViVi có 2 mảng chính:
+              tìm việc và tìm nhà. Từ đây người dùng có thể chọn đúng nhu cầu để đi vào trang riêng.
+            </p>
+
+            <div class="quick-list">
+              <div class="quick-item">Giới thiệu tổng quan cả 2 module trên cùng 1 trang.</div>
+              <div class="quick-item">Hiển thị dữ liệu thị trường, tin nổi bật và các nhóm nội dung quan trọng.</div>
+              <div class="quick-item">Điều hướng rõ sang trang Việc làm và trang Nhà ở riêng biệt.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="container">
+          <div class="market-board">
+            <div class="market-title">
+              Thị trường việc làm hôm nay <span>25/03/2026</span>
+            </div>
+
+            <div class="market-grid">
+              <div class="latest-box">
+                <h4>Việc làm mới nhất</h4>
+
+                <div class="latest-job">
+                  <div class="job-logo">DC</div>
+                  <div>
+                    <strong>Nhân viên kinh doanh / tư vấn phần mềm</strong>
+                    <span>Công ty công nghệ • Berlin (mới)</span>
+                  </div>
+                </div>
+
+                <div class="latest-job">
+                  <div class="job-logo">MD</div>
+                  <div>
+                    <strong>Nhân viên tư vấn bán hàng ngành y tế</strong>
+                    <span>Doanh nghiệp dịch vụ • Hamburg (mới)</span>
+                  </div>
+                </div>
+
+                <div class="latest-job">
+                  <div class="job-logo">HR</div>
+                  <div>
+                    <strong>Trưởng phòng tuyển dụng / HR Manager</strong>
+                    <span>Công ty nhân sự • Frankfurt (mới)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="market-right">
+                <div class="market-stats">
+                  <div class="market-stat">
+                    <strong>4.193</strong>
+                    <span>Việc làm mới trong 24h gần nhất</span>
+                  </div>
+                  <div class="market-stat">
+                    <strong>76.382</strong>
+                    <span>Việc làm đang tuyển trên nền tảng</span>
+                  </div>
+                  <div class="market-stat">
+                    <strong>21.114</strong>
+                    <span>Doanh nghiệp đang tuyển dụng</span>
+                  </div>
+                </div>
+
+                <div class="market-charts">
+                  <div class="chart-box">
+                    <h5>Tăng trưởng cơ hội việc làm</h5>
+                    <div class="chart-area">
+                      <svg viewBox="0 0 400 220" preserveAspectRatio="none">
+                        <polyline fill="none" stroke="#2563EB" stroke-width="4"
+                          points="10,190 45,145 75,125 110,132 145,98 180,84 215,90 250,62 285,56 320,38 360,32 390,20" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div class="chart-box">
+                    <h5>Nhu cầu tuyển dụng theo ngành</h5>
+                    <div class="chart-area">
+                      <svg viewBox="0 0 400 220" preserveAspectRatio="none">
+                        <rect x="35" y="38" width="48" height="152" fill="#60A5FA" />
+                        <rect x="110" y="68" width="48" height="122" fill="#2563EB" />
+                        <rect x="185" y="88" width="48" height="102" fill="#0F5A9A" />
+                        <rect x="260" y="118" width="48" height="72" fill="#93C5FD" />
+                        <rect x="335" y="126" width="48" height="64" fill="#1D4ED8" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="featured-jobs">
+        <div class="container">
+          <div class="section-head">
+            <div class="eyebrow">Tin nổi bật</div>
+            <h2>Việc làm nổi bật cho vị trí premium</h2>
+            <p>
+              Khu vực này dùng để hiển thị các tin tuyển dụng trả phí, giúp nhà tuyển dụng nổi bật hơn
+              và cũng giúp người tìm việc thấy những tin quan trọng đầu tiên.
+            </p>
+          </div>
+
+          <div class="cards-3">
+            <div class="card listing-card">
+              <div class="premium-badge">★ Premium Listing</div>
+              <h3>Senior Nail Technician</h3>
+              <div class="listing-meta">Berlin • Full-time • Đăng hôm nay</div>
+              <div class="tags">
+                <span>Tuyển gấp</span>
+                <span>Hỗ trợ chỗ ở</span>
+                <span>Kinh nghiệm</span>
+              </div>
+              <div class="listing-desc">
+                Vị trí dành cho người đã có kinh nghiệm cơ bản đến khá. Môi trường ổn định, thu nhập tốt.
+              </div>
+              <div class="listing-price">3.200€/tháng</div>
+              <a href="job.html" class="btn btn-primary">Xem chi tiết</a>
+            </div>
+
+            <div class="card listing-card">
+              <div class="premium-badge">★ Premium Listing</div>
+              <h3>Nhân viên phục vụ nhà hàng Việt</h3>
+              <div class="listing-meta">Hamburg • Theo ca • 1 ngày trước</div>
+              <div class="tags">
+                <span>Part-time</span>
+                <span>Ưu tiên mới sang</span>
+                <span>Ca linh hoạt</span>
+              </div>
+              <div class="listing-desc">
+                Phù hợp cho người cần công việc ổn định hoặc người mới sang muốn bắt đầu đi làm sớm.
+              </div>
+              <div class="listing-price">2.200€/tháng</div>
+              <a href="job.html" class="btn btn-primary">Xem chi tiết</a>
+            </div>
+
+            <div class="card listing-card">
+              <div class="premium-badge">★ Premium Listing</div>
+              <h3>Marketing Executive</h3>
+              <div class="listing-meta">Frankfurt • Hybrid • 2 ngày trước</div>
+              <div class="tags">
+                <span>Office</span>
+                <span>Full-time</span>
+                <span>Phát triển lâu dài</span>
+              </div>
+              <div class="listing-desc">
+                Phụ trách nội dung, quảng cáo cơ bản và hỗ trợ truyền thông cho doanh nghiệp tại Đức.
+              </div>
+              <div class="listing-price">3.500€/tháng</div>
+              <a href="job.html" class="btn btn-primary">Xem chi tiết</a>
+            </div>
+          </div>
+
+          <div class="section-actions">
+            <a href="job.html" class="btn btn-soft">Xem tất cả việc làm →</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="featured-housing">
+        <div class="container">
+          <div class="section-head">
+            <div class="eyebrow">Nhà ở nổi bật</div>
+            <h2>Những chỗ ở nổi bật được ưu tiên hiển thị</h2>
+            <p>
+              Homepage nên có thêm phần nhà ở nổi bật để cân bằng với module việc làm,
+              đồng thời cho khách thấy website thật sự kết hợp cả hai mảng.
+            </p>
+          </div>
+
+          <div class="cards-3">
+            <div class="card listing-card">
+              <div class="premium-badge">★ Featured Housing</div>
+              <h3>Phòng WG gần trung tâm Berlin</h3>
+              <div class="listing-meta">Berlin • 18m² • Vào ở ngay</div>
+              <div class="tags">
+                <span>WG</span>
+                <span>Gần ga</span>
+                <span>Giá tốt</span>
+              </div>
+              <div class="listing-desc">
+                Phòng sáng, khu yên tĩnh, phù hợp sinh viên hoặc người mới sang, đi lại thuận tiện.
+              </div>
+              <div class="listing-price">550€/tháng</div>
+              <a href="housing.html" class="btn btn-primary">Xem chi tiết</a>
+            </div>
+
+            <div class="card listing-card">
+              <div class="premium-badge">★ Featured Housing</div>
+              <h3>Studio đầy đủ nội thất</h3>
+              <div class="listing-meta">Hamburg • 25m² • Ngắn hạn</div>
+              <div class="tags">
+                <span>Studio</span>
+                <span>Bao phí</span>
+                <span>Ở ngay</span>
+              </div>
+              <div class="listing-desc">
+                Có bếp riêng, toilet riêng, phù hợp 1 người ở, ưu tiên người gọn gàng và đúng hẹn.
+              </div>
+              <div class="listing-price">850€/tháng</div>
+              <a href="housing.html" class="btn btn-primary">Xem chi tiết</a>
+            </div>
+
+            <div class="card listing-card">
+              <div class="premium-badge">★ Featured Housing</div>
+              <h3>Căn hộ 1 phòng ngủ khu yên tĩnh</h3>
+              <div class="listing-meta">Frankfurt • 42m² • Có thể xem nhà</div>
+              <div class="tags">
+                <span>Apartment</span>
+                <span>Near station</span>
+                <span>An toàn</span>
+              </div>
+              <div class="listing-desc">
+                Phù hợp cho cặp đôi hoặc người đi làm, giao thông tốt, khu dân cư ổn định.
+              </div>
+              <div class="listing-price">1.150€/tháng</div>
+              <a href="housing.html" class="btn btn-primary">Xem chi tiết</a>
+            </div>
+          </div>
+
+          <div class="section-actions">
+            <a href="housing.html" class="btn btn-soft">Xem tất cả nhà ở →</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <div class="container">
+          <div class="section-head">
+            <div class="eyebrow">Tổng quan</div>
+            <h2>Một website kết hợp cả tìm việc và tìm nhà</h2>
+            <p>
+              Đây là phần giúp khách hiểu rõ sản phẩm: ViVi không phải chỉ là trang việc làm
+              hay trang nhà ở riêng lẻ, mà là một nền tảng chung, sau đó dẫn người dùng đi đúng nhu cầu.
+            </p>
+          </div>
+
+          <div class="cards-2">
+            <div class="card module-card" id="jobs">
+              <div class="module-badge">Việc làm</div>
+              <h3>Tìm việc nhanh hơn, rõ hơn</h3>
+              <p>
+                Dành cho người tìm việc và nhà tuyển dụng. Người dùng có thể xem danh sách việc làm,
+                lọc theo thành phố, ngành nghề, mức lương và liên hệ trực tiếp với bên tuyển dụng.
+              </p>
+
+              <div class="feature-list">
+                <div class="feature-item">
+                  <div class="icon">✓</div>
+                  <div>Xem danh sách việc làm nổi bật và mới nhất</div>
+                </div>
+                <div class="feature-item">
+                  <div class="icon">✓</div>
+                  <div>Lọc theo vị trí, ngành nghề, mức lương, loại công việc</div>
+                </div>
+                <div class="feature-item">
+                  <div class="icon">✓</div>
+                  <div>Xem chi tiết công việc, quyền lợi, yêu cầu và thông tin nhà tuyển dụng</div>
+                </div>
+                <div class="feature-item">
+                  <div class="icon">✓</div>
+                  <div>Lưu tin và nhắn tin trực tiếp</div>
+                </div>
+              </div>
+
+              <a href="job.html" class="btn btn-primary">Đi đến trang việc làm</a>
+
+              <div class="preview-box">
+                <div class="preview-title">Người dùng sẽ thấy gì trong trang việc làm?</div>
+                <div class="mini-cards">
+                  <div class="mini-card">
+                    <strong>Hero + thanh tìm kiếm</strong>
+                    <span>Tìm theo từ khóa, khu vực, loại công việc.</span>
+                  </div>
+                  <div class="mini-card">
+                    <strong>Danh sách việc làm</strong>
+                    <span>Card rõ ràng, có lương, vị trí, thời gian đăng.</span>
+                  </div>
+                  <div class="mini-card">
+                    <strong>Bộ lọc và CTA liên hệ</strong>
+                    <span>Giúp người dùng tìm nhanh và liên hệ đúng tin phù hợp.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card module-card" id="housing">
+              <div class="module-badge">Nhà ở</div>
+              <h3>Tìm chỗ ở phù hợp dễ hơn</h3>
+              <p>
+                Dành cho người tìm nhà và người cho thuê. Người dùng có thể xem phòng, studio,
+                căn hộ hoặc chỗ ở ghép, sau đó lọc theo khu vực, giá thuê và thời gian.
+              </p>
+
+              <div class="feature-list">
+                <div class="feature-item">
+                  <div class="icon">✓</div>
+                  <div>Xem phòng trống, studio, WG và căn hộ</div>
+                </div>
+                <div class="feature-item">
+                  <div class="icon">✓</div>
+                  <div>Lọc theo giá, khu vực, diện tích, thời hạn thuê</div>
+                </div>
+                <div class="feature-item">
+                  <div class="icon">✓</div>
+                  <div>Xem chi tiết chỗ ở, hình ảnh và mô tả tiện ích</div>
+                </div>
+                <div class="feature-item">
+                  <div class="icon">✓</div>
+                  <div>Lưu tin và nhắn tin trực tiếp với host</div>
+                </div>
+              </div>
+
+              <a href="housing.html" class="btn btn-primary">Đi đến trang nhà ở</a>
+
+              <div class="preview-box">
+                <div class="preview-title">Người dùng sẽ thấy gì trong trang nhà ở?</div>
+                <div class="mini-cards">
+                  <div class="mini-card">
+                    <strong>Hero + thanh tìm kiếm</strong>
+                    <span>Tìm theo thành phố, loại chỗ ở, từ khóa tiện ích.</span>
+                  </div>
+                  <div class="mini-card">
+                    <strong>Danh sách nhà ở</strong>
+                    <span>Card hiển thị giá, diện tích, vị trí và tình trạng.</span>
+                  </div>
+                  <div class="mini-card">
+                    <strong>Bộ lọc và CTA liên hệ</strong>
+                    <span>Giúp người dùng chọn nhanh chỗ ở phù hợp với nhu cầu.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="container">
+          <div class="section-head">
+            <div class="eyebrow">Dành cho ai</div>
+            <h2>ViVi phục vụ 4 nhóm người dùng chính</h2>
+            <p>
+              Phần này giúp homepage rõ hơn về đối tượng sử dụng và giúp khách hiểu cấu trúc sản phẩm.
+            </p>
+          </div>
+
+          <div class="cards-4">
+            <div class="card persona-card">
+              <div class="persona-icon">JV</div>
+              <h3>Người tìm việc</h3>
+              <p>Tìm công việc phù hợp theo thành phố, mức lương và nhu cầu cá nhân.</p>
+            </div>
+
+            <div class="card persona-card">
+              <div class="persona-icon">NT</div>
+              <h3>Nhà tuyển dụng</h3>
+              <p>Đăng tin tuyển dụng, làm nổi bật bài đăng và nhận liên hệ từ ứng viên.</p>
+            </div>
+
+            <div class="card persona-card">
+              <div class="persona-icon">TN</div>
+              <h3>Người tìm nhà</h3>
+              <p>Xem phòng, studio, WG hoặc căn hộ phù hợp rồi liên hệ trực tiếp.</p>
+            </div>
+
+            <div class="card persona-card">
+              <div class="persona-icon">CT</div>
+              <h3>Người cho thuê</h3>
+              <p>Đăng thông tin chỗ ở, quản lý bài đăng và tiếp cận đúng nhóm người thuê.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div class="eyebrow">Cách hoạt động</div>
+            <h2>Người dùng sẽ đi qua luồng nào?</h2>
+            <p>
+              Phần này rất hữu ích khi demo cho khách vì nó mô tả cách homepage điều hướng sang 2 trang riêng.
+            </p>
+          </div>
+
+          <div class="cards-4">
+            <div class="card flow-card">
+              <div class="flow-step">1</div>
+              <h3>Vào trang chủ</h3>
+              <p>Người dùng thấy tổng quan website gồm cả tìm việc và tìm nhà.</p>
+            </div>
+
+            <div class="card flow-card">
+              <div class="flow-step">2</div>
+              <h3>Chọn nhu cầu</h3>
+              <p>Bấm vào “Tìm việc” hoặc “Tìm nhà” tùy mục đích sử dụng.</p>
+            </div>
+
+            <div class="card flow-card">
+              <div class="flow-step">3</div>
+              <h3>Xem trang riêng</h3>
+              <p>Hệ thống chuyển tới trang có danh sách, bộ lọc và thông tin đúng nhu cầu.</p>
+            </div>
+
+            <div class="card flow-card">
+              <div class="flow-step">4</div>
+              <h3>Liên hệ / đăng tin</h3>
+              <p>Người dùng có thể xem chi tiết, lưu tin, nhắn tin hoặc đăng bài mới.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="container">
+          <div class="section-head">
+            <div class="eyebrow">Vì sao chọn ViVi</div>
+            <h2>Một số điểm mạnh nên có trên homepage</h2>
+            <p>
+              Đây là các section giúp tăng độ tin cậy và làm rõ giá trị của website với người dùng mới.
+            </p>
+          </div>
+
+          <div class="cards-4">
+            <div class="card benefit-card">
+              <h3>Dành riêng cho cộng đồng Việt</h3>
+              <p>Nội dung và trải nghiệm được định hướng đúng với nhu cầu người Việt tại Đức.</p>
+            </div>
+
+            <div class="card benefit-card">
+              <h3>Kết hợp 2 nhu cầu lớn</h3>
+              <p>Tìm việc và tìm nhà trên cùng một nền tảng, giúp hành trình của người dùng liền mạch hơn.</p>
+            </div>
+
+            <div class="card benefit-card">
+              <h3>Dễ tìm, dễ lọc</h3>
+              <p>Bộ lọc rõ ràng giúp người dùng tiếp cận thông tin phù hợp nhanh hơn.</p>
+            </div>
+
+            <div class="card benefit-card">
+              <h3>Dễ liên hệ, dễ đăng tin</h3>
+              <p>Hướng tới trải nghiệm đơn giản, rõ ràng cho cả người tìm kiếm lẫn người đăng bài.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="cta-final">
+            <h2>Trang chủ này đủ để demo hướng đi của website</h2>
+            <p>
+              Nó cho thấy rõ ViVi là homepage tổng hợp cho cả việc làm và nhà ở, có dữ liệu thị trường,
+              tin nổi bật, giới thiệu sản phẩm, mô tả người dùng và dẫn vào 2 trang chức năng riêng.
+            </p>
+            <div class="hero-actions" style="justify-content:center; margin-bottom:0;">
+              <a href="job.html" class="btn btn-primary">Demo trang việc làm</a>
+              <a href="housing.html" class="btn btn-soft">Demo trang nhà ở</a>
+            </div>
+          </div>
+
+          <div class="footer">
+            ViVi Homepage Demo — tone trắng, chữ đen, điểm nhấn xanh
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+
+</html>

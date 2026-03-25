@@ -1877,6 +1877,40 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
   </div>
 </section>
 
+<!-- ══════════ SLIDE: INTERACTIVE DEMO ══════════ -->
+<section class="slide" id="s-demo" style="background:#f0f2f5">
+  <div class="slide-inner" style="width:100%;height:100%;max-width:1440px;display:flex;flex-direction:column;padding:20px">
+    <div style="display:flex;align-items:center;gap:20px;margin-bottom:15px">
+      <div class="slide-tag" style="background:var(--pu-l);color:var(--pu-d);margin-bottom:0">🎮 Demo thực tế</div>
+      <div class="slide-h1" style="font-size:24px;margin-bottom:0">Interactive Exploration</div>
+      <div style="margin-left:auto;display:flex;gap:10px">
+        <button class="btn btn-primary" onclick="switchDemo('preview.html')">Trang chủ</button>
+        <button class="btn btn-outline" style="background:#fff" onclick="switchDemo('housing.html')">Nhà ở</button>
+        <button class="btn btn-outline" style="background:#fff" onclick="switchDemo('job.html')">Việc làm</button>
+      </div>
+    </div>
+    <div style="flex:1;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.1);position:relative">
+      <iframe id="demo-iframe" src="preview.html" style="width:100%;height:100%;border:none"></iframe>
+    </div>
+  </div>
+</section>
+
+<script>
+function switchDemo(url) {
+  document.getElementById('demo-iframe').src = url;
+  // Update buttons
+  const btns = document.querySelectorAll('#s-demo button');
+  btns.forEach(b => {
+    if(b.textContent.toLowerCase().includes(url.split('.')[0] === 'job' ? 'việc làm' : url.split('.')[0] === 'housing' ? 'nhà ở' : 'trang chủ')) {
+      b.className = 'btn btn-primary';
+    } else {
+      b.className = 'btn btn-outline';
+      b.style.background = '#fff';
+    }
+  });
+}
+</script>
+
 </div><!-- #deck -->
 
 <!-- NAV -->
@@ -1891,7 +1925,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,Blink
 <script>
 // Define presentation order: s1→s2→s3→sm1(KYC)→s4(Routes)→sm2(Jobs)→s5(Roles)→sm3(Housing)→s6(Revenue)→sm4(Chat)→sm5(Admin)→s7(Tech)→s8(Roadmap)→s9(CTA)
 // Order: Cover → Problem → Features → KYC mockup → Routes → SiteMap → Jobs mockup → Roles → Housing mockup → Revenue → Chat&Premium → Admin mockup → Tech → Roadmap → CTA
-const ORDER = ['s1','s2','s3','sm1','s4','sm6','sm2','s5','sm3','s6','sm4','sm5','s7','s8','s-clarity','s9'];
+const ORDER = ['s1','s2','s3','sm1','s5','s4','sm6','sm2','sm3','s6','sm4','sm5','s7','s8','s-clarity','s-demo','s9'];
 const slides = ORDER.map(id=>document.getElementById(id));
 const dotsEl = document.getElementById('slides-grid');
 const counter = document.getElementById('counter');
@@ -1899,7 +1933,7 @@ let cur = 0;
 const N = slides.length;
 
 // Slide labels for dots tooltip
-const LABELS=['Cover','Vấn đề','Tính năng','KYC mockup','34 Routes','Site Map','Jobs mockup','6 Roles','Housing mockup','Doanh thu','Chat & Premium','Admin','Tech Stack','Roadmap','Làm rõ vận hành','CTA'];
+const LABELS=['Cover','Vấn đề','Tính năng','KYC mockup','6 Roles','34 Routes','Site Map','Jobs mockup','Housing mockup','Doanh thu','Chat & Premium','Admin','Tech Stack','Roadmap','Làm rõ vận hành','Demo tương tác','CTA'];
 
 // Build slide numbers
 for(let i=0;i<N;i++){
